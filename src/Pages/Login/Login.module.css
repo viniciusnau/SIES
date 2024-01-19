@@ -1,0 +1,25 @@
+@import "../../colors.css";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.google:hover {
+  background-color: var(--second-button-color-hover);
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5rem;
+}
