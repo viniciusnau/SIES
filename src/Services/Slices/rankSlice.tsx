@@ -41,7 +41,7 @@ export const { getRank, getRankSuccess, getRankFailure } = rankSlice.actions;
 export default rankSlice.reducer;
 
 export const fetchRank =
-  (page: string) =>
+  (filter: any, page: string) =>
   async (
     dispatch: (arg0: {
       payload: any;
@@ -50,10 +50,9 @@ export const fetchRank =
   ) => {
     dispatch(getRank());
     try {
-      const response = await services.getRank(page);
+      const response = await services.getRank(filter, page);
       dispatch(getRankSuccess(response.data));
     } catch (err) {
-      console.log("err: ", err);
       dispatch(getRankFailure());
     }
   };

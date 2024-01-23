@@ -5,25 +5,31 @@ import ProtectedRoute from "./Auth/ProtectedRoute";
 import Rank from "./Pages/Rank/Rank";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
+import Header from "./Components/Header/Header";
+import Update from "./Pages/Update/Update";
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          {/* <Route
+      <main>
+        <Router>
+          <Header />
+          <Routes>
+            {/* <Route
             path="/sies/*"
             element={<ProtectedRoute Component={Rank} path="/sies/*" />}
           /> */}
-          <Route path="/sies/" element={<Rank />} />
-          <Route path="/sies/login" element={<Login />} />
-          <Route path="/sies/register" element={<Register />} />
-          <Route
-            path="/"
-            element={<ProtectedRoute Component={Rank} path="/sies/" />}
-          />
-        </Routes>
-      </Router>
+            <Route path="/sies/" element={<Rank />} />
+            <Route path="/sies/login" element={<Login />} />
+            <Route path="/sies/register" element={<Register />} />
+            <Route path="/sies/update" element={<Update />} />
+            <Route
+              path="/"
+              element={<ProtectedRoute Component={Rank} path="/sies/" />}
+            />
+          </Routes>
+        </Router>
+      </main>
     </div>
   );
 }

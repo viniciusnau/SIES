@@ -3,36 +3,45 @@ import Input from "../../Components/Forms/Input";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Button from "../../Components/Forms/Button";
+import { fetchPostRegister } from "../../Services/Slices/postRegister";
 
 interface iForm {
   name: string;
-  core: string;
-  birthDate: string;
-  curso: string;
-  pcd: boolean;
-  imaa: string;
+  public_defense: string;
+  birth_date: string;
+  category: string;
+  is_pcd: boolean;
+  is_resident: boolean;
+  social_security_number: string;
+  academic_index: number;
 }
 
 const Register = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const [form, setForm] = useState<iForm>({
     name: "",
-    core: "",
-    birthDate: "",
-    curso: "",
-    pcd: false,
-    imaa: "",
+    public_defense: "",
+    birth_date: "",
+    category: "",
+    is_pcd: false,
+    is_resident: false,
+    social_security_number: "",
+    academic_index: 0,
   });
 
-  const handleChange = (event: any) => {
-    const { name, value } = event;
-    setForm({ ...form, [name]: value });
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, checked, type } = event.target;
+    const newValue = type === "checkbox" ? checked : value;
+
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: newValue,
+    }));
   };
 
   const handleSubmit = () => {
-    // dispatch(fetchRegister(form));
+    dispatch(fetchPostRegister(form));
   };
-
   return (
     <div className={styles.container}>
       <form
@@ -50,37 +59,53 @@ const Register = () => {
         <Input
           className={styles.input}
           onChange={handleChange}
-          name="core"
+          name="public_defense"
           label="Núcleo"
         />
         <Input
           className={styles.input}
           onChange={handleChange}
-          name="birthDate"
+          name="birth_date"
           label="Data de nascimento"
         />
         <Input
           className={styles.input}
           onChange={handleChange}
-          name="curso"
+          name="category"
           label="Curso"
         />
         <Input
           className={styles.input}
           onChange={handleChange}
-          name="imaa"
+          name="social_security_number"
+          label="CPF"
+        />
+        <Input
+          className={styles.input}
+          onChange={handleChange}
+          name="academic_index"
           label="Índice de Mérito Acadêmico Acumulado"
         />
         <Input
           className={styles.checkbox}
           onChange={handleChange}
-          name="pcd"
+          name="is_pcd"
           label="PCD"
           type="checkbox"
           style={{ boxShadow: "none" }}
         />
+        <Input
+          className={styles.checkbox}
+          onChange={handleChange}
+          name="is_resident"
+          label="Residente"
+          type="checkbox"
+          style={{ boxShadow: "none" }}
+        />
       </form>
-      <Button className={styles.button}>Registrar</Button>
+      <Button className={styles.button} onClick={handleSubmit}>
+        Registrar
+      </Button>
     </div>
   );
 };
