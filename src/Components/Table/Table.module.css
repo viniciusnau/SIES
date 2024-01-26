@@ -39,7 +39,7 @@
 
 .columnHeader {
   flex: 1;
-  padding: 10px 5px;
+  padding: 0.5rem 0.25rem;
   display: flex;
   justify-content: center;
 }

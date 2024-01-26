@@ -82,8 +82,6 @@ const Rank: React.FC = () => {
     });
   };
 
-  console.log("filter: ", filter);
-
   const handleSubmit = () => {
     dispatch(fetchRank(filter, page.toString()));
   };

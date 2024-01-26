@@ -1,51 +1,57 @@
 import styles from "./Update.module.css";
 import Input from "../../Components/Forms/Input";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../../Components/Forms/Button";
-import { fetchPutUpdate } from "../../Services/Slices/putUpdate";
+import { fetchPutUser } from "../../Services/Slices/putUser";
+import { fetchUsersList } from "../../Services/Slices/getUsersList";
 
 interface iForm {
-  name: string;
-  core: string;
-  birthDate: string;
-  curso: string;
-  pcd: boolean;
-  imaa: string;
+  id: string;
+  grade: string;
 }
 
 const Update = () => {
   const dispatch = useDispatch<any>();
   const [form, setForm] = useState<iForm>({
-    name: "",
-    core: "",
-    birthDate: "",
-    curso: "",
-    pcd: false,
-    imaa: "",
+    id: "",
+    grade: "",
   });
-  const id = "aaaaaaa";
-  // falta finalizar integração, precisa do dropdown that show the users and bring the id to the service
+  const { data, error, loading } = useSelector(
+    (state: any) => state.getUsersListSlice
+  );
 
   const handleChange = (event: any) => {
-    const { name, value } = event;
+    const { name, value } = event.target;
     setForm({ ...form, [name]: value });
   };
 
   const handleSubmit = () => {
-    dispatch(fetchPutUpdate(form, id));
+    dispatch(fetchPutUser(form));
   };
+  console.log("form: ", form);
+
+  useEffect(() => {
+    dispatch(fetchUsersList());
+  }, []);
 
   return (
     <div className={styles.container}>
       <div className={styles.form}>
-        <h3 className={styles.title}>Cadastrar estagiário:</h3>
-        <Input
-          className={styles.input}
+        <h3 className={styles.title}>Atualizar candidato:</h3>
+        <p style={{ fontSize: "1.25rem", margin: "0 0 .25rem 0" }}>Nome:</p>
+        <select
+          className={styles.select}
+          value={form.id}
           onChange={handleChange}
-          name="cpf"
-          label="CPF"
-        />
+          name="id"
+        >
+          {data.map((item: any) => (
+            <option key={item.id} value={item.id}>
+              {item.name}
+            </option>
+          ))}
+        </select>
         <Input
           className={styles.input}
           onChange={handleChange}

@@ -2,24 +2,26 @@ import axios from "axios";
 import { PATH } from "../PATH";
 
 const services = {
-  getRank: async (filter: string, page: string) => {
+  getRankList: async (filter: any, page: string) => {
+    return axios
+      .get(`${PATH.base}/user/rank/?page=${page}`)
+      .then((data: any) => {
+        return data;
+      })
+      .catch((err: any) => console.log(err));
+  },
+  getUpdateList: async () => {
     const apiToken = sessionStorage.getItem("apiToken");
     const authorizationMethod = apiToken ? "Token" : "Basic";
 
     const header = {
       headers: {
-        Authorization: `${authorizationMethod} ${
-          apiToken || sessionStorage.getItem("credentials")
-        }`,
+        // Authorization: `${authorizationMethod} ${
+        Authorization: ` ${apiToken || sessionStorage.getItem("credentials")}`,
       },
     };
     return axios
-      .get(
-        `${PATH.base}/transcriptions/${
-          page ? `?page=${page}` : ""
-        }&is_done=true`,
-        header
-      )
+      .get(`${PATH.base}/user/`, header)
       .then((data: any) => {
         return data;
       })
@@ -31,9 +33,8 @@ const services = {
 
     const header = {
       headers: {
-        Authorization: `${authorizationMethod} ${
-          apiToken || sessionStorage.getItem("credentials")
-        }`,
+        // Authorization: `${authorizationMethod} ${
+        Authorization: ` ${apiToken || sessionStorage.getItem("credentials")}`,
       },
     };
     return axios
@@ -43,19 +44,69 @@ const services = {
       })
       .catch((err: any) => console.log(err));
   },
-  putUpdate: async (body: any, id: string) => {
+  getUser: async (id: string) => {
     const apiToken = sessionStorage.getItem("apiToken");
     const authorizationMethod = apiToken ? "Token" : "Basic";
 
     const header = {
       headers: {
-        Authorization: `${authorizationMethod} ${
-          apiToken || sessionStorage.getItem("credentials")
-        }`,
+        // Authorization: `${authorizationMethod} ${
+        Authorization: ` ${apiToken || sessionStorage.getItem("credentials")}`,
       },
     };
     return axios
-      .post(PATH.base + `/user/${id}`, body, header)
+      .get(PATH.base + `/user/${id}`, header)
+      .then((response: any) => {
+        return response;
+      })
+      .catch((err: any) => console.log(err));
+  },
+  putUser: async (body: any, id: string) => {
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+
+    const header = {
+      headers: {
+        // Authorization: `${authorizationMethod} ${
+        Authorization: ` ${apiToken || sessionStorage.getItem("credentials")}`,
+      },
+    };
+    return axios
+      .put(PATH.base + `/user/${id}`, body, header)
+      .then((response: any) => {
+        return response;
+      })
+      .catch((err: any) => console.log(err));
+  },
+  patchUser: async (body: any, id: string) => {
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+
+    const header = {
+      headers: {
+        // Authorization: `${authorizationMethod} ${
+        Authorization: ` ${apiToken || sessionStorage.getItem("credentials")}`,
+      },
+    };
+    return axios
+      .patch(PATH.base + `/user/${id}`, body, header)
+      .then((response: any) => {
+        return response;
+      })
+      .catch((err: any) => console.log(err));
+  },
+  deleteUser: async (id: string) => {
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+
+    const header = {
+      headers: {
+        // Authorization: `${authorizationMethod} ${
+        Authorization: ` ${apiToken || sessionStorage.getItem("credentials")}`,
+      },
+    };
+    return axios
+      .delete(PATH.base + `/user/${id}`, header)
       .then((response: any) => {
         return response;
       })

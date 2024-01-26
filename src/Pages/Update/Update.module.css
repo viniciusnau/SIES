@@ -9,9 +9,18 @@
   margin: 3rem 0 1.5rem 0;
 }
 
+.select {
+  padding: 0.75rem 1.25rem;
+  margin: 0 0 2rem 0;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  box-shadow: 0px 10px 10px -10px var(--shadow-color);
+}
+
 .input {
   margin: 0 0 1rem 0;
-  width: 20rem;
+  width: 8rem;
   height: 2.5rem;
 }
 

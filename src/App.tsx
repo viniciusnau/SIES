@@ -9,6 +9,7 @@ import Header from "./Components/Header/Header";
 import Update from "./Pages/Update/Update";
 
 function App() {
+  sessionStorage.setItem("credentials", "Basic YWRtaW46RHBlQDEyMyM=");
   return (
     <div className="App">
       <main>
