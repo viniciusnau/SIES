@@ -11,7 +11,6 @@ import Callback from "./Pages/Callback/Callback";
 import NotFound from "./Pages/NotFound/NotFound";
 
 function App() {
-  sessionStorage.setItem("credentials", "Basic YWRtaW46RHBlQDEyMyM=");
   return (
     <div className="App">
       <main>
@@ -22,7 +21,7 @@ function App() {
             <Route path="/sies/login/" element={<Login />} />
             <Route path="/sies/register/" element={<Register />} />
             <Route path="/sies/update/" element={<Update />} />
-            <Route path="/automato/callback/:apiToken" element={<Callback />} />
+            <Route path="/sies/callback/:apiToken" element={<Callback />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
