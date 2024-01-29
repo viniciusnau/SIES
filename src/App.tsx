@@ -7,6 +7,8 @@ import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import Header from "./Components/Header/Header";
 import Update from "./Pages/Update/Update";
+import Callback from "./Pages/Callback/Callback";
+import NotFound from "./Pages/NotFound/NotFound";
 
 function App() {
   sessionStorage.setItem("credentials", "Basic YWRtaW46RHBlQDEyMyM=");
@@ -28,6 +30,8 @@ function App() {
               path="/"
               element={<ProtectedRoute Component={Rank} path="/sies/" />}
             />
+            <Route path="/automato/callback/:apiToken" element={<Callback />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
       </main>

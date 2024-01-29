@@ -6,7 +6,7 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <form
-        action="http://15.228.239.212:8000/api/user/google-redirect/"
+        action="https://sies.defensoria.sc.def.br/api/user/google-redirect/"
         method="get"
         className={styles.form}
       >
