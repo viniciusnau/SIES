@@ -11,7 +11,6 @@ import Callback from "./Pages/Callback/Callback";
 import NotFound from "./Pages/NotFound/NotFound";
 
 function App() {
-  sessionStorage.setItem("credentials", "Basic YWRtaW46RHBlQDEyMyM=");
   return (
     <div className="App">
       <main>
