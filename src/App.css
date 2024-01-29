@@ -1,3 +1,11 @@
+:root {
+  --font-size: 1rem;
+  --cursor-pointer: pointer;
+  --cursor-not-allowed: not-allowed;
+  --cursor-default: default;
+  --cursor-text: text;
+}
+
 .App {
   text-align: center;
 }
