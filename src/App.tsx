@@ -26,10 +26,6 @@ function App() {
             <Route path="/sies/login" element={<Login />} />
             <Route path="/sies/register" element={<Register />} />
             <Route path="/sies/update" element={<Update />} />
-            <Route
-              path="/"
-              element={<ProtectedRoute Component={Rank} path="/sies/" />}
-            />
             <Route path="/automato/callback/:apiToken" element={<Callback />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
