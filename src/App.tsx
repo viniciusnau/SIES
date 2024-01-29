@@ -21,7 +21,7 @@ function App() {
             <Route path="/sies/login/" element={<Login />} />
             <Route path="/sies/register/" element={<Register />} />
             <Route path="/sies/update/" element={<Update />} />
-            <Route path="/automato/callback/:apiToken" element={<Callback />} />
+            <Route path="/sies/callback/:apiToken" element={<Callback />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>

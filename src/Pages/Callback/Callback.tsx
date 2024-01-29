@@ -11,8 +11,8 @@ const Callback: React.FC = () => {
       sessionStorage.setItem("apiToken", apiToken);
     }
 
-    // navigate("/sies/");
-  }, [apiToken]);
+    navigate("/sies/");
+  }, [apiToken, navigate]);
 
   return (
     <div className={styles.container}>
