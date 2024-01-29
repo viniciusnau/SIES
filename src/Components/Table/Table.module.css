@@ -108,7 +108,7 @@
   border: none;
   border-radius: 0.5rem;
   background-color: var(--first-button-color);
-  box-shadow: 0 10px 10px -10px var(--shadow-color);
+  box-shadow: var(--box-shadow);
 }
 
 .button {
@@ -117,7 +117,7 @@
   align-items: center;
   border-radius: 5rem;
   background-color: var(--first-button-color);
-  box-shadow: 0 10px 10px -10px var(--shadow-color);
+  box-shadow: var(--box-shadow);
 }
 
 .downloadButton {
@@ -128,7 +128,7 @@
   justify-content: center;
   align-items: center;
   margin: 0 1rem 0.75rem 0;
-  box-shadow: 0 10px 10px -10px var(--shadow-color);
+  box-shadow: var(--box-shadow);
 }
 
 .backButton {

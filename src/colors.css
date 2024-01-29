@@ -31,4 +31,9 @@
 
   --shadow-color: #505050;
   --light-shadow-color: #646464;
+  --box-shadow: 0 0.625rem 0.625rem -0.625rem var(--shadow-color);
+
+  --mobile-width: 750px;
+  --tablet-width: 751px;
+  --desktop-width: 1024px;
 }

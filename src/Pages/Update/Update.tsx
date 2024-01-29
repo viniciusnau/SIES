@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "../../Components/Forms/Button";
 import { fetchPutUser } from "../../Services/Slices/putUser";
 import { fetchUsersList } from "../../Services/Slices/getUsersList";
+import Loading from "../../Components/Loading/Loading";
 
 interface iForm {
   id: string;
@@ -21,15 +22,19 @@ const Update = () => {
     (state: any) => state.getUsersListSlice
   );
 
+  const responseUser = useSelector((state: any) => state.putUserSlice);
+
   const handleChange = (event: any) => {
     const { name, value } = event.target;
+    if (name === "id") {
+      setForm({ ...form, [name]: value.id });
+    }
     setForm({ ...form, [name]: value });
   };
 
   const handleSubmit = () => {
     dispatch(fetchPutUser(form));
   };
-  console.log("form: ", form);
 
   useEffect(() => {
     dispatch(fetchUsersList());
@@ -39,7 +44,7 @@ const Update = () => {
     <div className={styles.container}>
       <div className={styles.form}>
         <h3 className={styles.title}>Atualizar candidato:</h3>
-        <p style={{ fontSize: "1.25rem", margin: "0 0 .25rem 0" }}>Nome:</p>
+        <p className={styles.label}>Nome:</p>
         <select
           className={styles.select}
           value={form.id}
@@ -60,7 +65,7 @@ const Update = () => {
         />
       </div>
       <Button className={styles.button} onClick={handleSubmit}>
-        Salvar
+        {responseUser.loading ? <Loading size="24" type="circle" /> : "Salvar"}
       </Button>
     </div>
   );

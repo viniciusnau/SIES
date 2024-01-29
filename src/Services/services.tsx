@@ -72,7 +72,7 @@ const services = {
       },
     };
     return axios
-      .put(PATH.base + `/user/${id}`, body, header)
+      .put(PATH.base + `/user/${id}/`, body, header)
       .then((response: any) => {
         return response;
       })
@@ -89,7 +89,7 @@ const services = {
       },
     };
     return axios
-      .patch(PATH.base + `/user/${id}`, body, header)
+      .patch(PATH.base + `/user/${id}/`, body, header)
       .then((response: any) => {
         return response;
       })

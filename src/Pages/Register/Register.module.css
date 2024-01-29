@@ -17,6 +17,7 @@
 
 .checkbox {
   height: 1.5rem;
+  box-shadow: none;
 }
 
 .button {

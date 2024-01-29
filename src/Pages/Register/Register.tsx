@@ -1,6 +1,6 @@
+import React, { useState } from "react";
 import styles from "./Register.module.css";
 import Input from "../../Components/Forms/Input";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Button from "../../Components/Forms/Button";
 import { fetchPostRegister } from "../../Services/Slices/postRegister";
@@ -28,6 +28,29 @@ const Register = () => {
     social_security_number: "",
     academic_index: 0,
   });
+  let formatted: iForm;
+
+  const handleFormat = () => {
+    const { birth_date, ...otherFormValues } = form;
+
+    if (birth_date.trim()) {
+      const [day, month, year] = birth_date.split("/");
+      const formattedDate = `${year}-${month?.padStart(2, "0")}-${day?.padStart(
+        2,
+        "0"
+      )}`;
+
+      formatted = {
+        ...otherFormValues,
+        birth_date: formattedDate,
+      };
+    }
+  };
+
+  const handleSubmit = () => {
+    handleFormat();
+    dispatch(fetchPostRegister(formatted));
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked, type } = event.target;
@@ -39,9 +62,6 @@ const Register = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    dispatch(fetchPostRegister(form));
-  };
   return (
     <div className={styles.container}>
       <form
@@ -89,18 +109,17 @@ const Register = () => {
         <Input
           className={styles.checkbox}
           onChange={handleChange}
-          name="is_pcd"
-          label="PCD"
+          name="is_resident"
+          label="Residente"
           type="checkbox"
           style={{ boxShadow: "none" }}
         />
         <Input
           className={styles.checkbox}
           onChange={handleChange}
-          name="is_resident"
-          label="Residente"
+          name="is_pcd"
+          label="PCD"
           type="checkbox"
-          style={{ boxShadow: "none" }}
         />
       </form>
       <Button className={styles.button} onClick={handleSubmit}>

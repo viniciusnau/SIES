@@ -37,19 +37,19 @@ const Header = () => {
         <div
           className={isResponsive ? styles.buttonContainer : styles.navigation}
         >
-          {isResponsive ? (
-            <div>
-              <button
-                className={styles.responsiveButton}
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              >
-                <HiBars3 size={24} />
-              </button>
-              {isResponsive && isDropdownOpen && (
-                <div className={styles.modal}>
-                  <ul>
-                    {isLoggedIn() && (
-                      <>
+          {isLoggedIn() && (
+            <>
+              {isResponsive ? (
+                <div>
+                  <button
+                    className={styles.responsiveButton}
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  >
+                    <HiBars3 size={24} />
+                  </button>
+                  {isResponsive && isDropdownOpen && (
+                    <div className={styles.modal}>
+                      <ul>
                         <li
                           onClick={() => {
                             setIsDropdownOpen(!isDropdownOpen);
@@ -66,25 +66,34 @@ const Header = () => {
                           onClick={() => {
                             setIsDropdownOpen(!isDropdownOpen);
                             setToggleNav(!toggleNav);
-                            navigate("sies/");
+                            navigate("sies/register");
                           }}
                         >
                           <span
                             className={`${styles.route} ${styles.modalItem}`}
                           >
-                            Transcrições
+                            Registrar
                           </span>
                         </li>
-                      </>
-                    )}
-                  </ul>
+                        <li
+                          onClick={() => {
+                            setIsDropdownOpen(!isDropdownOpen);
+                            setToggleNav(!toggleNav);
+                            navigate("sies/update");
+                          }}
+                        >
+                          <span
+                            className={`${styles.route} ${styles.modalItem}`}
+                          >
+                            Ranquear
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          ) : (
-            <div className={styles.navigation}>
-              {isLoggedIn() && (
-                <>
+              ) : (
+                <div className={styles.navigation}>
                   <span
                     className={`${styles.route} ${styles.logout}`}
                     onClick={() => logout(navigate)}
@@ -95,14 +104,23 @@ const Header = () => {
                     className={`${styles.route} ${styles.logout}`}
                     onClick={() => {
                       setToggleNav(!toggleNav);
-                      navigate("/sies/");
+                      navigate("/sies/register");
                     }}
                   >
-                    Transcrições
+                    Registrar
                   </span>
-                </>
+                  <span
+                    className={`${styles.route} ${styles.logout}`}
+                    onClick={() => {
+                      setToggleNav(!toggleNav);
+                      navigate("/sies/update");
+                    }}
+                  >
+                    Ranquear
+                  </span>
+                </div>
               )}
-            </div>
+            </>
           )}
         </div>
       </div>
