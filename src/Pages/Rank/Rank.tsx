@@ -19,7 +19,7 @@ const Rank: React.FC = () => {
   const [filter, setFilter] = useState<any>({
     is_resident: true,
     stage: stages[0].name,
-    public_defense: public_defenses[0].name,
+    public_defense: public_defenses[0],
     category: categories[0].name,
     pcd: false,
   });
@@ -55,7 +55,7 @@ const Rank: React.FC = () => {
     dispatch(
       fetchRank(
         {
-          public_defense: public_defenses[0].name,
+          public_defense: public_defenses[0],
           category: categories[0].name,
           stage: stages[0].name,
           pcd: false,
@@ -92,8 +92,8 @@ const Rank: React.FC = () => {
             name="public_defense"
           >
             {public_defenses.map((item) => (
-              <option key={item.property} value={item.property}>
-                {item.name}
+              <option key={item} value={item}>
+                {item}
               </option>
             ))}
           </select>

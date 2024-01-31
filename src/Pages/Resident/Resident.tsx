@@ -18,7 +18,7 @@ const Resident: React.FC = () => {
   );
   const [page, setPage] = useState<number>(1);
   const [filter, setFilter] = useState<any>({
-    public_defense: public_defenses[0].name,
+    public_defense: public_defenses[0],
     category: categories[0].name,
     stage: stages[0].name,
     pcd: false,
@@ -55,7 +55,7 @@ const Resident: React.FC = () => {
     dispatch(
       fetchResident(
         {
-          public_defense: public_defenses[0].name,
+          public_defense: public_defenses[0],
           category: categories[0].name,
           stage: stages[0].name,
           pcd: false,
@@ -92,8 +92,8 @@ const Resident: React.FC = () => {
             name="public_defense"
           >
             {public_defenses.map((item) => (
-              <option key={item.property} value={item.property}>
-                {item.name}
+              <option key={item} value={item}>
+                {item}
               </option>
             ))}
           </select>
