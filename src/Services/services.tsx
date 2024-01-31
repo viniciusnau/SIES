@@ -2,13 +2,28 @@ import axios from "axios";
 import { PATH } from "../PATH";
 
 const services = {
-  getRankList: async (filter: any, page: string) => {
-    return axios
-      .get(`${PATH.base}/user/rank/?page=${page}`)
-      .then((data: any) => {
-        return data;
-      })
-      .catch((err: any) => console.log(err));
+  getRankList: async (filter: any, page: any) => {
+    const {
+      is_resident,
+      stage,
+      public_defense,
+      category,
+      pcd,
+    } = filter;
+
+    let url = `${PATH.base}/user/rank/?is_resident=${is_resident}&stage=${stage}&public_defense=${public_defense}&category=${category}&page=${page}`;
+
+    if (pcd == true) {
+      url += `&pcd=${pcd}`;
+    }
+
+    try {
+      const response = await axios.get(url);
+      return response.data;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
   },
   getUpdateList: async () => {
     const apiToken = sessionStorage.getItem("apiToken");
