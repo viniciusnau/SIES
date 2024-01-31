@@ -15,7 +15,7 @@ const Snackbar: React.FC<iSnackbar> = ({ type, setShowSnackbar }) => {
     if (isVisible) {
       const timeoutId = setTimeout(() => {
         setIsVisible(false);
-        if (setShowSnackbar) setShowSnackbar(null);
+        if (setShowSnackbar) setShowSnackbar(false);
       }, 3000);
 
       return () => {

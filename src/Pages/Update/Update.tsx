@@ -6,6 +6,7 @@ import Button from "../../Components/Forms/Button";
 import { fetchPutUser } from "../../Services/Slices/putUser";
 import { fetchUsersList } from "../../Services/Slices/getUsersList";
 import Loading from "../../Components/Loading/Loading";
+import Snackbar from "../../Components/Snackbar/Snackbar";
 
 interface iForm {
   id: string;
@@ -14,6 +15,7 @@ interface iForm {
 
 const Update = () => {
   const dispatch = useDispatch<any>();
+  const [snackbarType, setSnackbarType] = useState<boolean>(false);
   const [form, setForm] = useState<iForm>({
     id: "",
     grade: "",
@@ -42,6 +44,12 @@ const Update = () => {
 
   return (
     <div className={styles.container}>
+      {data && snackbarType && (
+        <Snackbar type="successUpdate" setShowSnackbar={setSnackbarType} />
+      )}
+      {error && snackbarType && (
+        <Snackbar type="errorUpdate" setShowSnackbar={setSnackbarType} />
+      )}
       <div className={styles.form}>
         <h3 className={styles.title}>Atualizar candidato:</h3>
         <p className={styles.label}>Nome:</p>

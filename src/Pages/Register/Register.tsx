@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styles from "./Register.module.css";
 import Input from "../../Components/Forms/Input";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../../Components/Forms/Button";
 import { fetchPostRegister } from "../../Services/Slices/postRegister";
 import { public_defenses } from "../../Components/Consts";
+import Snackbar from "../../Components/Snackbar/Snackbar";
 
 interface iForm {
   name: string;
@@ -19,6 +20,7 @@ interface iForm {
 
 const Register = () => {
   const dispatch = useDispatch<any>();
+  const [snackbarType, setSnackbarType] = useState<boolean>(false);
   const [form, setForm] = useState<iForm>({
     name: "",
     public_defense: "",
@@ -29,6 +31,9 @@ const Register = () => {
     social_security_number: "",
     academic_index: 0,
   });
+  const { data, loading, error } = useSelector(
+    (state: any) => state.postRegisterSlice
+  );
   let formatted: iForm;
 
   const handleFormat = () => {
@@ -51,14 +56,15 @@ const Register = () => {
   const handleSubmit = () => {
     handleFormat();
     dispatch(fetchPostRegister(formatted));
+    setSnackbarType(true);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked, type } = event.target;
     const newValue = type === "checkbox" ? checked : value;
 
-    setForm((prevForm) => ({
-      ...prevForm,
+    setForm((prev) => ({
+      ...prev,
       [name]: newValue,
     }));
   };
@@ -66,14 +72,20 @@ const Register = () => {
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
 
-    setForm((prevForm) => ({
-      ...prevForm,
+    setForm((prev) => ({
+      ...prev,
       [name]: value,
     }));
   };
 
   return (
     <div className={styles.container}>
+      {data && snackbarType && (
+        <Snackbar type="successRegister" setShowSnackbar={setSnackbarType} />
+      )}
+      {error && snackbarType && (
+        <Snackbar type="errorRegister" setShowSnackbar={setSnackbarType} />
+      )}
       <form
         action="https://automato.defensoria.sc.def.br/api/google-redirect/"
         method="get"
