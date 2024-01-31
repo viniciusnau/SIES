@@ -49,8 +49,9 @@ const services = {
 
     const header = {
       headers: {
-        // Authorization: `${authorizationMethod} ${
-        Authorization: ` ${apiToken || sessionStorage.getItem("credentials")}`,
+        Authorization: `${authorizationMethod} ${
+            apiToken || sessionStorage.getItem("credentials")
+        }`,
       },
     };
     return axios
