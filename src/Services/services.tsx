@@ -2,14 +2,6 @@ import axios from "axios";
 import { PATH } from "../PATH";
 
 const services = {
-  // getRankList: async (filter: any, page: string) => {
-  //   return axios
-  //     .get(`${PATH.base}/user/rank/?page=${page}`)
-  //     .then((data: any) => {
-  //       return data;
-  //     })
-  //     .catch((err: any) => console.log(err));
-  // },
   getRankList: async (filter: any, page: string) => {
     const queryParams = new URLSearchParams({
       page: page,
@@ -17,8 +9,11 @@ const services = {
       stage: filter.stage,
       public_defense: filter.public_defense,
       category: filter.category,
-      pcd: filter.pcd,
     });
+
+    if (filter.pcd !== "false" && filter.pcd !== false) {
+      queryParams.append('pcd', filter.pcd);
+    }
 
     const url = `${PATH.base}/user/rank/?${queryParams.toString()}`;
 
