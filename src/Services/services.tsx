@@ -27,7 +27,7 @@ const services = {
       return response.data;
     } catch (err) {
       console.log(err);
-      throw err; // Re-throwing error for handling in the caller function
+      throw err;
     }
   },
 

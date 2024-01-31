@@ -9,17 +9,12 @@ import { public_defenses } from "../../Components/Consts";
 const Rank: React.FC = () => {
   const dispatch = useDispatch<any>();
   const columns = [
-    { title: "Nome", property: "name" },
-    { title: "CPF", property: "id" },
-    { title: "Nota", property: "grade" },
+    { title: "Nome", property: "blurred_name" },
+    { title: "CPF", property: "blurred_social_security_number" },
+    { title: "Nota", property: "average" },
   ];
 
-  const categories = [
-    { name: "Direito", property: "direito" },
-    { name: "Sistemas de Informações", property: "sistemas de informacoes" },
-    { name: "RH", property: "RH" },
-    { name: "Segurança", property: "seguranca" },
-  ];
+  const categories = [{ name: "Direito", property: "direito" }];
 
   const stages = [
     { name: "1", property: "1" },
@@ -29,9 +24,10 @@ const Rank: React.FC = () => {
   const { data, loading, error } = useSelector((state: any) => state.rankSlice);
   const [page, setPage] = useState<number>(1);
   const [filter, setFilter] = useState<any>({
+    is_resident: true,
+    stage: stages[0].name,
     public_defense: public_defenses[0].name,
     category: categories[0].name,
-    stage: stages[0].name,
     pcd: false,
   });
 
@@ -134,6 +130,7 @@ const Rank: React.FC = () => {
           Pesquisar
         </Button>
       </div>
+
       <Table
         title="Ranqueamento dos estagiários:"
         columns={columns}
