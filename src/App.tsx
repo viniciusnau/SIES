@@ -9,6 +9,7 @@ import Header from "./Components/Header/Header";
 import Update from "./Pages/Update/Update";
 import Callback from "./Pages/Callback/Callback";
 import NotFound from "./Pages/NotFound/NotFound";
+import Resident from "./Pages/Resident/Resident";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/sies/" element={<Rank />} />
+            <Route path="/sies/resident" element={<Resident />} />
             <Route path="/sies/login/" element={<Login />} />
             <Route path="/sies/register/" element={<Register />} />
             <Route path="/sies/update/" element={<Update />} />

@@ -4,6 +4,7 @@ import Input from "../../Components/Forms/Input";
 import { useDispatch } from "react-redux";
 import Button from "../../Components/Forms/Button";
 import { fetchPostRegister } from "../../Services/Slices/postRegister";
+import { public_defenses } from "../../Components/Consts";
 
 interface iForm {
   name: string;
@@ -62,6 +63,15 @@ const Register = () => {
     }));
   };
 
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target;
+
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
+  };
+
   return (
     <div className={styles.container}>
       <form
@@ -69,7 +79,7 @@ const Register = () => {
         method="get"
         className={styles.form}
       >
-        <h3 className={styles.title}>Cadastrar estagiário:</h3>
+        <h3 className={styles.title}>Cadastrar candidato:</h3>
         <Input
           className={styles.input}
           onChange={handleChange}
@@ -79,14 +89,16 @@ const Register = () => {
         <Input
           className={styles.input}
           onChange={handleChange}
-          name="public_defense"
-          label="Núcleo"
+          name="social_security_number"
+          label="CPF"
+          mask="999.999.999-99"
         />
         <Input
           className={styles.input}
           onChange={handleChange}
           name="birth_date"
           label="Data de nascimento"
+          mask="99/99/9999"
         />
         <Input
           className={styles.input}
@@ -97,22 +109,31 @@ const Register = () => {
         <Input
           className={styles.input}
           onChange={handleChange}
-          name="social_security_number"
-          label="CPF"
-        />
-        <Input
-          className={styles.input}
-          onChange={handleChange}
           name="academic_index"
           label="Índice de Mérito Acadêmico Acumulado"
+          max={3}
         />
+        <div>
+          <p className={styles.label}>Núcleo:</p>
+          <select
+            className={styles.select}
+            value={form.public_defense}
+            onChange={handleSelectChange}
+            name="public_defense"
+          >
+            {public_defenses.map((item) => (
+              <option key={item.property} value={item.property}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <Input
           className={styles.checkbox}
           onChange={handleChange}
           name="is_resident"
           label="Residente"
           type="checkbox"
-          style={{ boxShadow: "none" }}
         />
         <Input
           className={styles.checkbox}
@@ -121,6 +142,7 @@ const Register = () => {
           label="PCD"
           type="checkbox"
         />
+        {/* test below */}
       </form>
       <Button className={styles.button} onClick={handleSubmit}>
         Registrar

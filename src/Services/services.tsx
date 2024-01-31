@@ -2,14 +2,35 @@ import axios from "axios";
 import { PATH } from "../PATH";
 
 const services = {
+  // getRankList: async (filter: any, page: string) => {
+  //   return axios
+  //     .get(`${PATH.base}/user/rank/?page=${page}`)
+  //     .then((data: any) => {
+  //       return data;
+  //     })
+  //     .catch((err: any) => console.log(err));
+  // },
   getRankList: async (filter: any, page: string) => {
-    return axios
-      .get(`${PATH.base}/user/rank/?page=${page}`)
-      .then((data: any) => {
-        return data;
-      })
-      .catch((err: any) => console.log(err));
+    const queryParams = new URLSearchParams({
+      page: page,
+      is_resident: filter.is_resident,
+      stage: filter.stage,
+      public_defense: filter.public_defense,
+      category: filter.category,
+      pcd: filter.pcd,
+    });
+
+    const url = `${PATH.base}/user/rank/?${queryParams.toString()}`;
+
+    try {
+      const response = await axios.get(url);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err; // Re-throwing error for handling in the caller function
+    }
   },
+
   getUpdateList: async () => {
     const apiToken = sessionStorage.getItem("apiToken");
     const authorizationMethod = apiToken ? "Token" : "Basic";

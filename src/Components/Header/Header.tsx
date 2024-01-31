@@ -10,6 +10,7 @@ const Header = () => {
   const [isResponsive, setIsResponsive] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [toggleNav, setToggleNav] = useState<boolean>(true);
+  const [isResident, setIsResident] = useState<boolean>(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,19 +38,31 @@ const Header = () => {
         <div
           className={isResponsive ? styles.buttonContainer : styles.navigation}
         >
-          {isLoggedIn() && (
-            <>
-              {isResponsive ? (
-                <div>
-                  <button
-                    className={styles.responsiveButton}
-                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  >
-                    <HiBars3 size={24} />
-                  </button>
-                  {isResponsive && isDropdownOpen && (
-                    <div className={styles.modal}>
-                      <ul>
+          {isResponsive ? (
+            <div>
+              <button
+                className={styles.responsiveButton}
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              >
+                <HiBars3 size={24} />
+              </button>
+              {isDropdownOpen && (
+                <div className={styles.modal}>
+                  <ul>
+                    <li
+                      onClick={() => {
+                        setIsDropdownOpen(!isDropdownOpen);
+                        setToggleNav(!toggleNav);
+                        setIsResident(!isResident);
+                        navigate(isResident ? "sies/resident" : "sies/");
+                      }}
+                    >
+                      <span className={`${styles.route} ${styles.modalItem}`}>
+                        {isResident ? "Residentes" : "Estagiários"}
+                      </span>
+                    </li>
+                    {isLoggedIn() && (
+                      <>
                         <li
                           onClick={() => {
                             setIsDropdownOpen(!isDropdownOpen);
@@ -88,12 +101,26 @@ const Header = () => {
                             Ranquear
                           </span>
                         </li>
-                      </ul>
-                    </div>
-                  )}
+                      </>
+                    )}
+                  </ul>
                 </div>
-              ) : (
-                <div className={styles.navigation}>
+              )}
+            </div>
+          ) : (
+            <div className={styles.navigation}>
+              <span
+                onClick={() => {
+                  setToggleNav(!toggleNav);
+                  setIsResident(!isResident);
+                  navigate(isResident ? "sies/resident" : "sies/");
+                }}
+                className={`${styles.route} ${styles.logout}`}
+              >
+                {isResident ? "Residentes" : "Estagiários"}
+              </span>
+              {isLoggedIn() && (
+                <>
                   <span
                     className={`${styles.route} ${styles.logout}`}
                     onClick={() => logout(navigate)}
@@ -118,9 +145,9 @@ const Header = () => {
                   >
                     Ranquear
                   </span>
-                </div>
+                </>
               )}
-            </>
+            </div>
           )}
         </div>
       </div>

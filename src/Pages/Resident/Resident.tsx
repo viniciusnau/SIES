@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Rank.module.css";
+import styles from "./Resident.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "../../Components/Table/Table";
-import { fetchRank } from "../../Services/Slices/rankSlice";
 import Button from "../../Components/Forms/Button";
 import { public_defenses } from "../../Components/Consts";
+import { fetchResident } from "../../Services/Slices/residentSlice";
 
-const Rank: React.FC = () => {
+const Resident: React.FC = () => {
   const dispatch = useDispatch<any>();
   const columns = [
     { title: "Nome", property: "name" },
@@ -25,8 +25,9 @@ const Rank: React.FC = () => {
     { name: "1", property: "1" },
     { name: "2", property: "2" },
   ];
-
-  const { data, loading, error } = useSelector((state: any) => state.rankSlice);
+  const { data, loading, error } = useSelector(
+    (state: any) => state.residentSlice
+  );
   const [page, setPage] = useState<number>(1);
   const [filter, setFilter] = useState<any>({
     public_defense: public_defenses[0].name,
@@ -59,24 +60,23 @@ const Rank: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(fetchRank({ ...filter, is_resident: false }, page.toString()));
+    dispatch(fetchResident(filter, page.toString()));
   };
 
   useEffect(() => {
     dispatch(
-      fetchRank(
+      fetchResident(
         {
           public_defense: public_defenses[0].name,
           category: categories[0].name,
           stage: stages[0].name,
           pcd: false,
-          is_resident: false,
         },
         page.toString()
       )
     );
   }, [dispatch, page]);
-  console.log("rank: ", data);
+  console.log("resident: ", data);
   return (
     <div className={styles.container}>
       <div className={styles.filter}>
@@ -135,7 +135,7 @@ const Rank: React.FC = () => {
         </Button>
       </div>
       <Table
-        title="Ranqueamento dos estagiários:"
+        title="Ranqueamento dos residentes:"
         columns={columns}
         data={data}
         setPage={setPage}
@@ -149,4 +149,4 @@ const Rank: React.FC = () => {
   );
 };
 
-export default Rank;
+export default Resident;
