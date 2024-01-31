@@ -23,7 +23,7 @@ const Register = () => {
   const [snackbarType, setSnackbarType] = useState<boolean>(false);
   const [form, setForm] = useState<iForm>({
     name: "",
-    public_defense: "",
+    public_defense: public_defenses[0],
     birth_date: "",
     category: "",
     is_pcd: false,
@@ -52,9 +52,9 @@ const Register = () => {
       };
     }
   };
-
   const handleSubmit = () => {
     handleFormat();
+    console.log("form: ", form);
     dispatch(fetchPostRegister(formatted));
     setSnackbarType(true);
   };
@@ -134,8 +134,8 @@ const Register = () => {
             name="public_defense"
           >
             {public_defenses.map((item) => (
-              <option key={item.property} value={item.property}>
-                {item.name}
+              <option key={item} value={item}>
+                {item}
               </option>
             ))}
           </select>
