@@ -3,14 +3,17 @@ import styles from "./Header.module.css";
 import image from "../../Assets/image1.png";
 import { HiBars3 } from "react-icons/hi2";
 import { isLoggedIn, logout } from "../../Auth/Auth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isResponsive, setIsResponsive] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [toggleNav, setToggleNav] = useState<boolean>(true);
-  const [isResident, setIsResident] = useState<boolean>(false);
+  const [isResident, setIsResident] = useState<boolean>(
+    location.pathname === "/sies/resident"
+  );
 
   useEffect(() => {
     const handleResize = () => {

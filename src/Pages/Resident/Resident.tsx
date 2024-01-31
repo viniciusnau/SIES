@@ -3,28 +3,16 @@ import styles from "./Resident.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "../../Components/Table/Table";
 import Button from "../../Components/Forms/Button";
-import { public_defenses } from "../../Components/Consts";
+import {
+  categories,
+  columnsTable,
+  public_defenses,
+  stages,
+} from "../../Components/Consts";
 import { fetchResident } from "../../Services/Slices/residentSlice";
 
 const Resident: React.FC = () => {
   const dispatch = useDispatch<any>();
-  const columns = [
-    { title: "Nome", property: "name" },
-    { title: "CPF", property: "id" },
-    { title: "Nota", property: "grade" },
-  ];
-
-  const categories = [
-    { name: "Direito", property: "direito" },
-    { name: "Sistemas de Informações", property: "sistemas de informacoes" },
-    { name: "RH", property: "RH" },
-    { name: "Segurança", property: "seguranca" },
-  ];
-
-  const stages = [
-    { name: "1", property: "1" },
-    { name: "2", property: "2" },
-  ];
   const { data, loading, error } = useSelector(
     (state: any) => state.residentSlice
   );
@@ -76,7 +64,7 @@ const Resident: React.FC = () => {
       )
     );
   }, [dispatch, page]);
-  console.log("resident: ", data);
+
   return (
     <div className={styles.container}>
       <div className={styles.filter}>
@@ -136,12 +124,12 @@ const Resident: React.FC = () => {
       </div>
       <Table
         title="Ranqueamento dos residentes:"
-        columns={columns}
-        data={data}
+        columns={columnsTable}
+        data={data?.results}
         setPage={setPage}
         page={page}
         total={data?.count}
-        isEmpty={data?.length === 0}
+        isEmpty={data?.results?.length === 0}
         loading={loading}
         error={error}
       />

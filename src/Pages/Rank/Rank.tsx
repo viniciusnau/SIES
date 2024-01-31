@@ -4,22 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import Table from "../../Components/Table/Table";
 import { fetchRank } from "../../Services/Slices/rankSlice";
 import Button from "../../Components/Forms/Button";
-import { public_defenses } from "../../Components/Consts";
+import {
+  categories,
+  columnsTable,
+  public_defenses,
+  stages,
+} from "../../Components/Consts";
 
 const Rank: React.FC = () => {
   const dispatch = useDispatch<any>();
-  const columns = [
-    { title: "Nome", property: "blurred_name" },
-    { title: "CPF", property: "blurred_social_security_number" },
-    { title: "Nota", property: "average" },
-  ];
-
-  const categories = [{ name: "Direito", property: "direito" }];
-
-  const stages = [
-    { name: "1", property: "1" },
-    { name: "2", property: "2" },
-  ];
 
   const { data, loading, error } = useSelector((state: any) => state.rankSlice);
   const [page, setPage] = useState<number>(1);
@@ -72,7 +65,6 @@ const Rank: React.FC = () => {
       )
     );
   }, [dispatch, page]);
-  console.log("rank: ", data);
   return (
     <div className={styles.container}>
       <div className={styles.filter}>
@@ -133,12 +125,12 @@ const Rank: React.FC = () => {
 
       <Table
         title="Ranqueamento dos estagiários:"
-        columns={columns}
-        data={data}
+        columns={columnsTable}
+        data={data?.results}
         setPage={setPage}
         page={page}
         total={data?.count}
-        isEmpty={data?.length === 0}
+        isEmpty={data?.results?.length === 0}
         loading={loading}
         error={error}
       />

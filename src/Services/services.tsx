@@ -2,14 +2,6 @@ import axios from "axios";
 import { PATH } from "../PATH";
 
 const services = {
-  // getRankList: async (filter: any, page: string) => {
-  //   return axios
-  //     .get(`${PATH.base}/user/rank/?page=${page}`)
-  //     .then((data: any) => {
-  //       return data;
-  //     })
-  //     .catch((err: any) => console.log(err));
-  // },
   getRankList: async (filter: any, page: string) => {
     const queryParams = new URLSearchParams({
       page: page,

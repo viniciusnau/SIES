@@ -51,7 +51,7 @@ export const fetchRank =
     dispatch(getRank());
     try {
       const response = await services.getRankList(filter, page);
-      dispatch(getRankSuccess(response.data));
+      dispatch(getRankSuccess(response));
     } catch (err) {
       dispatch(getRankFailure());
     }

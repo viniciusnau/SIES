@@ -58,7 +58,7 @@ export const fetchResident =
         { ...filter, is_resident: true },
         page
       );
-      dispatch(getResidentSuccess(response.data));
+      dispatch(getResidentSuccess(response));
     } catch (err) {
       dispatch(getResidentFailure());
     }

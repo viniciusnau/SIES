@@ -106,3 +106,16 @@ export const public_defenses = [
   { name: "Maravilha", property: "maravilha" },
   { name: "São Miguel do Oeste", property: "sao miguel do oeste" },
 ];
+
+export const columnsTable = [
+  { title: "Nome", property: "blurred_name" },
+  { title: "CPF", property: "blurred_social_security_number" },
+  { title: "Nota", property: "average" },
+];
+
+export const categories = [{ name: "Direito", property: "direito" }];
+
+export const stages = [
+  { name: "1", property: "1" },
+  { name: "2", property: "2" },
+];
