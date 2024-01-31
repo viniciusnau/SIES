@@ -9,8 +9,11 @@ const services = {
       stage: filter.stage,
       public_defense: filter.public_defense,
       category: filter.category,
-      pcd: filter.pcd,
     });
+
+    if (filter.pcd !== "false" && filter.pcd !== false) {
+      queryParams.append('pcd', filter.pcd);
+    }
 
     const url = `${PATH.base}/user/rank/?${queryParams.toString()}`;
 
