@@ -21,8 +21,18 @@ function App() {
             <Route path="/sies/" element={<Rank />} />
             <Route path="/sies/resident" element={<Resident />} />
             <Route path="/sies/login/" element={<Login />} />
-            <Route path="/sies/register/" element={<Register />} />
-            <Route path="/sies/update/" element={<Update />} />
+            <Route
+                path="/sies/register/"
+                element={
+                  <ProtectedRoute Component={Register} path="/sies/register" />
+                }
+            />
+            <Route
+                path="/sies/update/"
+                element={
+                  <ProtectedRoute Component={Update} path="/sies/update" />
+                }
+            />
             <Route path="/sies/callback/:apiToken" element={<Callback />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

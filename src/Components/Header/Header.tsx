@@ -107,7 +107,7 @@ const Header = () => {
                           <span
                             className={`${styles.route} ${styles.modalItem}`}
                           >
-                            Ranquear
+                            Atualizar
                           </span>
                         </li>
                       </>
@@ -160,7 +160,7 @@ const Header = () => {
                       navigate("/sies/update");
                     }}
                   >
-                    Ranquear
+                    Atualizar
                   </span>
                 </>
               )}
