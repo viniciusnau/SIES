@@ -4,6 +4,7 @@ import residentSlice from "./Slices/residentSlice";
 import postRegisterSlice from "./Slices/postRegister";
 import putUserSlice from "./Slices/putUser";
 import getUsersListSlice from "./Slices/getUsersList";
+import loginSlice from "./Slices/getLogin";
 
 const reducer = combineReducers({
   rankSlice,
@@ -11,6 +12,7 @@ const reducer = combineReducers({
   postRegisterSlice,
   putUserSlice,
   getUsersListSlice,
+  loginSlice,
 });
 
 export const store = configureStore({ reducer });

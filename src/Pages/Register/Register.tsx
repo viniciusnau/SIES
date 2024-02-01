@@ -54,7 +54,6 @@ const Register = () => {
   };
   const handleSubmit = () => {
     handleFormat();
-    console.log("form: ", form);
     dispatch(fetchPostRegister(formatted));
     setSnackbarType(true);
   };

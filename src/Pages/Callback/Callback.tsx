@@ -11,7 +11,7 @@ const Callback: React.FC = () => {
       sessionStorage.setItem("apiToken", apiToken);
     }
 
-    navigate("/sies/");
+    navigate("/sies/register");
   }, [apiToken, navigate]);
 
   return (

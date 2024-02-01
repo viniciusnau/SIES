@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Header.module.css";
-import image from "../../Assets/image1.png";
+import image from "../../Assets/a.png";
 import { HiBars3 } from "react-icons/hi2";
 import { isLoggedIn, logout } from "../../Auth/Auth";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [isResponsive, setIsResponsive] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [toggleNav, setToggleNav] = useState<boolean>(true);
-  const [isResident, setIsResident] = useState<boolean>(
-    location.pathname === "/sies/resident"
-  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -56,12 +52,22 @@ const Header = () => {
                       onClick={() => {
                         setIsDropdownOpen(!isDropdownOpen);
                         setToggleNav(!toggleNav);
-                        setIsResident(!isResident);
-                        navigate(isResident ? "sies/resident" : "sies/");
+                        navigate("sies/resident");
                       }}
                     >
                       <span className={`${styles.route} ${styles.modalItem}`}>
-                        {isResident ? "Residentes" : "Estagiários"}
+                        Residentes
+                      </span>
+                    </li>
+                    <li
+                      onClick={() => {
+                        setIsDropdownOpen(!isDropdownOpen);
+                        setToggleNav(!toggleNav);
+                        navigate("sies/");
+                      }}
+                    >
+                      <span className={`${styles.route} ${styles.modalItem}`}>
+                        Estagiários
                       </span>
                     </li>
                     {isLoggedIn() && (
@@ -115,12 +121,20 @@ const Header = () => {
               <span
                 onClick={() => {
                   setToggleNav(!toggleNav);
-                  setIsResident(!isResident);
-                  navigate(isResident ? "sies/resident" : "sies/");
+                  navigate("sies/resident");
                 }}
                 className={`${styles.route} ${styles.logout}`}
               >
-                {isResident ? "Residentes" : "Estagiários"}
+                Residentes
+              </span>
+              <span
+                onClick={() => {
+                  setToggleNav(!toggleNav);
+                  navigate("sies/");
+                }}
+                className={`${styles.route} ${styles.logout}`}
+              >
+                Estagiários
               </span>
               {isLoggedIn() && (
                 <>

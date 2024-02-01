@@ -10,7 +10,8 @@ import Snackbar from "../../Components/Snackbar/Snackbar";
 
 interface iForm {
   id: string;
-  grade: string;
+  test_index: string;
+  interview_index: string;
 }
 
 const Update = () => {
@@ -18,7 +19,8 @@ const Update = () => {
   const [snackbarType, setSnackbarType] = useState<boolean>(false);
   const [form, setForm] = useState<iForm>({
     id: "",
-    grade: "",
+    test_index: "",
+    interview_index: "",
   });
   const { data, error, loading } = useSelector(
     (state: any) => state.getUsersListSlice
@@ -68,8 +70,14 @@ const Update = () => {
         <Input
           className={styles.input}
           onChange={handleChange}
-          name="grade"
-          label="Nota"
+          name="test_index"
+          label="Nota da prova"
+        />
+        <Input
+          className={styles.input}
+          onChange={handleChange}
+          name="interview_index"
+          label="Nota da entrevista"
         />
       </div>
       <Button className={styles.button} onClick={handleSubmit}>

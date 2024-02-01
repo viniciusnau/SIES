@@ -34,6 +34,12 @@ export const snackbarConsts = {
     description: "Tente novamente mais tarde.",
     color: "#ff6464",
   },
+
+  errorLogin: {
+    title: "Erro ao verificar as credenciais!",
+    description: "Certifique se os campos estão corretos.",
+    color: "#ff6464",
+  },
 };
 
 export const public_defenses = [
@@ -65,15 +71,24 @@ export const public_defenses = [
   "São Miguel do Oeste",
 ];
 
-export const columnsTable = [
-  { title: "Nome", property: "blurred_name" },
-  { title: "CPF", property: "blurred_social_security_number" },
-  { title: "Nota", property: "average" },
-];
-
 export const categories = [{ name: "Direito", property: "direito" }];
 
 export const stages = [
   { name: "1", property: "1" },
   { name: "2", property: "2" },
+];
+
+export const columnsTable = [
+  { title: "Nome", property: "blurred_name" },
+  { title: "CPF", property: "blurred_social_security_number" },
+  { title: "IMAA", property: "academic_index" },
+];
+
+export const extraColumnsTable = [
+  { title: "Nome", property: "blurred_name" },
+  { title: "CPF", property: "blurred_social_security_number" },
+  { title: "IMAA", property: "academic_index" },
+  { title: "Prova", property: "test_index" },
+  { title: "Entrevista", property: "interview_index" },
+  { title: "Média", property: "average" },
 ];

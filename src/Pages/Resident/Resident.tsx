@@ -6,6 +6,7 @@ import Button from "../../Components/Forms/Button";
 import {
   categories,
   columnsTable,
+  extraColumnsTable,
   public_defenses,
   stages,
 } from "../../Components/Consts";
@@ -17,6 +18,7 @@ const Resident: React.FC = () => {
     (state: any) => state.residentSlice
   );
   const [page, setPage] = useState<number>(1);
+  const [isExtraColumns, setIsExtraColumns] = useState<boolean>(false);
   const [filter, setFilter] = useState<any>({
     public_defense: public_defenses[0],
     category: categories[0].name,
@@ -49,6 +51,7 @@ const Resident: React.FC = () => {
 
   const handleSubmit = () => {
     dispatch(fetchResident(filter, page.toString()));
+    filter.stage == 2 ? setIsExtraColumns(true) : setIsExtraColumns(false);
   };
 
   useEffect(() => {
@@ -64,7 +67,7 @@ const Resident: React.FC = () => {
       )
     );
   }, [dispatch, page]);
-
+  console.log("isExtraColumns", isExtraColumns);
   return (
     <div className={styles.container}>
       <div className={styles.filter}>
@@ -124,7 +127,7 @@ const Resident: React.FC = () => {
       </div>
       <Table
         title="Ranqueamento dos residentes:"
-        columns={columnsTable}
+        columns={isExtraColumns ? extraColumnsTable : columnsTable}
         data={data?.results}
         setPage={setPage}
         page={page}

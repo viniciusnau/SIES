@@ -41,3 +41,7 @@ export function handleKeyPress(
     handleSubmit();
   }
 }
+
+export function neverNull(value: string) {
+  return value ? value : "-";
+}
