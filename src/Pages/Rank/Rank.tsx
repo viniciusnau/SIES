@@ -7,15 +7,16 @@ import Button from "../../Components/Forms/Button";
 import {
   categories,
   columnsTable,
+  extraColumnsTable,
   public_defenses,
   stages,
 } from "../../Components/Consts";
 
 const Rank: React.FC = () => {
   const dispatch = useDispatch<any>();
-
   const { data, loading, error } = useSelector((state: any) => state.rankSlice);
   const [page, setPage] = useState<number>(1);
+  const [isExtraColumns, setIsExtraColumns] = useState<boolean>(false);
   const [filter, setFilter] = useState<any>({
     is_resident: true,
     stage: stages[0].name,
@@ -49,6 +50,7 @@ const Rank: React.FC = () => {
 
   const handleSubmit = () => {
     dispatch(fetchRank({ ...filter, is_resident: false }, page.toString()));
+    filter.stage == 2 ? setIsExtraColumns(true) : setIsExtraColumns(false);
   };
 
   useEffect(() => {
@@ -57,7 +59,7 @@ const Rank: React.FC = () => {
         {
           public_defense: public_defenses[0],
           category: categories[0].name,
-          stage: stages[0].name,
+          stage: 2,
           pcd: false,
           is_resident: false,
         },
@@ -125,7 +127,7 @@ const Rank: React.FC = () => {
 
       <Table
         title="Ranqueamento dos estagiários:"
-        columns={columnsTable}
+        columns={isExtraColumns ? extraColumnsTable : columnsTable}
         data={data?.results}
         setPage={setPage}
         page={page}

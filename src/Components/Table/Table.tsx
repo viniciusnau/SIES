@@ -5,6 +5,7 @@ import Pagination from "rc-pagination";
 import { MdDownload } from "react-icons/md";
 import Button from "../Forms/Button";
 import Loading from "../Loading/Loading";
+import { neverNull } from "../Helper";
 
 interface Column {
   title: string;
@@ -128,7 +129,7 @@ const Table: React.FC<TableProps> = ({
                                 color: "initial",
                               }}
                             >
-                              {row[column.property]}
+                              {neverNull(row[column.property])}
                             </div>
                           )}
                         </div>

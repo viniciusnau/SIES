@@ -12,7 +12,7 @@ const services = {
     });
 
     if (filter.pcd !== "false" && filter.pcd !== false) {
-      queryParams.append('pcd', filter.pcd);
+      queryParams.append("pcd", filter.pcd);
     }
 
     const url = `${PATH.base}/user/rank/?${queryParams.toString()}`;
@@ -123,6 +123,21 @@ const services = {
     };
     return axios
       .delete(PATH.base + `/user/${id}`, header)
+      .then((response: any) => {
+        return response;
+      })
+      .catch((err: any) => console.log(err));
+  },
+  getLogin: async (credentials: { username: string; password: string }) => {
+    const headers = {
+      headers: {
+        Authorization:
+          "Basic " + btoa(`${credentials.username}:${credentials.password}`),
+      },
+    };
+
+    return axios
+      .get(PATH.base + "/user/", headers)
       .then((response: any) => {
         return response;
       })
