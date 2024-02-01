@@ -75,18 +75,6 @@ const Header = () => {
                         <li
                           onClick={() => {
                             setIsDropdownOpen(!isDropdownOpen);
-                            logout(navigate);
-                          }}
-                        >
-                          <span
-                            className={`${styles.route} ${styles.modalItem}`}
-                          >
-                            Sair
-                          </span>
-                        </li>
-                        <li
-                          onClick={() => {
-                            setIsDropdownOpen(!isDropdownOpen);
                             setToggleNav(!toggleNav);
                             navigate("sies/register");
                           }}
@@ -108,6 +96,18 @@ const Header = () => {
                             className={`${styles.route} ${styles.modalItem}`}
                           >
                             Atualizar
+                          </span>
+                        </li>
+                        <li
+                            onClick={() => {
+                              setIsDropdownOpen(!isDropdownOpen);
+                              logout(navigate);
+                            }}
+                        >
+                          <span
+                              className={`${styles.route} ${styles.modalItem}`}
+                          >
+                            Sair
                           </span>
                         </li>
                       </>
@@ -140,12 +140,6 @@ const Header = () => {
                 <>
                   <span
                     className={`${styles.route} ${styles.logout}`}
-                    onClick={() => logout(navigate)}
-                  >
-                    Sair
-                  </span>
-                  <span
-                    className={`${styles.route} ${styles.logout}`}
                     onClick={() => {
                       setToggleNav(!toggleNav);
                       navigate("/sies/register");
@@ -161,6 +155,12 @@ const Header = () => {
                     }}
                   >
                     Atualizar
+                  </span>
+                  <span
+                      className={`${styles.route} ${styles.logout}`}
+                      onClick={() => logout(navigate)}
+                  >
+                    Sair
                   </span>
                 </>
               )}
