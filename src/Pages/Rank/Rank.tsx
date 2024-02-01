@@ -59,7 +59,7 @@ const Rank: React.FC = () => {
         {
           public_defense: public_defenses[0],
           category: categories[0].name,
-          stage: 2,
+          stage: stages[0].name,
           pcd: false,
           is_resident: false,
         },
@@ -67,6 +67,7 @@ const Rank: React.FC = () => {
       )
     );
   }, [dispatch, page]);
+
   return (
     <div className={styles.container}>
       <div className={styles.filter}>

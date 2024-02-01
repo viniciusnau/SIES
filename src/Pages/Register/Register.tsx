@@ -153,7 +153,6 @@ const Register = () => {
           label="PCD"
           type="checkbox"
         />
-        {/* test below */}
       </form>
       <Button className={styles.button} onClick={handleSubmit}>
         Registrar
