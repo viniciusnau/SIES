@@ -67,7 +67,7 @@ const Resident: React.FC = () => {
       )
     );
   }, [dispatch, page]);
-  console.log("isExtraColumns", isExtraColumns);
+
   return (
     <div className={styles.container}>
       <div className={styles.filter}>
