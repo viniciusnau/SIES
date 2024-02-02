@@ -184,7 +184,7 @@ const Register = () => {
             <Loading size="1.5rem" type="spin" />
           </div>
         ) : (
-          "Entrar"
+          "Salvar"
         )}
       </Button>
     </div>
