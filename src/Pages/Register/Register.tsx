@@ -141,7 +141,7 @@ const Register = () => {
           onChange={handleChange}
           name="academic_index"
           label="Índice de Mérito Acadêmico Acumulado"
-          mask="99,99"
+          mask="9,99"
         />
         <div>
           <p className={styles.label}>Núcleo:</p>
