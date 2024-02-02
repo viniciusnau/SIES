@@ -80,7 +80,7 @@ const Update = () => {
           onChange={handleChange}
           name="test_index"
           label="Nota da prova"
-          mask="99,99"
+          mask="9,99"
         />
         <Input
           className={styles.input}
