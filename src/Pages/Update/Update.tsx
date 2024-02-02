@@ -56,11 +56,9 @@ const Update = () => {
     setForm({ ...form, id: data[0]?.id });
   }, [data]);
 
-  console.log("form:", form);
-
   return (
     <div className={styles.container}>
-      {userResponse.data && snackbarType && (
+      {userResponse.data.length && snackbarType && (
         <Snackbar type="successUpdate" setShowSnackbar={setSnackbarType} />
       )}
       {userResponse.error && snackbarType && (
