@@ -74,45 +74,51 @@ const Rank: React.FC = () => {
         <div
           style={{ display: "flex", alignItems: "center", margin: "0 0 1rem" }}
         >
-          <p>Curso:</p>
-          <select
-            className={styles.select}
-            value={filter.category}
-            onChange={handleChange}
-            name="category"
-          >
-            {categories.map((item) => (
-              <option key={item.property} value={item.property}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-          <p>Defensoria:</p>
-          <select
-            className={styles.select}
-            value={filter.public_defense}
-            onChange={handleChange}
-            name="public_defense"
-          >
-            {public_defenses.map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-          <p>Etapa:</p>
-          <select
-            className={styles.select}
-            value={filter.stage}
-            onChange={handleChange}
-            name="stage"
-          >
-            {stages.map((item) => (
-              <option key={item.property} value={item.property}>
-                {item.name}
-              </option>
-            ))}
-          </select>
+          <div>
+            <p>Curso:</p>
+            <select
+              className={styles.select}
+              value={filter.category}
+              onChange={handleChange}
+              name="category"
+            >
+              {categories.map((item) => (
+                <option key={item.property} value={item.property}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <p>Defensoria:</p>
+            <select
+              className={styles.select}
+              value={filter.public_defense}
+              onChange={handleChange}
+              name="public_defense"
+            >
+              {public_defenses.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <p>Etapa:</p>
+            <select
+              className={styles.select}
+              value={filter.stage}
+              onChange={handleChange}
+              name="stage"
+            >
+              {stages.map((item) => (
+                <option key={item.property} value={item.property}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </div>
           <input
             type="checkbox"
             name="pcd"

@@ -26,7 +26,7 @@ const Update = () => {
     (state: any) => state.getUsersListSlice
   );
 
-  const responseUser = useSelector((state: any) => state.putUserSlice);
+  const userResponse = useSelector((state: any) => state.putUserSlice);
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
@@ -37,19 +37,27 @@ const Update = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(fetchPutUser(form));
+    const processedForm = {
+      ...form,
+      test_index: form.test_index.replace(/,/g, ".").replace("_", ""),
+      interview_index: form.interview_index.replace(/,/g, ".").replace("_", ""),
+    };
+
+    dispatch(fetchPutUser(processedForm));
+    setSnackbarType(true);
   };
 
   useEffect(() => {
     dispatch(fetchUsersList());
+    setSnackbarType(false);
   }, []);
 
   return (
     <div className={styles.container}>
-      {data && snackbarType && (
+      {userResponse.data && snackbarType && (
         <Snackbar type="successUpdate" setShowSnackbar={setSnackbarType} />
       )}
-      {error && snackbarType && (
+      {userResponse.error && snackbarType && (
         <Snackbar type="errorUpdate" setShowSnackbar={setSnackbarType} />
       )}
       <div className={styles.form}>
@@ -72,16 +80,29 @@ const Update = () => {
           onChange={handleChange}
           name="test_index"
           label="Nota da prova"
+          mask="99,99"
         />
         <Input
           className={styles.input}
           onChange={handleChange}
           name="interview_index"
           label="Nota da entrevista"
+          mask="99,99"
         />
       </div>
       <Button className={styles.button} onClick={handleSubmit}>
-        {responseUser.loading ? <Loading size="24" type="circle" /> : "Salvar"}
+        {loading || userResponse.loading ? (
+          <div
+            style={{
+              position: "relative",
+              top: "-3rem",
+            }}
+          >
+            <Loading size="1.5rem" type="spin" />
+          </div>
+        ) : (
+          "Entrar"
+        )}
       </Button>
     </div>
   );

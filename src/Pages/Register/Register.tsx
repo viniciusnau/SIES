@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Register.module.css";
 import Input from "../../Components/Forms/Input";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../Components/Forms/Button";
 import { fetchPostRegister } from "../../Services/Slices/postRegister";
-import { public_defenses } from "../../Components/Consts";
+import { categories, public_defenses } from "../../Components/Consts";
 import Snackbar from "../../Components/Snackbar/Snackbar";
+import Loading from "../../Components/Loading/Loading";
 
 interface iForm {
   name: string;
@@ -15,7 +16,7 @@ interface iForm {
   is_pcd: boolean;
   is_resident: boolean;
   social_security_number: string;
-  academic_index: number;
+  academic_index: string;
 }
 
 const Register = () => {
@@ -29,12 +30,11 @@ const Register = () => {
     is_pcd: false,
     is_resident: false,
     social_security_number: "",
-    academic_index: 0,
+    academic_index: "",
   });
   const { data, loading, error } = useSelector(
     (state: any) => state.postRegisterSlice
   );
-  let formatted: iForm;
 
   const handleFormat = () => {
     const { birth_date, ...otherFormValues } = form;
@@ -46,16 +46,22 @@ const Register = () => {
         "0"
       )}`;
 
-      formatted = {
+      return {
         ...otherFormValues,
         birth_date: formattedDate,
+        academic_index: form.academic_index.replace(/,/g, ".").replace("_", ""),
       };
     }
+
+    return null;
   };
+
   const handleSubmit = () => {
-    handleFormat();
-    dispatch(fetchPostRegister(formatted));
-    setSnackbarType(true);
+    const formattedForm = handleFormat();
+    if (formattedForm) {
+      dispatch(fetchPostRegister(formattedForm));
+      setSnackbarType(true);
+    }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +83,10 @@ const Register = () => {
     }));
   };
 
+  useEffect(() => {
+    setSnackbarType(false);
+  }, []);
+  console.log("form: ", form);
   return (
     <div className={styles.container}>
       {data && snackbarType && (
@@ -111,18 +121,27 @@ const Register = () => {
           label="Data de nascimento"
           mask="99/99/9999"
         />
-        <Input
-          className={styles.input}
-          onChange={handleChange}
-          name="category"
-          label="Curso"
-        />
+        <div>
+          <p className={styles.label}>Curso:</p>
+          <select
+            className={styles.select}
+            value={form.category}
+            onChange={handleSelectChange}
+            name="category"
+          >
+            {categories.map((item) => (
+              <option key={item.property} value={item.property}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <Input
           className={styles.input}
           onChange={handleChange}
           name="academic_index"
           label="Índice de Mérito Acadêmico Acumulado"
-          max={3}
+          mask="99,99"
         />
         <div>
           <p className={styles.label}>Núcleo:</p>
@@ -155,7 +174,18 @@ const Register = () => {
         />
       </form>
       <Button className={styles.button} onClick={handleSubmit}>
-        Registrar
+        {loading ? (
+          <div
+            style={{
+              position: "relative",
+              top: "-3rem",
+            }}
+          >
+            <Loading size="1.5rem" type="spin" />
+          </div>
+        ) : (
+          "Entrar"
+        )}
       </Button>
     </div>
   );

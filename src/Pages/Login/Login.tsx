@@ -9,6 +9,7 @@ import { fetchLogin } from "../../Services/Slices/getLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Snackbar from "../../Components/Snackbar/Snackbar";
+import Loading from "../../Components/Loading/Loading";
 
 const Login = () => {
   const dispatch = useDispatch<any>();
@@ -36,6 +37,10 @@ const Login = () => {
   const handleSubmit = () => {
     dispatch(fetchLogin(form));
     setIsDispatched(true);
+    setForm({
+      username: "",
+      password: "",
+    });
   };
 
   const handleShowPassword = () => {
@@ -43,15 +48,16 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (data && isDispatched) {
+    if (data.length && isDispatched) {
       navigate("/sies/register");
     }
   }, [data]);
 
   useEffect(() => {
     setIsDispatched(false);
-  });
-
+  }, []);
+  console.log("error: ", error);
+  console.log("isDispatched: ", isDispatched);
   return (
     <div className={styles.container}>
       {error && isDispatched && (
@@ -121,7 +127,18 @@ const Login = () => {
         </form>
         <div className={styles.formButton}>
           <Button className={styles.button} onClick={handleSubmit}>
-            {"Entrar"}
+            {loading ? (
+              <div
+                style={{
+                  position: "relative",
+                  top: "-3rem",
+                }}
+              >
+                <Loading size="1.5rem" type="spin" />
+              </div>
+            ) : (
+              "Entrar"
+            )}
           </Button>
         </div>
       </div>
