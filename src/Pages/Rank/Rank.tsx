@@ -23,7 +23,7 @@ const Rank: React.FC = () => {
     is_resident: true,
     stage: stages[0].name,
     public_defense: public_defenses[0],
-    category: categories[0].name,
+    category: categories[0],
     pcd: false,
   });
 
@@ -64,7 +64,7 @@ const Rank: React.FC = () => {
       fetchRank(
         {
           public_defense: public_defenses[0],
-          category: categories[0].name,
+          category: categories[0],
           stage: stages[0].name,
           pcd: false,
           is_resident: false,
@@ -88,8 +88,8 @@ const Rank: React.FC = () => {
               name="category"
             >
               {categories.map((item) => (
-                <option key={item.property} value={item.property}>
-                  {item.name}
+                <option key={item} value={item}>
+                  {item}
                 </option>
               ))}
             </select>

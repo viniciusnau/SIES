@@ -23,7 +23,7 @@ const Resident: React.FC = () => {
   const [isToolTipVisible, setIsToolTipVisible] = useState<boolean>(false);
   const [filter, setFilter] = useState<any>({
     public_defense: public_defenses[0],
-    category: categories[0].name,
+    category: categories[0],
     stage: stages[0].name,
     pcd: false,
   });
@@ -65,7 +65,7 @@ const Resident: React.FC = () => {
       fetchResident(
         {
           public_defense: public_defenses[0],
-          category: categories[0].name,
+          category: categories[0],
           stage: stages[0].name,
           pcd: false,
         },
@@ -88,8 +88,8 @@ const Resident: React.FC = () => {
               name="category"
             >
               {categories.map((item) => (
-                <option key={item.property} value={item.property}>
-                  {item.name}
+                <option key={item} value={item}>
+                  {item}
                 </option>
               ))}
             </select>

@@ -26,7 +26,7 @@ const Register = () => {
     name: "",
     public_defense: public_defenses[0],
     birth_date: "",
-    category: "",
+    category: categories[0],
     is_pcd: false,
     is_resident: false,
     social_security_number: "",
@@ -86,7 +86,7 @@ const Register = () => {
   useEffect(() => {
     setSnackbarType(false);
   }, []);
-  console.log("form: ", form);
+
   return (
     <div className={styles.container}>
       {data && snackbarType && (
@@ -130,8 +130,8 @@ const Register = () => {
             name="category"
           >
             {categories.map((item) => (
-              <option key={item.property} value={item.property}>
-                {item.name}
+              <option key={item} value={item}>
+                {item}
               </option>
             ))}
           </select>

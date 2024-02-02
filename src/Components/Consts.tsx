@@ -71,7 +71,7 @@ export const public_defenses = [
   "São Miguel do Oeste",
 ];
 
-export const categories = [{ name: "Direito", property: "direito" }];
+export const categories = ["Direito"];
 
 export const stages = [
   { name: "1", property: "1" },
