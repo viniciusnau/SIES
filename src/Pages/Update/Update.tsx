@@ -38,9 +38,9 @@ const Update = () => {
 
   const handleSubmit = () => {
     const processedForm = {
-      ...form,
-      test_index: form.test_index.replace(/,/g, ".").replace("_", ""),
-      interview_index: form.interview_index.replace(/,/g, ".").replace("_", ""),
+      id: form.id,
+      ...(form.test_index !== '' && { test_index: form.test_index.replace(/,/g, ".").replace("_", "") }),
+      ...(form.interview_index !== '' && { interview_index: form.interview_index.replace(/,/g, ".").replace("_", "") }),
     };
 
     dispatch(fetchPutUser(processedForm));
@@ -84,14 +84,14 @@ const Update = () => {
           onChange={handleChange}
           name="test_index"
           label="Nota da prova"
-          mask="99,99"
+          mask="99,9"
         />
         <Input
           className={styles.input}
           onChange={handleChange}
           name="interview_index"
           label="Nota da entrevista"
-          mask="99,99"
+          mask="99,9"
         />
       </div>
       <Button className={styles.button} onClick={handleSubmit}>
