@@ -132,7 +132,7 @@ const Rank: React.FC = () => {
                   }`}
                 >
                   Etapa 1: somente Índice de Mérito Acadêmico Acumulado (IMAA),
-                  Etapa 2: média entre IMAA, entrevista e prova
+                  Etapa 2: média entre IMAA, entrevista e/ou prova
                 </p>
               )}
               <BsQuestionSquare
