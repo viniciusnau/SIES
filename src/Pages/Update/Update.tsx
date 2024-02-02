@@ -84,14 +84,14 @@ const Update = () => {
           onChange={handleChange}
           name="test_index"
           label="Nota da prova"
-          mask="9,99"
+          mask="99,9"
         />
         <Input
           className={styles.input}
           onChange={handleChange}
           name="interview_index"
           label="Nota da entrevista"
-          mask="9,99"
+          mask="99,9"
         />
       </div>
       <Button className={styles.button} onClick={handleSubmit}>
