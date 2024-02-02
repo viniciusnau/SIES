@@ -35,6 +35,10 @@ const Login = () => {
   };
 
   const handleSubmit = () => {
+    sessionStorage.setItem(
+        "credentials",
+        btoa(`${form.username}:${form.password}`)
+    );
     dispatch(fetchLogin(form));
     setIsDispatched(true);
     setForm({
