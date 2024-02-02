@@ -52,6 +52,12 @@ const Update = () => {
     setSnackbarType(false);
   }, []);
 
+  useEffect(() => {
+    setForm({ ...form, id: data[0]?.id });
+  }, [data]);
+
+  console.log("form:", form);
+
   return (
     <div className={styles.container}>
       {userResponse.data && snackbarType && (
