@@ -173,7 +173,16 @@ const Register = () => {
           type="checkbox"
         />
       </form>
-      <Button className={styles.button} onClick={handleSubmit}>
+      <Button
+        className={styles.button}
+        onClick={handleSubmit}
+        disabled={
+          !form.name &&
+          !form.social_security_number &&
+          !form.birth_date &&
+          !form.academic_index
+        }
+      >
         {loading ? (
           <div
             style={{

@@ -39,8 +39,14 @@ const Update = () => {
   const handleSubmit = () => {
     const processedForm = {
       id: form.id,
-      ...(form.test_index !== '' && { test_index: form.test_index.replace(/,/g, ".").replace("_", "") }),
-      ...(form.interview_index !== '' && { interview_index: form.interview_index.replace(/,/g, ".").replace("_", "") }),
+      ...(form.test_index !== "" && {
+        test_index: form.test_index.replace(/,/g, ".").replace("_", ""),
+      }),
+      ...(form.interview_index !== "" && {
+        interview_index: form.interview_index
+          .replace(/,/g, ".")
+          .replace("_", ""),
+      }),
     };
 
     dispatch(fetchPutUser(processedForm));
@@ -94,7 +100,11 @@ const Update = () => {
           mask="99,9"
         />
       </div>
-      <Button className={styles.button} onClick={handleSubmit}>
+      <Button
+        className={styles.button}
+        onClick={handleSubmit}
+        disabled={!form.test_index && !form.interview_index}
+      >
         {loading || userResponse.loading ? (
           <div
             style={{

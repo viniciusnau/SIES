@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import services from "../services";
 
 interface UserState {
@@ -22,7 +22,7 @@ const putUserSlice = createSlice({
       state.error = false;
       state.data = [];
     },
-    putUserSuccess: (state: any, action: any) => {
+    putUserSuccess: (state: any, action: PayloadAction<string>) => {
       state.loading = false;
       state.error = false;
       state.data = action.payload;
@@ -54,7 +54,8 @@ export const fetchPutUser =
     dispatch(putUser());
     try {
       const response = await services.putUser(body, body.id);
-      dispatch(putUserSuccess(response.data));
+      const message = "Atualizado com sucesso!";
+      dispatch(putUserSuccess(message));
     } catch (err) {
       dispatch(putUserFailure());
     }

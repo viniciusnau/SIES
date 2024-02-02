@@ -77,13 +77,12 @@ const Resident: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.filter}>
-        <div
-          style={{ display: "flex", alignItems: "center", margin: "0 0 1rem" }}
-        >
+        <div className={styles.filterContainer}>
           <div>
             <p>Curso:</p>
             <select
               className={styles.select}
+              style={{ margin: "0 3rem 0 .5rem" }}
               value={filter.category}
               onChange={handleChange}
               name="category"
