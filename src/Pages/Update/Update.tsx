@@ -58,7 +58,7 @@ const Update = () => {
 
   return (
     <div className={styles.container}>
-      {userResponse.data.length && snackbarType && (
+      {userResponse.data.length > 0 && snackbarType && (
         <Snackbar type="successUpdate" setShowSnackbar={setSnackbarType} />
       )}
       {userResponse.error && snackbarType && (

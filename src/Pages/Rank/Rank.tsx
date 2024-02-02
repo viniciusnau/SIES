@@ -11,12 +11,14 @@ import {
   public_defenses,
   stages,
 } from "../../Components/Consts";
+import { BsQuestionSquare } from "react-icons/bs";
 
 const Rank: React.FC = () => {
   const dispatch = useDispatch<any>();
   const { data, loading, error } = useSelector((state: any) => state.rankSlice);
   const [page, setPage] = useState<number>(1);
   const [isExtraColumns, setIsExtraColumns] = useState<boolean>(false);
+  const [isToolTipVisible, setIsToolTipVisible] = useState<boolean>(false);
   const [filter, setFilter] = useState<any>({
     is_resident: true,
     stage: stages[0].name,
@@ -24,6 +26,10 @@ const Rank: React.FC = () => {
     category: categories[0].name,
     pcd: false,
   });
+
+  const handleTooltipToggle = () => {
+    setIsToolTipVisible(!isToolTipVisible);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
     const { name, value, type, checked } = e.target;
@@ -108,6 +114,7 @@ const Rank: React.FC = () => {
             <p>Etapa:</p>
             <select
               className={styles.select}
+              style={{ margin: "0 .25rem 0 2.5rem" }}
               value={filter.stage}
               onChange={handleChange}
               name="stage"
@@ -118,14 +125,35 @@ const Rank: React.FC = () => {
                 </option>
               ))}
             </select>
+            <label className={styles.question}>
+              {isToolTipVisible && (
+                <p
+                  className={`${styles.tooltip} ${
+                    isToolTipVisible ? styles.fadeIn : styles.fadeOut
+                  }`}
+                >
+                  Etapa 1: somente Índice de Mérito Acadêmico Acumulado (IMAA),
+                  Etapa 2: média entre IMAA, entrevista e prova
+                </p>
+              )}
+              <BsQuestionSquare
+                size={18}
+                color="#ff6464"
+                style={{ margin: "0 0 0 .25rem" }}
+                onMouseEnter={handleTooltipToggle}
+                onMouseLeave={handleTooltipToggle}
+              />
+            </label>
           </div>
-          <input
-            type="checkbox"
-            name="pcd"
-            onChange={handleChange}
-            className={styles.checkbox}
-          />
-          <p style={{ margin: "0 0 0 .25rem" }}>PCD</p>
+          <div>
+            <p style={{ margin: "0 0 1rem .25rem" }}>PCD</p>
+            <input
+              type="checkbox"
+              name="pcd"
+              onChange={handleChange}
+              className={styles.checkbox}
+            />
+          </div>
         </div>
         <Button onClick={handleSubmit} className={styles.button}>
           Pesquisar
