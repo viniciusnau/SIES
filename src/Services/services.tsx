@@ -15,13 +15,13 @@ const services = {
       queryParams.append("pcd", filter.pcd);
     }
 
-    const url = `${PATH.base}/user/rank/?${queryParams.toString()}`;
-
-    if (filter.stage == "1") {
+    if (filter.stage === "1" || filter.stage === 1) {
       queryParams.append("ordering", "-academic_index");
-    } else if (filter.stage == "2") {
+    } else if (filter.stage === "2" || filter.stage === 2) {
       queryParams.append("ordering", "-average");
     }
+
+    const url = `${PATH.base}/user/rank/?${queryParams.toString()}`;
 
     try {
       const response = await axios.get(url);
