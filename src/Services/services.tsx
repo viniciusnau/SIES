@@ -17,9 +17,9 @@ const services = {
 
     const url = `${PATH.base}/user/rank/?${queryParams.toString()}`;
 
-    if (filter.stage === 1) {
+    if (filter.stage == "1") {
       queryParams.append("ordering", "-academic_index");
-    } else if (filter.stage === 2) {
+    } else if (filter.stage == "2") {
       queryParams.append("ordering", "-average");
     }
 
