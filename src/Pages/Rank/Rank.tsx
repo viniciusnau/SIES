@@ -78,11 +78,10 @@ const Rank: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.filter}>
         <div className={styles.filterContainer}>
-          <div>
+          <div className={styles.selectContainer}>
             <p>Curso:</p>
             <select
               className={styles.select}
-              style={{ margin: "0 3rem 0 .5rem" }}
               value={filter.category}
               onChange={handleChange}
               name="category"
@@ -94,7 +93,7 @@ const Rank: React.FC = () => {
               ))}
             </select>
           </div>
-          <div>
+          <div className={styles.selectContainer}>
             <p>Defensoria:</p>
             <select
               className={styles.select}
@@ -109,11 +108,10 @@ const Rank: React.FC = () => {
               ))}
             </select>
           </div>
-          <div>
+          <div className={styles.selectContainer}>
             <p>Etapa:</p>
             <select
               className={styles.select}
-              style={{ margin: "0 .25rem 0 2.5rem" }}
               value={filter.stage}
               onChange={handleChange}
               name="stage"

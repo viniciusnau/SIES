@@ -7,11 +7,14 @@ import { fetchPutUser } from "../../Services/Slices/putUser";
 import { fetchUsersList } from "../../Services/Slices/getUsersList";
 import Loading from "../../Components/Loading/Loading";
 import Snackbar from "../../Components/Snackbar/Snackbar";
+import { statusList } from "../../Components/Consts";
 
 interface iForm {
   id: string;
   test_index: string;
   interview_index: string;
+  academic_index: string;
+  status: string;
 }
 
 const Update = () => {
@@ -21,6 +24,8 @@ const Update = () => {
     id: "",
     test_index: "",
     interview_index: "",
+    academic_index: "",
+    status: statusList[0],
   });
   const { data, error, loading } = useSelector(
     (state: any) => state.getUsersListSlice
@@ -72,19 +77,21 @@ const Update = () => {
       )}
       <div className={styles.form}>
         <h3 className={styles.title}>Atualizar candidato:</h3>
-        <p className={styles.label}>Nome:</p>
-        <select
-          className={styles.select}
-          value={form.id}
-          onChange={handleChange}
-          name="id"
-        >
-          {data.map((item: any) => (
-            <option key={item.id} value={item.id}>
-              {item.name}
-            </option>
-          ))}
-        </select>
+        <div>
+          <p className={styles.label}>Nome:</p>
+          <select
+            className={styles.select}
+            value={form.id}
+            onChange={handleChange}
+            name="id"
+          >
+            {data.map((item: any) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <Input
           className={styles.input}
           onChange={handleChange}
@@ -99,11 +106,33 @@ const Update = () => {
           label="Nota da entrevista"
           mask="99,9"
         />
+        <Input
+          className={styles.input}
+          onChange={handleChange}
+          name="academic_index"
+          label="Índice de Mérito Acadêmico Acumulado"
+          mask="99,9"
+        />
+        <div>
+          <p className={styles.label}>Status:</p>
+          <select
+            className={styles.select}
+            value={form.id}
+            onChange={handleChange}
+            name="status"
+          >
+            {statusList.map((item: any) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
       <Button
         className={styles.button}
         onClick={handleSubmit}
-        disabled={!form.test_index && !form.interview_index}
+        disabled={!form.test_index && !form.interview_index && !form.status}
       >
         {loading || userResponse.loading ? (
           <div
