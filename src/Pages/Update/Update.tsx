@@ -38,7 +38,7 @@ const Update = () => {
     if (name === "id") {
       setForm({ ...form, [name]: value.id });
     } else if (name === "hiring_status") {
-      setForm({ ...form, [name]: value.name });
+      setForm({ ...form, [name]: value.property });
     }
     setForm({ ...form, [name]: value });
   };

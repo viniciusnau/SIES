@@ -101,6 +101,7 @@ export const statusListTable = {
 };
 
 export const statusList = [
+  { name: "Aprovado", property: "pendent" },
   { name: "Contratado", property: "hired" },
   { name: "Eliminado", property: "rejected" },
 ];
