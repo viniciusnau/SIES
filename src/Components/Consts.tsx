@@ -91,7 +91,7 @@ export const extraColumnsTable = [
   { title: "Prova", property: "test_index" },
   { title: "Entrevista", property: "interview_index" },
   { title: "Média", property: "average" },
-  { title: "Status", property: "status" },
+  { title: "Status", property: "hiring_status" },
 ];
 
 export const statusList = ["Contratado", "Eliminado"];

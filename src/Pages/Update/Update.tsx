@@ -14,7 +14,7 @@ interface iForm {
   test_index: string;
   interview_index: string;
   academic_index: string;
-  status: string;
+  hiring_status: string;
 }
 
 const Update = () => {
@@ -25,7 +25,7 @@ const Update = () => {
     test_index: "",
     interview_index: "",
     academic_index: "",
-    status: statusList[0],
+    hiring_status: statusList[0],
   });
   const { data, error, loading } = useSelector(
     (state: any) => state.getUsersListSlice
@@ -119,7 +119,7 @@ const Update = () => {
             className={styles.select}
             value={form.id}
             onChange={handleChange}
-            name="status"
+            name="hiring_status"
           >
             {statusList.map((item: any) => (
               <option key={item} value={item}>
@@ -132,7 +132,9 @@ const Update = () => {
       <Button
         className={styles.button}
         onClick={handleSubmit}
-        disabled={!form.test_index && !form.interview_index && !form.status}
+        disabled={
+          !form.test_index && !form.interview_index && !form.hiring_status
+        }
       >
         {loading || userResponse.loading ? (
           <div
