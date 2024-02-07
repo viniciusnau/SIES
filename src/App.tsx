@@ -10,6 +10,7 @@ import Update from "./Pages/Update/Update";
 import Callback from "./Pages/Callback/Callback";
 import NotFound from "./Pages/NotFound/NotFound";
 import Resident from "./Pages/Resident/Resident";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   return (
@@ -22,20 +23,21 @@ function App() {
             <Route path="/sies/resident" element={<Resident />} />
             <Route path="/sies/login/" element={<Login />} />
             <Route
-                path="/sies/register/"
-                element={
-                  <ProtectedRoute Component={Register} path="/sies/register" />
-                }
+              path="/sies/register/"
+              element={
+                <ProtectedRoute Component={Register} path="/sies/register" />
+              }
             />
             <Route
-                path="/sies/update/"
-                element={
-                  <ProtectedRoute Component={Update} path="/sies/update" />
-                }
+              path="/sies/update/"
+              element={
+                <ProtectedRoute Component={Update} path="/sies/update" />
+              }
             />
             <Route path="/sies/callback/:apiToken" element={<Callback />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Footer />
         </Router>
       </main>
     </div>
