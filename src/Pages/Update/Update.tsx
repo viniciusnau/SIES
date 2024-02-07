@@ -47,20 +47,24 @@ const Update = () => {
     const processedForm = {
       ...form,
       id: form.id,
-      ...(form.test_index !== "" && {
+      ...(form.test_index && {
         test_index: form.test_index.replace(/,/g, ".").replace("_", ""),
       }),
-      ...(form.interview_index !== "" && {
+      ...(form.interview_index && {
         interview_index: form.interview_index
           .replace(/,/g, ".")
           .replace("_", ""),
       }),
-      ...(form.academic_index !== "" && {
+      ...(form.academic_index && {
         academic_index: form.academic_index.replace(/,/g, ".").replace("_", ""),
       }),
     };
 
-    dispatch(fetchPutUser(processedForm));
+    const filteredProcessedForm = Object.fromEntries(
+      Object.entries(processedForm).filter(([key, value]) => value !== "")
+    );
+
+    dispatch(fetchPutUser(filteredProcessedForm));
     setSnackbarType(true);
   };
 
