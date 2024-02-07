@@ -96,12 +96,12 @@ export const extraColumnsTable = [
 
 export const statusListTable = {
   hired: "Contratado",
-  pending: "Contratado",
+  pending: "Aprovado",
   rejected: "Eliminado",
 };
 
 export const statusList = [
-  { name: "Aprovado", property: "pendent" },
+  { name: "Aprovado", property: "pending" },
   { name: "Contratado", property: "hired" },
   { name: "Eliminado", property: "rejected" },
 ];

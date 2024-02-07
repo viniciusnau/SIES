@@ -25,7 +25,7 @@ const Update = () => {
     test_index: "",
     interview_index: "",
     academic_index: "",
-    hiring_status: statusList[0].name,
+    hiring_status: statusList[0].property,
   });
   const { data, error, loading } = useSelector(
     (state: any) => state.getUsersListSlice

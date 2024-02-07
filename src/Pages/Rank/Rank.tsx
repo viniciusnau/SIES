@@ -10,7 +10,6 @@ import {
   extraColumnsTable,
   public_defenses,
   stages,
-  statusList,
   statusListTable,
 } from "../../Components/Consts";
 import { BsQuestionSquare } from "react-icons/bs";

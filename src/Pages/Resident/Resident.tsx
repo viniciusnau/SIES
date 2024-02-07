@@ -9,7 +9,6 @@ import {
   extraColumnsTable,
   public_defenses,
   stages,
-  statusList,
   statusListTable,
 } from "../../Components/Consts";
 import { fetchResident } from "../../Services/Slices/residentSlice";
