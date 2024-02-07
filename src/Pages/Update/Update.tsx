@@ -25,7 +25,7 @@ const Update = () => {
     test_index: "",
     interview_index: "",
     academic_index: "",
-    hiring_status: statusList[0],
+    hiring_status: statusList[0].name,
   });
   const { data, error, loading } = useSelector(
     (state: any) => state.getUsersListSlice
@@ -37,12 +37,15 @@ const Update = () => {
     const { name, value } = event.target;
     if (name === "id") {
       setForm({ ...form, [name]: value.id });
+    } else if (name === "hiring_status") {
+      setForm({ ...form, [name]: value.name });
     }
     setForm({ ...form, [name]: value });
   };
 
   const handleSubmit = () => {
     const processedForm = {
+      ...form,
       id: form.id,
       ...(form.test_index !== "" && {
         test_index: form.test_index.replace(/,/g, ".").replace("_", ""),
@@ -51,6 +54,9 @@ const Update = () => {
         interview_index: form.interview_index
           .replace(/,/g, ".")
           .replace("_", ""),
+      }),
+      ...(form.academic_index !== "" && {
+        academic_index: form.academic_index.replace(/,/g, ".").replace("_", ""),
       }),
     };
 
@@ -117,13 +123,13 @@ const Update = () => {
           <p className={styles.label}>Status:</p>
           <select
             className={styles.select}
-            value={form.id}
+            value={form.hiring_status}
             onChange={handleChange}
             name="hiring_status"
           >
             {statusList.map((item: any) => (
-              <option key={item} value={item}>
-                {item}
+              <option key={item.property} value={item.property}>
+                {item.name}
               </option>
             ))}
           </select>

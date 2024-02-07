@@ -9,9 +9,15 @@ import {
   extraColumnsTable,
   public_defenses,
   stages,
+  statusList,
+  statusListTable,
 } from "../../Components/Consts";
 import { fetchResident } from "../../Services/Slices/residentSlice";
 import { BsQuestionSquare } from "react-icons/bs";
+
+interface iData {
+  hiring_status: keyof typeof statusListTable;
+}
 
 const Resident: React.FC = () => {
   const dispatch = useDispatch<any>();
@@ -21,6 +27,7 @@ const Resident: React.FC = () => {
   const [page, setPage] = useState<number>(1);
   const [isExtraColumns, setIsExtraColumns] = useState<boolean>(false);
   const [isToolTipVisible, setIsToolTipVisible] = useState<boolean>(false);
+  const [formatted, setFormatted] = useState<any>(null);
   const [filter, setFilter] = useState<any>({
     public_defense: public_defenses[0],
     category: categories[0],
@@ -55,6 +62,14 @@ const Resident: React.FC = () => {
     });
   };
 
+  const handleData = (data: any) => {
+    const updated = data?.map((item: iData) => ({
+      ...item,
+      hiring_status: statusListTable[item?.hiring_status],
+    }));
+    setFormatted(updated);
+  };
+
   const handleSubmit = () => {
     dispatch(fetchResident(filter, page.toString()));
     filter.stage == 2 ? setIsExtraColumns(true) : setIsExtraColumns(false);
@@ -73,6 +88,10 @@ const Resident: React.FC = () => {
       )
     );
   }, [dispatch, page]);
+
+  useEffect(() => {
+    handleData(data?.results);
+  }, [data]);
 
   return (
     <div className={styles.container}>
@@ -161,7 +180,7 @@ const Resident: React.FC = () => {
       <Table
         title="Ranqueamento dos residentes:"
         columns={isExtraColumns ? extraColumnsTable : columnsTable}
-        data={data?.results}
+        data={formatted}
         setPage={setPage}
         page={page}
         total={data?.count}

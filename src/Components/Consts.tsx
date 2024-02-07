@@ -94,4 +94,13 @@ export const extraColumnsTable = [
   { title: "Status", property: "hiring_status" },
 ];
 
-export const statusList = ["Contratado", "Eliminado"];
+export const statusListTable = {
+  hired: "Contratado",
+  pending: "Contratado",
+  rejected: "Eliminado",
+};
+
+export const statusList = [
+  { name: "Contratado", property: "hired" },
+  { name: "Eliminado", property: "rejected" },
+];
