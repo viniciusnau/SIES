@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Header.module.css";
-import image from "../../Assets/a.png";
+import image from "../../Assets/logo_sies.png";
 import { HiBars3 } from "react-icons/hi2";
 import { isLoggedIn, logout } from "../../Auth/Auth";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -99,13 +99,13 @@ const Header = () => {
                           </span>
                         </li>
                         <li
-                            onClick={() => {
-                              setIsDropdownOpen(!isDropdownOpen);
-                              logout(navigate);
-                            }}
+                          onClick={() => {
+                            setIsDropdownOpen(!isDropdownOpen);
+                            logout(navigate);
+                          }}
                         >
                           <span
-                              className={`${styles.route} ${styles.modalItem}`}
+                            className={`${styles.route} ${styles.modalItem}`}
                           >
                             Sair
                           </span>
@@ -157,8 +157,8 @@ const Header = () => {
                     Atualizar
                   </span>
                   <span
-                      className={`${styles.route} ${styles.logout}`}
-                      onClick={() => logout(navigate)}
+                    className={`${styles.route} ${styles.logout}`}
+                    onClick={() => logout(navigate)}
                   >
                     Sair
                   </span>

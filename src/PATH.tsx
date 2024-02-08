@@ -1,3 +1,3 @@
 export const PATH = {
-  base: "https://sies.defensoria.sc.def.br/api",
+  base: "http://0.0.0.0:8000",
 };
