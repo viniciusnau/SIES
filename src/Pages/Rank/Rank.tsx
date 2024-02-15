@@ -96,7 +96,7 @@ const Rank: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.filter}>
         <div className={styles.filterContainer}>
-          <div className={styles.selectContainer}>
+          <div>
             <p>Curso:</p>
             <select
               className={styles.select}
@@ -111,7 +111,7 @@ const Rank: React.FC = () => {
               ))}
             </select>
           </div>
-          <div className={styles.selectContainer}>
+          <div>
             <p>Defensoria:</p>
             <select
               className={styles.select}
@@ -126,7 +126,7 @@ const Rank: React.FC = () => {
               ))}
             </select>
           </div>
-          <div className={styles.selectContainer}>
+          <div>
             <p>Etapa:</p>
             <select
               className={styles.select}

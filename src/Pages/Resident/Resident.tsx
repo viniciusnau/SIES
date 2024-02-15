@@ -120,7 +120,7 @@ const Resident: React.FC = () => {
               onChange={handleChange}
               name="public_defense"
             >
-              {public_defenses.map((item) => (
+              {public_defenses.map((item: string) => (
                 <option key={item} value={item}>
                   {item}
                 </option>

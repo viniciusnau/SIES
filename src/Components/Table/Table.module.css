@@ -152,7 +152,7 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 750px) {
+@media (max-width: --mobile-width) {
   .content {
     width: 80vw;
     margin: 0 auto;
@@ -178,13 +178,13 @@
   }
 
   .backButton {
-    width: 4rem;
-    height: 2rem;
+    width: 5rem;
+    height: 2.5rem;
     padding: 0;
   }
 }
 
-@media (min-width: 751px) {
+@media (min-width: --tablet-width) {
   .content {
     width: 80vw;
   }
