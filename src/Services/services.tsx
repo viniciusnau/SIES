@@ -38,7 +38,7 @@ const services = {
     const header = {
       headers: {
         Authorization: `${authorizationMethod} ${
-            apiToken || sessionStorage.getItem("credentials")
+          apiToken || sessionStorage.getItem("credentials")
         }`,
       },
     };
@@ -56,7 +56,7 @@ const services = {
     const header = {
       headers: {
         Authorization: `${authorizationMethod} ${
-            apiToken || sessionStorage.getItem("credentials")
+          apiToken || sessionStorage.getItem("credentials")
         }`,
       },
     };
@@ -74,7 +74,7 @@ const services = {
     const header = {
       headers: {
         Authorization: `${authorizationMethod} ${
-            apiToken || sessionStorage.getItem("credentials")
+          apiToken || sessionStorage.getItem("credentials")
         }`,
       },
     };
@@ -95,6 +95,26 @@ const services = {
 
     return axios
       .get(PATH.base + "/user/", headers)
+      .then((response: any) => {
+        return response;
+      })
+      .catch((err: any) => console.log(err));
+  },
+
+  deleteUser: async (id: string) => {
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+
+    const header = {
+      headers: {
+        Authorization: `${authorizationMethod} ${
+          apiToken || sessionStorage.getItem("credentials")
+        }`,
+      },
+    };
+
+    return axios
+      .delete(PATH.base + `/user/${id}`, header)
       .then((response: any) => {
         return response;
       })

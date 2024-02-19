@@ -40,6 +40,18 @@ export const snackbarConsts = {
     description: "Certifique se os campos estão corretos.",
     color: "#ff6464",
   },
+
+  successDeleteUser: {
+    title: "Candidato excluido com sucesso!",
+    description: "Exclusão feita com sucesso!",
+    color: "#9fc54d",
+  },
+
+  errorDeleteUser: {
+    title: "Erro ao excluir candidato!",
+    description: "Tente novamente mais tarde.",
+    color: "#ff6464",
+  },
 };
 
 export const public_defenses = [
@@ -105,3 +117,11 @@ export const statusList = [
   { name: "Contratado", property: "hired" },
   { name: "Eliminado", property: "rejected" },
 ];
+
+export const modalText = {
+  deleteCandidate: {
+    title: "Excluir candidato",
+    description: "Você tem certeza que deseja excluir esse candidato?",
+    button: "Excluir",
+  },
+};

@@ -7,10 +7,13 @@ import { fetchPutUser } from "../../Services/Slices/putUser";
 import { fetchUsersList } from "../../Services/Slices/getUsersList";
 import Loading from "../../Components/Loading/Loading";
 import Snackbar from "../../Components/Snackbar/Snackbar";
-import { statusList } from "../../Components/Consts";
+import { public_defenses, statusList } from "../../Components/Consts";
+import { fetchDeleteUser } from "../../Services/Slices/deleteUser";
+import Modal from "../../Components/Modal/Modal";
 
 interface iForm {
   id: string;
+  public_defense: string;
   test_index: string;
   interview_index: string;
   academic_index: string;
@@ -20,8 +23,11 @@ interface iForm {
 const Update = () => {
   const dispatch = useDispatch<any>();
   const [snackbarType, setSnackbarType] = useState<boolean>(false);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [confirm, setConfirm] = useState<boolean>(false);
   const [form, setForm] = useState<iForm>({
     id: "",
+    public_defense: "",
     test_index: "",
     interview_index: "",
     academic_index: "",
@@ -30,6 +36,7 @@ const Update = () => {
   const { data, error, loading } = useSelector(
     (state: any) => state.getUsersListSlice
   );
+  const response = useSelector((state: any) => state.deleteUserSlice);
 
   const userResponse = useSelector((state: any) => state.putUserSlice);
 
@@ -71,19 +78,35 @@ const Update = () => {
   useEffect(() => {
     dispatch(fetchUsersList());
     setSnackbarType(false);
-  }, []);
+  }, [response]);
 
   useEffect(() => {
     setForm({ ...form, id: data[0]?.id });
   }, [data]);
 
+  console.log("response: ", response);
+
   return (
     <div className={styles.container}>
+      {isOpenModal && (
+        <Modal
+          content="deleteCandidate"
+          confirm={fetchDeleteUser(form.id)}
+          setConfirm={setConfirm}
+          setOpenModal={setIsOpenModal}
+        />
+      )}
       {userResponse.data.length > 0 && snackbarType && (
         <Snackbar type="successUpdate" setShowSnackbar={setSnackbarType} />
       )}
       {userResponse.error && snackbarType && (
         <Snackbar type="errorUpdate" setShowSnackbar={setSnackbarType} />
+      )}
+      {response.data && snackbarType && (
+        <Snackbar type="successDeleteUser" setShowSnackbar={setSnackbarType} />
+      )}
+      {response.error && snackbarType && (
+        <Snackbar type="errorDeleteUser" setShowSnackbar={setSnackbarType} />
       )}
       <div className={styles.form}>
         <h3 className={styles.title}>Atualizar candidato:</h3>
@@ -91,6 +114,7 @@ const Update = () => {
           <p className={styles.label}>Nome:</p>
           <select
             className={styles.select}
+            style={{ width: "27.5rem" }}
             value={form.id}
             onChange={handleChange}
             name="id"
@@ -98,6 +122,21 @@ const Update = () => {
             {data.map((item: any) => (
               <option key={item.id} value={item.id}>
                 {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <p className={styles.label}>Defensoria pública:</p>
+          <select
+            className={styles.select}
+            value={form.public_defense}
+            onChange={handleChange}
+            name="public_defense"
+          >
+            {public_defenses.map((item: string) => (
+              <option key={item} value={item}>
+                {item}
               </option>
             ))}
           </select>
@@ -139,26 +178,35 @@ const Update = () => {
           </select>
         </div>
       </div>
-      <Button
-        className={styles.button}
-        onClick={handleSubmit}
-        disabled={
-          !form.test_index && !form.interview_index && !form.hiring_status
-        }
-      >
-        {loading || userResponse.loading ? (
-          <div
-            style={{
-              position: "relative",
-              top: "-3rem",
-            }}
-          >
-            <Loading size="1.5rem" type="spin" />
-          </div>
-        ) : (
-          "Salvar"
-        )}
-      </Button>
+
+      <div className={styles.buttonContainer}>
+        <Button
+          className={styles.button}
+          onClick={handleSubmit}
+          disabled={
+            !form.test_index && !form.interview_index && !form.hiring_status
+          }
+        >
+          {loading || userResponse.loading ? (
+            <div
+              style={{
+                position: "relative",
+                top: "-3rem",
+              }}
+            >
+              <Loading size="1.5rem" type="spin" />
+            </div>
+          ) : (
+            "Salvar"
+          )}
+        </Button>
+        <Button
+          className={`${styles.button} ${styles.delete}`}
+          onClick={() => setIsOpenModal(true)}
+        >
+          Excluir
+        </Button>
+      </div>
     </div>
   );
 };
