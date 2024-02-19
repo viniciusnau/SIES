@@ -24,7 +24,6 @@ const Update = () => {
   const dispatch = useDispatch<any>();
   const [snackbarType, setSnackbarType] = useState<boolean>(false);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  const [confirm, setConfirm] = useState<boolean>(false);
   const [form, setForm] = useState<iForm>({
     id: "",
     public_defense: "",
@@ -37,6 +36,8 @@ const Update = () => {
     (state: any) => state.getUsersListSlice
   );
   const response = useSelector((state: any) => state.deleteUserSlice);
+  console.log("response: ", response);
+  console.log("response === sucesso: ", response.data === "sucesso");
 
   const userResponse = useSelector((state: any) => state.putUserSlice);
 
@@ -78,13 +79,11 @@ const Update = () => {
   useEffect(() => {
     dispatch(fetchUsersList());
     setSnackbarType(false);
-  }, [response]);
+  }, [response.data === "sucesso"]);
 
   useEffect(() => {
     setForm({ ...form, id: data[0]?.id });
   }, [data]);
-
-  console.log("response: ", response);
 
   return (
     <div className={styles.container}>
@@ -92,8 +91,8 @@ const Update = () => {
         <Modal
           content="deleteCandidate"
           confirm={fetchDeleteUser(form.id)}
-          setConfirm={setConfirm}
           setOpenModal={setIsOpenModal}
+          setShowSnackbar={setSnackbarType}
         />
       )}
       {userResponse.data.length > 0 && snackbarType && (
@@ -102,7 +101,7 @@ const Update = () => {
       {userResponse.error && snackbarType && (
         <Snackbar type="errorUpdate" setShowSnackbar={setSnackbarType} />
       )}
-      {response.data && snackbarType && (
+      {response.data === "sucesso" && snackbarType && (
         <Snackbar type="successDeleteUser" setShowSnackbar={setSnackbarType} />
       )}
       {response.error && snackbarType && (

@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import services from "../services";
 
 interface DeleteUserState {
-  data: any[];
+  data: string;
   loading: boolean;
   error: boolean;
 }
 
 const initialState: DeleteUserState = {
-  data: [],
+  data: "",
   loading: false,
   error: false,
 };
@@ -20,7 +20,7 @@ const rankSlice = createSlice({
     deleteUser: (state) => {
       state.loading = true;
       state.error = false;
-      state.data = [];
+      state.data = "";
     },
     deleteUserSuccess: (state, action) => {
       state.loading = false;
@@ -30,7 +30,7 @@ const rankSlice = createSlice({
     deleteUserFailure: (state) => {
       state.loading = false;
       state.error = true;
-      state.data = [];
+      state.data = "";
     },
   },
 });
@@ -54,7 +54,7 @@ export const fetchDeleteUser =
     dispatch(deleteUser());
     try {
       await services.deleteUser(id);
-      dispatch(deleteUserSuccess("Deletado com sucesso!"));
+      dispatch(deleteUserSuccess("sucesso"));
     } catch (err) {
       dispatch(deleteUserFailure());
     }

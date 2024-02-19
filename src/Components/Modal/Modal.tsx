@@ -7,15 +7,15 @@ import { modalText } from "../Consts";
 interface IModal {
   content: keyof typeof modalText;
   confirm: any;
-  setConfirm: any;
   setOpenModal: any;
+  setShowSnackbar: any;
 }
 
 const Modal: React.FC<IModal> = ({
   content,
   confirm,
-  setConfirm,
   setOpenModal,
+  setShowSnackbar,
 }) => {
   const dispatch = useDispatch<any>();
 
@@ -26,7 +26,7 @@ const Modal: React.FC<IModal> = ({
   const handleConfirm = () => {
     dispatch(confirm);
     setOpenModal(false);
-    setConfirm(true);
+    setShowSnackbar(true);
   };
 
   const modalContent = modalText[content];
