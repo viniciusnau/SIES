@@ -120,7 +120,7 @@ const Update = () => {
           >
             {data.map((item: any) => (
               <option key={item.id} value={item.id}>
-                {item.name}
+                {item.name} - {item.public_defense}
               </option>
             ))}
           </select>
@@ -145,21 +145,21 @@ const Update = () => {
           onChange={handleChange}
           name="test_index"
           label="Nota da prova"
-          mask="99,9"
+          mask="99,99"
         />
         <Input
           className={styles.input}
           onChange={handleChange}
           name="interview_index"
           label="Nota da entrevista"
-          mask="99,9"
+          mask="99,99"
         />
         <Input
           className={styles.input}
           onChange={handleChange}
           name="academic_index"
           label="Índice de Mérito Acadêmico Acumulado"
-          mask="99,9"
+          mask="99,99"
         />
         <div>
           <p className={styles.label}>Status:</p>
