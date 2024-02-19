@@ -121,7 +121,7 @@ const Update = () => {
           >
             {data.map((item: any) => (
               <option key={item.id} value={item.id}>
-                {item.name}
+                {item.name} - {item.public_defense}
               </option>
             ))}
           </select>
