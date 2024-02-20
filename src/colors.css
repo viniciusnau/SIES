@@ -29,6 +29,8 @@
 
   --first-text-color-disabled: #3c4759;
 
+  --delete-button: #F0AD4E;
+
   --shadow-color: #505050;
   --light-shadow-color: #646464;
   --box-shadow: 0 0.625rem 0.625rem -0.625rem var(--shadow-color);
