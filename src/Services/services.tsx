@@ -1,5 +1,6 @@
 import axios from "axios";
 import { PATH } from "../PATH";
+import { iGetCandidates } from "../Types/Candidates";
 
 const services = {
   getRankList: async (filter: any, page: string) => {
@@ -31,6 +32,7 @@ const services = {
       throw err;
     }
   },
+
   getUpdateList: async () => {
     const apiToken = sessionStorage.getItem("apiToken");
     const authorizationMethod = apiToken ? "Token" : "Basic";
@@ -49,6 +51,7 @@ const services = {
       })
       .catch((err: any) => console.log(err));
   },
+
   postRegister: async (body: any) => {
     const apiToken = sessionStorage.getItem("apiToken");
     const authorizationMethod = apiToken ? "Token" : "Basic";
@@ -117,6 +120,28 @@ const services = {
       .delete(PATH.base + `/user/${id}`, header)
       .then((response: any) => {
         return response;
+      })
+      .catch((err: any) => console.log(err));
+  },
+
+  getCandidates: async (body: iGetCandidates) => {
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+
+    const { name } = body;
+    const queryString = `?name=${encodeURIComponent(name)}`;
+
+    const header = {
+      headers: {
+        Authorization: `${authorizationMethod} ${
+          apiToken || sessionStorage.getItem("credentials")
+        }`,
+      },
+    };
+    return axios
+      .get(`${PATH.base}/user/${queryString}`, header)
+      .then((data: any) => {
+        return data;
       })
       .catch((err: any) => console.log(err));
   },

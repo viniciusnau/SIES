@@ -125,3 +125,38 @@ export const modalText = {
     button: "Excluir",
   },
 };
+
+export const candidatesColumns = [
+  {
+    title: "Nome",
+    property: "name",
+  },
+  {
+    title: "CPF",
+    property: "social_security_number",
+  },
+  {
+    title: "Data de nascimento",
+    property: "birth_date",
+  },
+  {
+    title: "Curso",
+    property: "category",
+  },
+  {
+    title: "Nota academica",
+    property: "academic_index",
+  },
+  {
+    title: "Nota da prova",
+    property: "test_index",
+  },
+  {
+    title: "Contratação",
+    property: "hiring_status",
+  },
+  {
+    title: "Média",
+    property: "average",
+  },
+];

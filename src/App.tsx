@@ -11,6 +11,7 @@ import Callback from "./Pages/Callback/Callback";
 import NotFound from "./Pages/NotFound/NotFound";
 import Resident from "./Pages/Resident/Resident";
 import Footer from "./Components/Footer/Footer";
+import Candidates from "./Pages/Candidates/Candidates";
 
 function App() {
   return (
@@ -26,6 +27,15 @@ function App() {
               path="/sies/register/"
               element={
                 <ProtectedRoute Component={Register} path="/sies/register" />
+              }
+            />
+            <Route
+              path="/sies/candidates/"
+              element={
+                <ProtectedRoute
+                  Component={Candidates}
+                  path="/sies/candidates"
+                />
               }
             />
             <Route
