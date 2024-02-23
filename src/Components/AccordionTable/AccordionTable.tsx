@@ -7,7 +7,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 
 interface iCurrentPublicDefense {
-  [name: string]: string;
+  [name: string]: number;
 }
 
 interface Column {
@@ -35,11 +35,12 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
   const [currentPublicDefense, setCurrentPublicDefense] =
     useState<iCurrentPublicDefense>({});
 
-  const handlePublicDefense = (name: string, rowData: any) => {
+  const handlePublicDefense = (rowData: any, row: any, index: number) => {
     const { public_defense } = rowData;
+    console.log("row: ", row);
     setCurrentPublicDefense((prev) => ({
       ...prev,
-      [name]: public_defense,
+      [row?.name?.replace(/ /g, "")]: index,
     }));
   };
 
@@ -80,14 +81,20 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
                       >
                         {columns.map((column, index) => (
                           <div key={index} className={styles.row}>
-                            {row[column.property] === "public_defense"
+                            {column.property === "average" ||
+                            column.property === "test_index" ||
+                            column.property === "hiring_status" ||
+                            column.property === "category"
                               ? neverNull(
-                                  row?.public_defense.filter((item: any) => {
-                                    return (
-                                      item.public_defense ===
-                                      currentPublicDefense[row.name]
-                                    );
-                                  })?.[column.property]
+                                  row?.public_defense[
+                                    currentPublicDefense[
+                                      row?.name?.replace(/ /g, "")
+                                    ]
+                                      ? currentPublicDefense[
+                                          row?.name?.replace(/ /g, "")
+                                        ]
+                                      : 0
+                                  ]?.[column.property]
                                 )
                               : neverNull(row[column.property])}
                           </div>
@@ -97,7 +104,9 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
                         <h3>Defensorias públicas</h3>
                         {row.public_defense?.map((item: any, index: number) => (
                           <p
-                            onClick={() => handlePublicDefense(row.name, item)}
+                            onClick={() =>
+                              handlePublicDefense(item, row, index)
+                            }
                             key={index}
                           >
                             {item.public_defense}

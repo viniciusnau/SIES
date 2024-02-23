@@ -26,7 +26,7 @@ const candidatesSlice = createSlice({
     getCandidatesSuccess: (state: any, action: any) => {
       state.loading = false;
       state.error = false;
-      state.data = action.payload.data;
+      state.data = action.payload;
     },
 
     getCandidatesFailure: (state: any) => {
@@ -56,7 +56,7 @@ export const fetchCandidates =
     dispatch(getCandidates());
     try {
       const response = await services.getCandidates(body);
-      dispatch(getCandidatesSuccess(response));
+      dispatch(getCandidatesSuccess(response.data));
     } catch (err) {
       dispatch(getCandidatesFailure());
     }

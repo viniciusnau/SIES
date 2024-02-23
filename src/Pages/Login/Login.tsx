@@ -36,8 +36,8 @@ const Login = () => {
 
   const handleSubmit = () => {
     sessionStorage.setItem(
-        "credentials",
-        btoa(`${form.username}:${form.password}`)
+      "credentials",
+      btoa(`${form.username}:${form.password}`)
     );
     dispatch(fetchLogin(form));
     setIsDispatched(true);
@@ -60,8 +60,7 @@ const Login = () => {
   useEffect(() => {
     setIsDispatched(false);
   }, []);
-  console.log("error: ", error);
-  console.log("isDispatched: ", isDispatched);
+
   return (
     <div className={styles.container}>
       {error && isDispatched && (
