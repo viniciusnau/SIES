@@ -159,4 +159,8 @@ export const candidatesColumns = [
     title: "Média",
     property: "average",
   },
+  {
+    title: "Editar",
+    property: "edit",
+  },
 ];

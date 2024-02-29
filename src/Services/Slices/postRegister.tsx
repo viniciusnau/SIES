@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import services from "../services";
 
 interface RegisterState {
-  data: any[];
+  data: string;
   loading: boolean;
   error: boolean;
 }
 
 const initialState: RegisterState = {
-  data: [],
+  data: "",
   loading: false,
   error: false,
 };
@@ -17,21 +17,21 @@ const postRegisterSlice = createSlice({
   name: "postRegister",
   initialState,
   reducers: {
-    postRegister: (state: any) => {
+    postRegister: (state) => {
       state.loading = true;
       state.error = false;
-      state.data = [];
+      state.data = "";
     },
-    postRegisterSuccess: (state: any, action: any) => {
+    postRegisterSuccess: (state, action) => {
       state.loading = false;
       state.error = false;
       state.data = action.payload;
     },
 
-    postRegisterFailure: (state: any) => {
+    postRegisterFailure: (state) => {
       state.loading = false;
       state.error = true;
-      state.data = [];
+      state.data = "";
     },
   },
 });
@@ -54,8 +54,8 @@ export const fetchPostRegister =
   ) => {
     dispatch(postRegister());
     try {
-      const response = await services.postRegister(body);
-      dispatch(postRegisterSuccess(response.data));
+      await services.postRegister(body);
+      dispatch(postRegisterSuccess("sucesso"));
     } catch (err) {
       dispatch(postRegisterFailure());
     }

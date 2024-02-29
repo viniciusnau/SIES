@@ -117,7 +117,7 @@ const services = {
     };
 
     return axios
-      .delete(PATH.base + `/user/${id}`, header)
+      .delete(PATH.base + `/user/${id}/`, header)
       .then((response: any) => {
         return response;
       })
@@ -140,6 +140,28 @@ const services = {
     };
     return axios
       .get(`${PATH.base}/user/${queryString}`, header)
+      .then((data: any) => {
+        return data;
+      })
+      .catch((err: any) => console.log(err));
+  },
+
+  putCandidate: async (id: any, body: iGetCandidates) => {
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+
+    const { name } = body;
+    const queryString = `?name=${encodeURIComponent(name)}`;
+
+    const header = {
+      headers: {
+        Authorization: `${authorizationMethod} ${
+          apiToken || sessionStorage.getItem("credentials")
+        }`,
+      },
+    };
+    return axios
+      .patch(`${PATH.base}/user/${id}/`, body, header)
       .then((data: any) => {
         return data;
       })

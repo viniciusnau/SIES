@@ -13,7 +13,7 @@ const initialState: DeleteUserState = {
   error: false,
 };
 
-const rankSlice = createSlice({
+const deleteUserSlice = createSlice({
   name: "deleteUser",
   initialState,
   reducers: {
@@ -36,9 +36,9 @@ const rankSlice = createSlice({
 });
 
 export const { deleteUser, deleteUserSuccess, deleteUserFailure } =
-  rankSlice.actions;
+  deleteUserSlice.actions;
 
-export default rankSlice.reducer;
+export default deleteUserSlice.reducer;
 
 export const fetchDeleteUser =
   (id: string) =>

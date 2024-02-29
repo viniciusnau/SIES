@@ -89,6 +89,19 @@ const Header = () => {
                           onClick={() => {
                             setIsDropdownOpen(!isDropdownOpen);
                             setToggleNav(!toggleNav);
+                            navigate("sies/candidates");
+                          }}
+                        >
+                          <span
+                            className={`${styles.route} ${styles.modalItem}`}
+                          >
+                            Candidatos
+                          </span>
+                        </li>
+                        <li
+                          onClick={() => {
+                            setIsDropdownOpen(!isDropdownOpen);
+                            setToggleNav(!toggleNav);
                             navigate("sies/update");
                           }}
                         >
@@ -146,6 +159,15 @@ const Header = () => {
                     }}
                   >
                     Registrar
+                  </span>
+                  <span
+                    className={`${styles.route} ${styles.logout}`}
+                    onClick={() => {
+                      setToggleNav(!toggleNav);
+                      navigate("/sies/candidates");
+                    }}
+                  >
+                    Candidatos
                   </span>
                   <span
                     className={`${styles.route} ${styles.logout}`}

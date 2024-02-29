@@ -5,6 +5,8 @@ import { neverNull } from "../Helper";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
+import Button from "../Forms/Button";
+import { MdModeEdit } from "react-icons/md";
 
 interface iCurrentPublicDefense {
   [name: string]: number;
@@ -22,6 +24,10 @@ interface AccordionTableProps {
   isEmpty?: boolean;
   loading?: boolean;
   error?: boolean;
+  setOpenEditModal?: any;
+  setCurrentData?: any;
+  currentPublicDefense?: any;
+  setCurrentPublicDefense?: any;
 }
 
 export const AccordionTable: React.FC<AccordionTableProps> = ({
@@ -31,14 +37,24 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
   isEmpty,
   loading,
   error,
+  setOpenEditModal,
+  setCurrentData,
+  currentPublicDefense,
+  setCurrentPublicDefense,
 }) => {
-  const [currentPublicDefense, setCurrentPublicDefense] =
-    useState<iCurrentPublicDefense>({});
+  const handleEdit = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    index: number
+  ) => {
+    e.stopPropagation();
+    setOpenEditModal(true);
+    setCurrentData(index);
+  };
 
   const handlePublicDefense = (rowData: any, row: any, index: number) => {
     const { public_defense } = rowData;
-    console.log("row: ", row);
-    setCurrentPublicDefense((prev) => ({
+    console.log("index: ", index);
+    setCurrentPublicDefense((prev: any) => ({
       ...prev,
       [row?.name?.replace(/ /g, "")]: index,
     }));
@@ -84,19 +100,26 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
                             {column.property === "average" ||
                             column.property === "test_index" ||
                             column.property === "hiring_status" ||
-                            column.property === "category"
-                              ? neverNull(
-                                  row?.public_defense[
-                                    currentPublicDefense[
-                                      row?.name?.replace(/ /g, "")
-                                    ]
-                                      ? currentPublicDefense[
-                                          row?.name?.replace(/ /g, "")
-                                        ]
-                                      : 0
-                                  ]?.[column.property]
-                                )
-                              : neverNull(row[column.property])}
+                            column.property === "category" ? (
+                              neverNull(
+                                row?.public_defense[
+                                  currentPublicDefense[
+                                    row?.name?.replace(/ /g, "")
+                                  ]
+                                    ? currentPublicDefense[
+                                        row?.name?.replace(/ /g, "")
+                                      ]
+                                    : 0
+                                ]?.[column.property]
+                              )
+                            ) : column.property === "edit" ? (
+                              <MdModeEdit
+                                size={24}
+                                onClick={(e: any) => handleEdit(e, rowIndex)}
+                              />
+                            ) : (
+                              neverNull(row[column.property])
+                            )}
                           </div>
                         ))}
                       </AccordionSummary>
