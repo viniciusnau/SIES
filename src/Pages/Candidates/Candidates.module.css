@@ -15,7 +15,7 @@
     background-color: var(--fifth-color);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0px 10px 10px -10px var(--shadow-color);
+    box-shadow: 0 10px 10px -10px var(--shadow-color);
     max-width: 25rem;
     width: 100%;
     max-height: 80%;
@@ -48,7 +48,7 @@
   width: 20rem;
   font-size: 1rem;
   border: none;
-  box-shadow: 0px 10px 10px -10px var(--shadow-color);
+  box-shadow: 0 10px 10px -10px var(--shadow-color);
 }
 
 .checkbox {

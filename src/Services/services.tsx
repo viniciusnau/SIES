@@ -56,6 +56,14 @@ const services = {
     const apiToken = sessionStorage.getItem("apiToken");
     const authorizationMethod = apiToken ? "Token" : "Basic";
 
+    if (body.test_index === "") {
+      delete body.test_index;
+    }
+
+    if (body.interview_index === "") {
+      delete body.interview_index;
+    }
+
     const header = {
       headers: {
         Authorization: `${authorizationMethod} ${
@@ -73,6 +81,14 @@ const services = {
   putUser: async (body: any, id: string) => {
     const apiToken = sessionStorage.getItem("apiToken");
     const authorizationMethod = apiToken ? "Token" : "Basic";
+
+    if (body.test_index === "") {
+      delete body.test_index;
+    }
+
+    if (body.interview_index === "") {
+      delete body.interview_index;
+    }
 
     const header = {
       headers: {

@@ -461,17 +461,19 @@ const Candidates = () => {
           style={{ margin: "0 .5rem", cursor: "pointer" }}
         />
       </div>
-      <AccordionTable
-        title="Lista de candidatos"
-        columns={candidatesColumns}
-        data={data}
-        loading={loading}
-        error={error}
-        setOpenEditModal={setIsOpenEditModal}
-        setCurrentData={setCurrentData}
-        setCurrentPublicDefense={setCurrentPublicDefense}
-        currentPublicDefense={currentPublicDefense}
-      />
+      <div className={styles.tableWrapper}>
+        <AccordionTable
+          title="Lista de candidatos"
+          columns={candidatesColumns}
+          data={data}
+          loading={loading}
+          error={error}
+          setOpenEditModal={setIsOpenEditModal}
+          setCurrentData={setCurrentData}
+          setCurrentPublicDefense={setCurrentPublicDefense}
+          currentPublicDefense={currentPublicDefense}
+        />
+      </div>
     </div>
   );
 };

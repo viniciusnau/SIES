@@ -126,7 +126,7 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
                         ))}
                       </AccordionSummary>
                       <AccordionDetails>
-                        <h3>Defensorias públicas</h3>
+                        <h3>Núcleos</h3>
                         {row.public_defense?.map((item: any, index: number) => (
                           <p
                             onClick={() =>
