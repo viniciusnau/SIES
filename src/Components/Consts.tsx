@@ -143,6 +143,7 @@ export const candidatesColumns = [
     title: "Curso",
     property: "category",
   },
+  { title: "Defensoria", property: "public_defense" },
   {
     title: "Nota academica",
     property: "academic_index",
@@ -150,6 +151,10 @@ export const candidatesColumns = [
   {
     title: "Nota da prova",
     property: "test_index",
+  },
+  {
+    title: "Nota da entrevista",
+    property: "interview_index",
   },
   {
     title: "Contratação",

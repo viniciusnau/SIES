@@ -26,6 +26,8 @@ interface iForm {
   is_graduated: boolean;
   social_security_number: string;
   academic_index: string;
+  interview_index: string;
+  test_index: string;
 }
 
 interface iPublic_defense {
@@ -73,6 +75,8 @@ const Candidates = () => {
     is_graduated: false,
     social_security_number: "",
     academic_index: "",
+    interview_index: "",
+    test_index: "",
   });
   const { data, loading, error } = useSelector(
     (state: any) => state.getCandidates
@@ -95,11 +99,17 @@ const Candidates = () => {
       const formattedDate = `${year ? year + "-" : ""}${
         month ? month?.padStart(2, "0") + "-" : ""
       }${day ? day?.padStart(2, "0") : ""}`;
-
+      console.log("form: ", form);
       return {
         ...otherFormValues,
         birth_date: formattedDate,
-        academic_index: form.academic_index.replace(/,/g, ".").replace("_", ""),
+        academic_index: String(form.academic_index)
+          .replace(/,/g, ".")
+          .replace("_", ""),
+        test_index: String(form.test_index).replace(/,/g, ".").replace("_", ""),
+        interview_index: String(form.interview_index)
+          .replace(/,/g, ".")
+          .replace("_", ""),
       };
     }
 
@@ -113,14 +123,11 @@ const Candidates = () => {
 
   const handleCreateSubmit = () => {
     const formattedForm = handleFormat();
-    const lastFormatt = {
-      ...formattedForm,
-      public_defense: formattedForm?.public_defense[currentId].public_defense,
-    };
     if (formattedForm) {
-      dispatch(fetchPostRegister(lastFormatt));
+      dispatch(fetchPostRegister(formattedForm));
       setSnackbarType(true);
     }
+    setIsOpenCreateModal(false);
   };
 
   const handleEditSubmit = () => {
@@ -132,6 +139,7 @@ const Candidates = () => {
       )
     );
     setSnackbarType(true);
+    setIsOpenEditModal(false);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -164,6 +172,7 @@ const Candidates = () => {
 
   const handleDelete = () => {
     dispatch(fetchDeleteUser(data[currentData].public_defense[currentId].id));
+    setIsOpenEditModal(false);
   };
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -203,12 +212,14 @@ const Candidates = () => {
         is_graduated: candidate.is_graduated || false,
         social_security_number: candidate.social_security_number || "",
         academic_index: candidate.academic_index || "",
+        interview_index:
+          candidate.public_defense[currentId].interview_index || "",
+        test_index: candidate.public_defense[currentId].test_index || "",
       });
       setIsResidentChecked(candidate.is_resident || false);
       setIsGraduatedChecked(candidate.is_graduated || false);
     }
   }, [currentData, data]);
-
   useEffect(() => {
     let id = "";
     const matchingDefense = data[currentData]?.public_defense.filter(
@@ -364,7 +375,21 @@ const Candidates = () => {
                 name="academic_index"
                 onChange={handleChange}
                 mask="99,99"
-                value={form.academic_index}
+                value={String(form.academic_index)}
+              />
+              <Input
+                label="Nota da entrevista"
+                name="interview_index"
+                onChange={handleChange}
+                mask="99,99"
+                value={String(form.interview_index)}
+              />
+              <Input
+                label="Nota da data"
+                name="test_index"
+                onChange={handleChange}
+                mask="99,99"
+                value={String(form.test_index)}
               />
               <div>
                 <p className={styles.label}>Núcleo:</p>
@@ -411,12 +436,6 @@ const Candidates = () => {
           }
         />
       )}
-      <div className={styles.dashboard}>
-        <MdAddCircleOutline
-          size={24}
-          onClick={() => setIsOpenCreateModal(true)}
-        />
-      </div>
       <div
         style={{
           display: "flex",
@@ -424,10 +443,23 @@ const Candidates = () => {
           alignItems: "flex-end",
         }}
       >
-        <Input label="Nome" name="name" onChange={handleChangeCandidates} />
-        <Button style={{ height: "2rem" }} onClick={handleSearchCandidates}>
+        <Input
+          label="Nome"
+          name="name"
+          onChange={handleChangeCandidates}
+          style={{ margin: "0 .5rem" }}
+        />
+        <Button
+          style={{ height: "2rem", margin: "0 .5rem" }}
+          onClick={handleSearchCandidates}
+        >
           Pesquisar
         </Button>
+        <MdAddCircleOutline
+          size={28}
+          onClick={() => setIsOpenCreateModal(true)}
+          style={{ margin: "0 .5rem", cursor: "pointer" }}
+        />
       </div>
       <AccordionTable
         title="Lista de candidatos"

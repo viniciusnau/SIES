@@ -100,6 +100,8 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
                             {column.property === "average" ||
                             column.property === "test_index" ||
                             column.property === "hiring_status" ||
+                            column.property === "public_defense" ||
+                            column.property === "interview_index" ||
                             column.property === "category" ? (
                               neverNull(
                                 row?.public_defense[
@@ -131,6 +133,7 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
                               handlePublicDefense(item, row, index)
                             }
                             key={index}
+                            style={{ cursor: "pointer" }}
                           >
                             {item.public_defense}
                           </p>

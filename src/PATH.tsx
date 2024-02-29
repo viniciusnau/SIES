@@ -2,5 +2,5 @@
 //   base: "https://sies.defensoria.sc.def.br/api",
 // };
 export const PATH = {
-  base: "http://18.229.117.169/api",
+  base: "https://dev-sies.defensoria.sc.def.br/api",
 };
