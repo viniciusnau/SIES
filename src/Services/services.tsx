@@ -162,12 +162,17 @@ const services = {
       .catch((err: any) => console.log(err));
   },
 
-  putCandidate: async (id: any, body: iGetCandidates) => {
+  putCandidate: async (id: any, body: any) => {
     const apiToken = sessionStorage.getItem("apiToken");
     const authorizationMethod = apiToken ? "Token" : "Basic";
 
-    const { name } = body;
-    const queryString = `?name=${encodeURIComponent(name)}`;
+    if (body.test_index === "") {
+      delete body.test_index;
+    }
+
+    if (body.interview_index === "") {
+      delete body.interview_index;
+    }
 
     const header = {
       headers: {
