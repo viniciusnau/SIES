@@ -68,23 +68,23 @@ const Rank: React.FC = () => {
 
     const handleData = (data: any) => {
         const updated = data?.map((item: iData) => {
-            const formattedAcademicIndex = item.academic_index
-                .toString()
-                .replace('.', ',');
-            const formattedTestIndex = item.test_index
-                ? item.test_index.toString().replace('.', ',')
-                : null;
-            const formattedInterviewIndex = item.interview_index
-                ? item.interview_index.toString().replace('.', ',')
-                : null;
+            const formattedAcademicIndex = item.academic_index.toString().replace('.', ',');
+            const formattedTestIndex = item.test_index ? item.test_index.toString().replace('.', ',') : null;
+            const formattedInterviewIndex = item.interview_index ? item.interview_index.toString().replace('.', ',') : null;
             const formattedAverage = item.average.toString().replace('.', ',');
+
+            let formattedStatus = null;
+            if (filter.stage === '1' && (item.hiring_status === 'hiring' || item.hiring_status === 'hired')) {
+                formattedStatus = statusListTable[item.hiring_status];
+            }
+
             return {
                 ...item,
                 academic_index: formattedAcademicIndex,
                 test_index: formattedTestIndex,
                 interview_index: formattedInterviewIndex,
                 average: formattedAverage,
-                hiring_status: statusListTable[item?.hiring_status],
+                hiring_status: formattedStatus,
             };
         });
         setFormatted(updated);
