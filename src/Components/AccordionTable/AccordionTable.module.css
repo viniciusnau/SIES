@@ -42,6 +42,7 @@
   padding: 0.5rem 0.25rem;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .tableBody {
@@ -74,8 +75,8 @@
 
 .row {
   display: flex;
-  /* flex-direction: column; */
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 
@@ -224,8 +225,7 @@
 
 @media (min-width: 1024px) {
   .content {
-    width: 80vw;
-    max-width: 800px;
+    width: 90vw;
   }
 
   .headerTable {

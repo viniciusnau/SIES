@@ -23,7 +23,6 @@ interface iForm {
   category: string;
   is_pcd: boolean;
   is_resident: boolean;
-  is_graduated: boolean;
   social_security_number: string;
   academic_index: string;
   interview_index: string;
@@ -55,7 +54,6 @@ const Candidates = () => {
   const dispatch = useDispatch<any>();
   const [snackbarType, setSnackbarType] = useState<boolean>(false);
   const [isResidentChecked, setIsResidentChecked] = useState<boolean>(false);
-  const [isGraduatedChecked, setIsGraduatedChecked] = useState<boolean>(false);
   const [isOpenCreateModal, setIsOpenCreateModal] = useState<boolean>(false);
   const [currentData, setCurrentData] = useState<number>(0);
   const [currentId, setCurrentId] = useState<number | string>(0);
@@ -72,12 +70,12 @@ const Candidates = () => {
     category: categories[0],
     is_pcd: false,
     is_resident: false,
-    is_graduated: false,
     social_security_number: "",
     academic_index: "",
     interview_index: "",
     test_index: "",
   });
+  let candidate;
   const { data, loading, error } = useSelector(
     (state: any) => state.getCandidates
   );
@@ -99,7 +97,6 @@ const Candidates = () => {
       const formattedDate = `${year ? year + "-" : ""}${
         month ? month?.padStart(2, "0") + "-" : ""
       }${day ? day?.padStart(2, "0") : ""}`;
-      console.log("form: ", form);
       return {
         ...otherFormValues,
         birth_date: formattedDate,
@@ -148,11 +145,6 @@ const Candidates = () => {
 
     if (checked && name === "is_resident") {
       setIsResidentChecked(true);
-      setIsGraduatedChecked(false);
-    }
-    if (checked && name === "is_graduated") {
-      setIsGraduatedChecked(true);
-      setIsResidentChecked(false);
     }
     setForm((prev) => ({
       ...prev,
@@ -174,7 +166,7 @@ const Candidates = () => {
     dispatch(fetchDeleteUser(data[currentData].public_defense[currentId].id));
     setIsOpenEditModal(false);
   };
-
+  console.log("form: ", form);
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
     setCurrentPublicDefense((prev: any) => ({
@@ -201,29 +193,31 @@ const Candidates = () => {
 
   useEffect(() => {
     if (data && data[currentData]) {
-      const candidate = data[currentData];
+      candidate = data[currentData];
       setForm({
         name: candidate.name || "",
-        public_defense: candidate.public_defense.name || public_defenses[0],
+        public_defense:
+          candidate.public_defense[currentId].public_defense ||
+          public_defenses[0],
         birth_date: candidate.birth_date || "",
         category: candidate.category || categories[0],
         is_pcd: candidate.is_pcd || false,
         is_resident: candidate.is_resident || false,
-        is_graduated: candidate.is_graduated || false,
         social_security_number: candidate.social_security_number || "",
-        academic_index: candidate.academic_index || "",
+        academic_index: String(candidate.academic_index) + "0" || "",
         interview_index:
-          candidate.public_defense[currentId].interview_index || "",
-        test_index: candidate.public_defense[currentId].test_index || "",
+          String(candidate.public_defense[currentId].interview_index) + "0" ||
+          "",
+        test_index:
+          String(candidate.public_defense[currentId].test_index) + "0" || "",
       });
       setIsResidentChecked(candidate.is_resident || false);
-      setIsGraduatedChecked(candidate.is_graduated || false);
     }
   }, [currentData, data]);
   useEffect(() => {
     let id = "";
     const matchingDefense = data[currentData]?.public_defense.filter(
-      (defense: iPublic_defense, index: any) => {
+      (defense: iPublic_defense) => {
         id =
           defense.public_defense === form?.public_defense
             ? defense.public_defense
@@ -307,14 +301,6 @@ const Candidates = () => {
               <Input
                 className={styles.checkbox}
                 onChange={handleChange}
-                checked={isGraduatedChecked}
-                name="is_graduated"
-                label="Graduação"
-                type="checkbox"
-              />
-              <Input
-                className={styles.checkbox}
-                onChange={handleChange}
                 name="is_pcd"
                 label="PCD"
                 type="checkbox"
@@ -385,7 +371,7 @@ const Candidates = () => {
                 value={String(form.interview_index)}
               />
               <Input
-                label="Nota da data"
+                label="Nota da prova"
                 name="test_index"
                 onChange={handleChange}
                 mask="99,99"
@@ -414,15 +400,6 @@ const Candidates = () => {
                 label="Residente"
                 type="checkbox"
                 value={form.is_resident}
-              />
-              <Input
-                className={styles.checkbox}
-                onChange={handleChange}
-                checked={isGraduatedChecked}
-                name="is_graduated"
-                label="Graduação"
-                type="checkbox"
-                value={form.is_graduated}
               />
               <Input
                 className={styles.checkbox}
