@@ -57,7 +57,7 @@ export const snackbarConsts = {
 export const public_defenses = [
   "Florianópolis",
   "Palhoça",
-  "Sao José",
+  "São José",
   "Tubarão",
   "Criciúma",
   "Araranguá",
@@ -75,7 +75,7 @@ export const public_defenses = [
   "Caçador",
   "Campos Novos",
   "Joaçaba",
-  "Concordia",
+  "Concórdia",
   "Xanxerê",
   "São Lourenço do Oeste",
   "Chapecó",
@@ -94,6 +94,7 @@ export const columnsTable = [
   { title: "Nome", property: "blurred_name" },
   { title: "CPF", property: "blurred_social_security_number" },
   { title: "IMAA", property: "academic_index" },
+  { title: "Status", property: "hiring_status" },
 ];
 
 export const extraColumnsTable = [
@@ -108,14 +109,16 @@ export const extraColumnsTable = [
 
 export const statusListTable = {
   hired: "Contratado",
-  pending: "Aprovado",
+  approved: "Aprovado",
   rejected: "Eliminado",
+  hiring: "Em contratação"
 };
 
 export const statusList = [
-  { name: "Aprovado", property: "pending" },
+  { name: "Aprovado", property: "approved" },
   { name: "Contratado", property: "hired" },
   { name: "Eliminado", property: "rejected" },
+  { name: "Em contratação", property: "hiring" },
 ];
 
 export const modalText = {
