@@ -83,6 +83,30 @@ export const public_defenses = [
   "São Miguel do Oeste",
 ];
 
+export const hiring_status = [
+  "pendente",
+  "contratado",
+  "eliminado",
+  "aprovado",
+  "em contratação",
+];
+
+export const ptToEnStatus = {
+  pendente: "pending",
+  contratado: "hired",
+  eliminado: "rejected",
+  aprovado: "approved",
+  emcontratação: "hiring",
+};
+
+export const EnToPtStatus = {
+  pending: "pendente",
+  hired: "contratado",
+  rejected: "eliminado",
+  approved: "aprovado",
+  hiring: "em contratação",
+};
+
 export const categories = ["Direito"];
 
 export const stages = [
@@ -145,7 +169,7 @@ export const candidatesColumns = [
   },
   { title: "Defensoria", property: "public_defense" },
   {
-    title: "Nota academica",
+    title: "IMAA",
     property: "academic_index",
   },
   {

@@ -4,6 +4,8 @@ import styles from "./Candidates.module.css";
 import {
   candidatesColumns,
   categories,
+  hiring_status,
+  ptToEnStatus,
   public_defenses,
 } from "../../Components/Consts";
 import { AccordionTable } from "../../Components/AccordionTable/AccordionTable";
@@ -27,6 +29,7 @@ interface iForm {
   academic_index: string;
   interview_index: string;
   test_index: string;
+  hiring_status: string;
 }
 
 interface iPublic_defense {
@@ -74,6 +77,7 @@ const Candidates = () => {
     academic_index: "",
     interview_index: "",
     test_index: "",
+    hiring_status: "",
   });
   let candidate;
   const { data, loading, error } = useSelector(
@@ -90,7 +94,13 @@ const Candidates = () => {
   );
 
   const handleFormat = () => {
-    const { birth_date, ...otherFormValues } = form;
+    const {
+      birth_date,
+      test_index,
+      academic_index,
+      interview_index,
+      ...otherFormValues
+    } = form;
 
     if (birth_date.trim()) {
       const [day, month, year] = birth_date.split("/");
@@ -100,13 +110,21 @@ const Candidates = () => {
       return {
         ...otherFormValues,
         birth_date: formattedDate,
-        academic_index: String(form.academic_index)
-          .replace(/,/g, ".")
-          .replace("_", ""),
-        test_index: String(form.test_index).replace(/,/g, ".").replace("_", ""),
-        interview_index: String(form.interview_index)
-          .replace(/,/g, ".")
-          .replace("_", ""),
+        academic_index: Number(academic_index)
+          ? String(academic_index).replace(/,/g, ".").replace("_", "")
+          : "",
+        test_index:
+          test_index !== "undefined" &&
+          test_index !== "null" &&
+          test_index !== ""
+            ? String(test_index).replace(/,/g, ".").replace("_", "")
+            : null,
+        interview_index:
+          interview_index !== "undefined" &&
+          interview_index !== "null" &&
+          interview_index !== ""
+            ? String(interview_index).replace(/,/g, ".").replace("_", "")
+            : "",
       };
     }
 
@@ -120,8 +138,13 @@ const Candidates = () => {
 
   const handleCreateSubmit = () => {
     const formattedForm = handleFormat();
-    if (formattedForm) {
-      dispatch(fetchPostRegister(formattedForm));
+    const formatted = {
+      ...formattedForm,
+      interview_index: null,
+      hiring_status: "pending",
+    };
+    if (formatted) {
+      dispatch(fetchPostRegister(formatted));
       setSnackbarType(true);
     }
     setIsOpenCreateModal(false);
@@ -129,14 +152,22 @@ const Candidates = () => {
 
   const handleEditSubmit = () => {
     const formattedForm = handleFormat();
-    dispatch(
-      fetchUpdateRegister(
-        data[currentData].public_defense[currentId].id,
-        formattedForm
-      )
-    );
-    setSnackbarType(true);
-    setIsOpenEditModal(false);
+
+    if (formattedForm) {
+      const formatted = {
+        ...formattedForm,
+        hiring_status:
+          ptToEnStatus[
+            formattedForm.hiring_status as keyof typeof ptToEnStatus
+          ],
+      };
+
+      dispatch(fetchUpdateRegister(currentId, formatted));
+      setSnackbarType(true);
+      setIsOpenEditModal(false);
+    } else {
+      console.error("formattedForm is null");
+    }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -163,12 +194,24 @@ const Candidates = () => {
   };
 
   const handleDelete = () => {
-    dispatch(fetchDeleteUser(data[currentData].public_defense[currentId].id));
+    const selectedDefense = data[currentData]?.public_defense.find(
+      (defense: iPublic_defense) =>
+        defense?.public_defense === form?.public_defense
+    );
+    dispatch(fetchDeleteUser(selectedDefense.id));
     setIsOpenEditModal(false);
   };
-  console.log("form: ", form);
+
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
+
+    const selectedDefense = data[currentData]?.public_defense.find(
+      (defense: iPublic_defense) => defense.public_defense === value
+    );
+
+    if (selectedDefense) {
+      setCurrentId(selectedDefense?.id);
+    }
     setCurrentPublicDefense((prev: any) => ({
       ...prev,
       [form.name?.replace(/ /g, "")]: value,
@@ -194,26 +237,48 @@ const Candidates = () => {
   useEffect(() => {
     if (data && data[currentData]) {
       candidate = data[currentData];
+      console.log("currentData: ", currentData);
+      console.log("currentId: ", currentId);
+      console.log(
+        "candidate?.public_defense[currentId]: ",
+        candidate?.public_defense[currentData]?.hiring_status
+      );
       setForm({
         name: candidate.name || "",
         public_defense:
-          candidate.public_defense[currentId].public_defense ||
+          candidate?.public_defense[currentId]?.public_defense ||
           public_defenses[0],
         birth_date: candidate.birth_date || "",
         category: candidate.category || categories[0],
         is_pcd: candidate.is_pcd || false,
         is_resident: candidate.is_resident || false,
         social_security_number: candidate.social_security_number || "",
-        academic_index: String(candidate.academic_index) + "0" || "",
+        hiring_status:
+          candidate?.public_defense[currentData]?.hiring_status ||
+          hiring_status[0],
+        academic_index:
+          candidate.academic_index &&
+          String(candidate.academic_index).length >= 3
+            ? "0" + String(candidate.academic_index)
+            : String(candidate.academic_index) || "",
         interview_index:
-          String(candidate.public_defense[currentId].interview_index) + "0" ||
-          "",
+          candidate?.public_defense[currentId]?.interview_index &&
+          String(candidate?.public_defense[currentId]?.interview_index)
+            .length >= 3
+            ? "0" +
+              String(candidate?.public_defense[currentId]?.interview_index)
+            : String(candidate?.public_defense[currentId]?.interview_index) ||
+              "",
         test_index:
-          String(candidate.public_defense[currentId].test_index) + "0" || "",
+          candidate?.public_defense[currentId]?.test_index &&
+          String(candidate?.public_defense[currentId]?.test_index).length >= 3
+            ? "0" + String(candidate?.public_defense[currentId]?.test_index)
+            : String(candidate?.public_defense[currentId]?.test_index) || "",
       });
       setIsResidentChecked(candidate.is_resident || false);
     }
   }, [currentData, data]);
+
   useEffect(() => {
     let id = "";
     const matchingDefense = data[currentData]?.public_defense.filter(
@@ -228,6 +293,19 @@ const Candidates = () => {
       setCurrentId(id);
     }
   }, [form.public_defense, data, currentData, setCurrentId]);
+
+  useEffect(() => {
+    if (form?.public_defense) {
+      const selectedDefense = data[currentData]?.public_defense.find(
+        (defense: iPublic_defense) =>
+          defense?.public_defense === form?.public_defense
+      );
+
+      if (selectedDefense) {
+        setCurrentId(selectedDefense?.id);
+      }
+    }
+  }, [isOpenEditModal]);
 
   return (
     <div className={styles.container}>
@@ -377,6 +455,21 @@ const Candidates = () => {
                 mask="99,99"
                 value={String(form.test_index)}
               />
+              <div>
+                <p className={styles.label}>Status:</p>
+                <select
+                  className={styles.select}
+                  value={form.hiring_status}
+                  onChange={handleSelectChange}
+                  name="hiring_status"
+                >
+                  {hiring_status.map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <div>
                 <p className={styles.label}>Núcleo:</p>
                 <select

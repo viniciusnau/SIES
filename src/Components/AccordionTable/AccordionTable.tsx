@@ -7,6 +7,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Button from "../Forms/Button";
 import { MdModeEdit } from "react-icons/md";
+import { EnToPtStatus, hiring_status } from "../Consts";
 
 interface iCurrentPublicDefense {
   [name: string]: number;
@@ -99,7 +100,6 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
                           <div key={index} className={styles.row}>
                             {column.property === "average" ||
                             column.property === "test_index" ||
-                            column.property === "hiring_status" ||
                             column.property === "public_defense" ||
                             column.property === "interview_index" ||
                             column.property === "category" ? (
@@ -114,6 +114,20 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
                                     : 0
                                 ]?.[column.property]
                               )
+                            ) : column.property === "hiring_status" ? (
+                              EnToPtStatus[
+                                row?.public_defense[
+                                  currentPublicDefense[
+                                    row?.name?.replace(/ /g, "")
+                                  ]
+                                    ? currentPublicDefense[
+                                        row?.name?.replace(/ /g, "")
+                                      ]
+                                    : 0
+                                ]?.[
+                                  column.property
+                                ] as keyof typeof EnToPtStatus
+                              ]
                             ) : column.property === "edit" ? (
                               <MdModeEdit
                                 size={24}
