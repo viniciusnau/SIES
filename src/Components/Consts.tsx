@@ -188,7 +188,7 @@ export const candidatesColumns = [
     property: "interview_index",
   },
   {
-    title: "Contratação",
+    title: "Status",
     property: "hiring_status",
   },
   {
