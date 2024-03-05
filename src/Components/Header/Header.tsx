@@ -101,19 +101,6 @@ const Header = () => {
                         <li
                           onClick={() => {
                             setIsDropdownOpen(!isDropdownOpen);
-                            setToggleNav(!toggleNav);
-                            navigate("sies/update");
-                          }}
-                        >
-                          <span
-                            className={`${styles.route} ${styles.modalItem}`}
-                          >
-                            Atualizar
-                          </span>
-                        </li>
-                        <li
-                          onClick={() => {
-                            setIsDropdownOpen(!isDropdownOpen);
                             logout(navigate);
                           }}
                         >
@@ -168,15 +155,6 @@ const Header = () => {
                     }}
                   >
                     Candidatos
-                  </span>
-                  <span
-                    className={`${styles.route} ${styles.logout}`}
-                    onClick={() => {
-                      setToggleNav(!toggleNav);
-                      navigate("/sies/update");
-                    }}
-                  >
-                    Atualizar
                   </span>
                   <span
                     className={`${styles.route} ${styles.logout}`}
