@@ -56,11 +56,11 @@ const services = {
     const apiToken = sessionStorage.getItem("apiToken");
     const authorizationMethod = apiToken ? "Token" : "Basic";
 
-    if (body.test_index === "") {
+    if (body.test_index === "" || body.test_index === undefined || body.test_index === null) {
       delete body.test_index;
     }
 
-    if (body.interview_index === "") {
+    if (body.interview_index === "" || body.interview_index === undefined || body.interview_index === null) {
       delete body.interview_index;
     }
 
@@ -166,11 +166,11 @@ const services = {
     const apiToken = sessionStorage.getItem("apiToken");
     const authorizationMethod = apiToken ? "Token" : "Basic";
 
-    if (body.test_index === "") {
+    if (body.test_index === "" || body.test_index === undefined || body.test_index === null) {
       delete body.test_index;
     }
 
-    if (body.interview_index === "") {
+    if (body.interview_index === "" || body.interview_index === undefined || body.interview_index === null) {
       delete body.interview_index;
     }
 
