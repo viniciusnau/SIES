@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./AccordionTable.module.css";
 import Loading from "../Loading/Loading";
-import { neverNull } from "../Helper";
+import { exhibitionDateFormat, neverNull } from "../Helper";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -101,6 +101,7 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
                             {column.property === "average" ||
                             column.property === "test_index" ||
                             column.property === "public_defense" ||
+                            column.property === "registration" ||
                             column.property === "interview_index" ||
                             column.property === "category" ? (
                               neverNull(
@@ -128,6 +129,8 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
                                   column.property
                                 ] as keyof typeof EnToPtStatus
                               ]
+                            ) : column.property === "birth_date" ? (
+                              exhibitionDateFormat(row[column.property])
                             ) : column.property === "edit" ? (
                               <MdModeEdit
                                 size={24}

@@ -135,7 +135,7 @@ export const statusListTable = {
   hired: "Contratado",
   approved: "Aprovado",
   rejected: "Eliminado",
-  hiring: "Em contratação"
+  hiring: "Em contratação",
 };
 
 export const statusList = [
@@ -165,6 +165,10 @@ export const candidatesColumns = [
   {
     title: "Data de nascimento",
     property: "birth_date",
+  },
+  {
+    title: "Matrícula",
+    property: "registration",
   },
   {
     title: "Curso",

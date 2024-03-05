@@ -17,6 +17,7 @@ import { ChildrenModal } from "../../Components/ChildrenModal/ChildrenModal";
 import { fetchDeleteUser } from "../../Services/Slices/deleteUser";
 import { fetchUpdateRegister } from "../../Services/Slices/updateCandidate";
 import Button from "../../Components/Forms/Button";
+import { exhibitionDateFormat } from "../../Components/Helper";
 
 interface iForm {
   name: string;
@@ -248,7 +249,7 @@ const Candidates = () => {
         public_defense:
           candidate?.public_defense[currentId]?.public_defense ||
           public_defenses[0],
-        birth_date: candidate.birth_date || "",
+        birth_date: exhibitionDateFormat(candidate.birth_date) || "",
         category: candidate.category || categories[0],
         is_pcd: candidate.is_pcd || false,
         is_resident: candidate.is_resident || false,
