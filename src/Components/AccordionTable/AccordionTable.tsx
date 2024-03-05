@@ -52,9 +52,7 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
     setCurrentData(index);
   };
 
-  const handlePublicDefense = (rowData: any, row: any, index: number) => {
-    const { public_defense } = rowData;
-    console.log("index: ", index);
+  const handlePublicDefense = (row: any, index: number) => {
     setCurrentPublicDefense((prev: any) => ({
       ...prev,
       [row?.name?.replace(/ /g, "")]: index,
@@ -146,9 +144,7 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
                         <h3>Núcleos</h3>
                         {row.public_defense?.map((item: any, index: number) => (
                           <p
-                            onClick={() =>
-                              handlePublicDefense(item, row, index)
-                            }
+                            onClick={() => handlePublicDefense(row, index)}
                             key={index}
                             style={{ cursor: "pointer" }}
                           >

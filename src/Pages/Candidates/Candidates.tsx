@@ -80,7 +80,7 @@ const Candidates = () => {
     test_index: "",
     hiring_status: "",
   });
-  let candidate;
+  let candidate, indexPublicDefense;
   const { data, loading, error } = useSelector(
     (state: any) => state.getCandidates
   );
@@ -162,7 +162,7 @@ const Candidates = () => {
             formattedForm.hiring_status as keyof typeof ptToEnStatus
           ],
       };
-
+      console.log("formatted: ", formatted);
       dispatch(fetchUpdateRegister(currentId, formatted));
       setSnackbarType(true);
       setIsOpenEditModal(false);
@@ -238,16 +238,12 @@ const Candidates = () => {
   useEffect(() => {
     if (data && data[currentData]) {
       candidate = data[currentData];
-      console.log("currentData: ", currentData);
-      console.log("currentId: ", currentId);
-      console.log(
-        "candidate?.public_defense[currentId]: ",
-        candidate?.public_defense[currentData]?.hiring_status
-      );
+      indexPublicDefense =
+        currentPublicDefense[candidate.name.replace(" ", "")] || 0;
       setForm({
         name: candidate.name || "",
         public_defense:
-          candidate?.public_defense[currentId]?.public_defense ||
+          candidate?.public_defense[indexPublicDefense]?.public_defense ||
           public_defenses[0],
         birth_date: exhibitionDateFormat(candidate.birth_date) || "",
         category: candidate.category || categories[0],
@@ -255,7 +251,7 @@ const Candidates = () => {
         is_resident: candidate.is_resident || false,
         social_security_number: candidate.social_security_number || "",
         hiring_status:
-          candidate?.public_defense[currentData]?.hiring_status ||
+          candidate?.public_defense[indexPublicDefense]?.hiring_status ||
           hiring_status[0],
         academic_index:
           candidate.academic_index &&
@@ -263,18 +259,25 @@ const Candidates = () => {
             ? "0" + String(candidate.academic_index)
             : String(candidate.academic_index) || "",
         interview_index:
-          candidate?.public_defense[currentId]?.interview_index &&
-          String(candidate?.public_defense[currentId]?.interview_index)
+          candidate?.public_defense[indexPublicDefense]?.interview_index &&
+          String(candidate?.public_defense[indexPublicDefense]?.interview_index)
             .length >= 3
             ? "0" +
-              String(candidate?.public_defense[currentId]?.interview_index)
-            : String(candidate?.public_defense[currentId]?.interview_index) ||
-              "",
+              String(
+                candidate?.public_defense[indexPublicDefense]?.interview_index
+              )
+            : String(
+                candidate?.public_defense[indexPublicDefense]?.interview_index
+              ) || "",
         test_index:
-          candidate?.public_defense[currentId]?.test_index &&
-          String(candidate?.public_defense[currentId]?.test_index).length >= 3
-            ? "0" + String(candidate?.public_defense[currentId]?.test_index)
-            : String(candidate?.public_defense[currentId]?.test_index) || "",
+          candidate?.public_defense[indexPublicDefense]?.test_index &&
+          String(candidate?.public_defense[indexPublicDefense]?.test_index)
+            .length >= 3
+            ? "0" +
+              String(candidate?.public_defense[indexPublicDefense]?.test_index)
+            : String(
+                candidate?.public_defense[indexPublicDefense]?.test_index
+              ) || "",
       });
       setIsResidentChecked(candidate.is_resident || false);
     }
