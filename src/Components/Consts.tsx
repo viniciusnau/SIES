@@ -96,7 +96,7 @@ export const ptToEnStatus = {
   contratado: "hired",
   eliminado: "rejected",
   aprovado: "approved",
-  emcontratação: "hiring",
+  "em contratação": "hiring",
 };
 
 export const EnToPtStatus = {

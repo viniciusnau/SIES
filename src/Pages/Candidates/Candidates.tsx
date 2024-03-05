@@ -162,6 +162,7 @@ const Candidates = () => {
             formattedForm.hiring_status as keyof typeof ptToEnStatus
           ],
       };
+      console.log("formattedForm: ", formattedForm);
       console.log("formatted: ", formatted);
       dispatch(fetchUpdateRegister(currentId, formatted));
       setSnackbarType(true);
