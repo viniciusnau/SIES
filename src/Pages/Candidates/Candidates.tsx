@@ -111,19 +111,17 @@ const Candidates = () => {
       return {
         ...otherFormValues,
         birth_date: formattedDate,
-        academic_index: Number(academic_index)
+        academic_index: academic_index
           ? String(academic_index).replace(/,/g, ".").replace("_", "")
           : "",
         test_index:
-          test_index !== "undefined" &&
-          test_index !== "null" &&
-          test_index !== ""
+          test_index !== "undefined" && test_index !== "null" && test_index
             ? String(test_index).replace(/,/g, ".").replace("_", "")
             : null,
         interview_index:
           interview_index !== "undefined" &&
           interview_index !== "null" &&
-          interview_index !== ""
+          interview_index
             ? String(interview_index).replace(/,/g, ".").replace("_", "")
             : "",
       };
@@ -144,6 +142,7 @@ const Candidates = () => {
       interview_index: null,
       hiring_status: "pending",
     };
+    console.log("formatted: ", formatted);
     if (formatted) {
       dispatch(fetchPostRegister(formatted));
       setSnackbarType(true);
@@ -162,8 +161,6 @@ const Candidates = () => {
             formattedForm.hiring_status as keyof typeof ptToEnStatus
           ],
       };
-      console.log("formattedForm: ", formattedForm);
-      console.log("formatted: ", formatted);
       dispatch(fetchUpdateRegister(currentId, formatted));
       setSnackbarType(true);
       setIsOpenEditModal(false);
