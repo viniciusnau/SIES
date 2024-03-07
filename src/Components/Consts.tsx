@@ -52,6 +52,36 @@ export const snackbarConsts = {
     description: "Tente novamente mais tarde.",
     color: "#ff6464",
   },
+
+  errorPostCandidate: {
+    title: "Erro ao criar candidato!",
+    description: "Tente novamente mais tarde.",
+    color: "#ff6464",
+  },
+
+  errorGetCandidates: {
+    title: "Erro ao carregar a lista de candidatos!",
+    description: "Tente novamente mais tarde.",
+    color: "#ff6464",
+  },
+
+  errorEditCandidate: {
+    title: "Erro ao alterar informações do candidato!",
+    description: "Tente novamente mais tarde.",
+    color: "#ff6464",
+  },
+
+  successDeleteCandidate: {
+    title: "Candidato excluido com sucesso!",
+    description: "Exclusão feita com sucesso!",
+    color: "#9fc54d",
+  },
+
+  errorDeleteCandidate: {
+    title: "Erro ao excluir candidato!",
+    description: "Tente novamente mais tarde.",
+    color: "#ff6464",
+  },
 };
 
 export const public_defenses = [

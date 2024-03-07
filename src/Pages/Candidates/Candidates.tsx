@@ -18,6 +18,7 @@ import { fetchDeleteUser } from "../../Services/Slices/deleteUser";
 import { fetchUpdateRegister } from "../../Services/Slices/updateCandidate";
 import Button from "../../Components/Forms/Button";
 import { exhibitionDateFormat } from "../../Components/Helper";
+import Snackbar from "../../Components/Snackbar/Snackbar";
 
 interface iForm {
   name: string;
@@ -311,6 +312,27 @@ const Candidates = () => {
 
   return (
     <div className={styles.container}>
+      {error && snackbarType && (
+        <Snackbar type="errorGetCandidates" setShowSnackbar={setSnackbarType} />
+      )}
+      {responseEditCandidate.error && snackbarType && (
+        <Snackbar type="errorEditCandidate" setShowSnackbar={setSnackbarType} />
+      )}
+      {responsePostCandidate.error && snackbarType && (
+        <Snackbar type="errorPostCandidate" setShowSnackbar={setSnackbarType} />
+      )}
+      {responseDeleteCandidate.error && snackbarType && (
+        <Snackbar
+          type="errorDeleteCandidate"
+          setShowSnackbar={setSnackbarType}
+        />
+      )}
+      {responseDeleteCandidate.data === "sucesso" && snackbarType && (
+        <Snackbar
+          type="successDeleteCandidate"
+          setShowSnackbar={setSnackbarType}
+        />
+      )}
       {isOpenCreateModal && (
         <ChildrenModal
           loading={false}
