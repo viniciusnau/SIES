@@ -58,8 +58,8 @@ interface iCurrentPublicDefense {
 const Candidates = () => {
   const dispatch = useDispatch<any>();
   const [snackbarType, setSnackbarType] = useState<boolean>(false);
-  const [isResidentChecked, setIsResidentChecked] = useState<boolean>(false);
   const [isOpenCreateModal, setIsOpenCreateModal] = useState<boolean>(false);
+  const [isGraduation, setIsGraduation] = useState<boolean>(false);
   const [currentData, setCurrentData] = useState<number>(0);
   const [currentId, setCurrentId] = useState<number | string>(0);
   const [currentPublicDefense, setCurrentPublicDefense] =
@@ -170,17 +170,52 @@ const Candidates = () => {
     }
   };
 
+  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value, checked, type } = event.target;
+  //   const newValue = type === "checkbox" ? checked : value;
+  //   if (name === "isGraduation" || name === "is_resident") {
+  //     isGraduation
+  //       ? setForm((prev: iForm) => ({ ...prev, is_resident: false }))
+  //       : setIsGraduation(false);
+  //   } else {
+  //     if (checked && name === "is_resident") {
+  //       setIsResidentChecked(true);
+  //     }
+  //     setForm((prev: iForm) => ({
+  //       ...prev,
+  //       [name]: newValue,
+  //     }));
+  //   }
+  // };
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked, type } = event.target;
     const newValue = type === "checkbox" ? checked : value;
 
-    if (checked && name === "is_resident") {
-      setIsResidentChecked(true);
+    if (name === "isGraduation") {
+      setIsGraduation(!isGraduation);
+
+      if (checked) {
+        setForm((prev: iForm) => ({
+          ...prev,
+          is_resident: false,
+        }));
+      }
+    } else if (name === "is_resident") {
+      setForm((prev: iForm) => ({
+        ...prev,
+        is_resident: !form.is_resident,
+      }));
+
+      if (checked) {
+        setIsGraduation(false);
+      }
+    } else {
+      setForm((prev: iForm) => ({
+        ...prev,
+        [name]: newValue,
+      }));
     }
-    setForm((prev) => ({
-      ...prev,
-      [name]: newValue,
-    }));
   };
 
   const handleChangeCandidates = (
@@ -278,7 +313,6 @@ const Candidates = () => {
                 candidate?.public_defense[indexPublicDefense]?.test_index
               ) || "",
       });
-      setIsResidentChecked(candidate.is_resident || false);
     }
   }, [currentData, data]);
 
@@ -395,10 +429,18 @@ const Candidates = () => {
               <Input
                 className={styles.checkbox}
                 onChange={handleChange}
-                checked={isResidentChecked}
+                name="isGraduation"
+                label="Graduação"
+                type="checkbox"
+                checked={isGraduation}
+              />
+              <Input
+                className={styles.checkbox}
+                onChange={handleChange}
                 name="is_resident"
                 label="Residente"
                 type="checkbox"
+                checked={form.is_resident}
               />
               <Input
                 className={styles.checkbox}
@@ -512,7 +554,7 @@ const Candidates = () => {
               <Input
                 className={styles.checkbox}
                 onChange={handleChange}
-                checked={isResidentChecked}
+                checked={form.is_resident}
                 name="is_resident"
                 label="Residente"
                 type="checkbox"
