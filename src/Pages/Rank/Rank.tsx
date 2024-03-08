@@ -73,18 +73,13 @@ const Rank: React.FC = () => {
             const formattedInterviewIndex = item.interview_index ? item.interview_index.toString().replace('.', ',') : null;
             const formattedAverage = item.average.toString().replace('.', ',');
 
-            let formattedStatus = null;
-            if (filter.stage === '1' && (item.hiring_status === 'hiring' || item.hiring_status === 'hired')) {
-                formattedStatus = statusListTable[item.hiring_status];
-            }
-
             return {
                 ...item,
                 academic_index: formattedAcademicIndex,
                 test_index: formattedTestIndex,
                 interview_index: formattedInterviewIndex,
                 average: formattedAverage,
-                hiring_status: formattedStatus,
+                hiring_status: statusListTable[item.hiring_status],
             };
         });
         setFormatted(updated);
