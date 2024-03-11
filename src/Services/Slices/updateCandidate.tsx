@@ -57,7 +57,8 @@ export const fetchUpdateRegister =
   ) => {
     dispatch(updateCandidate());
     try {
-      await services.putCandidate(id, body);
+      const { registration, ...prev } = body;
+      await services.putCandidate(id, prev);
       dispatch(updateCandidateSuccess("sucesso"));
     } catch (err) {
       dispatch(updateCandidateFailure());

@@ -32,6 +32,7 @@ interface iForm {
   interview_index: string;
   test_index: string;
   hiring_status: string;
+  registration: string;
 }
 
 interface iPublic_defense {
@@ -80,6 +81,7 @@ const Candidates = () => {
     interview_index: "",
     test_index: "",
     hiring_status: "",
+    registration: "",
   });
   let candidate, indexPublicDefense;
   const { data, loading, error } = useSelector(
@@ -143,7 +145,7 @@ const Candidates = () => {
       interview_index: null,
       hiring_status: "pending",
     };
-    console.log("formatted: ", formatted);
+
     if (formatted) {
       dispatch(fetchPostRegister(formatted));
       setSnackbarType(true);
@@ -169,24 +171,6 @@ const Candidates = () => {
       console.error("formattedForm is null");
     }
   };
-
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value, checked, type } = event.target;
-  //   const newValue = type === "checkbox" ? checked : value;
-  //   if (name === "isGraduation" || name === "is_resident") {
-  //     isGraduation
-  //       ? setForm((prev: iForm) => ({ ...prev, is_resident: false }))
-  //       : setIsGraduation(false);
-  //   } else {
-  //     if (checked && name === "is_resident") {
-  //       setIsResidentChecked(true);
-  //     }
-  //     setForm((prev: iForm) => ({
-  //       ...prev,
-  //       [name]: newValue,
-  //     }));
-  //   }
-  // };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked, type } = event.target;
@@ -235,6 +219,7 @@ const Candidates = () => {
     );
     dispatch(fetchDeleteUser(selectedDefense.id));
     setIsOpenEditModal(false);
+    setSnackbarType(true);
   };
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -312,6 +297,8 @@ const Candidates = () => {
             : String(
                 candidate?.public_defense[indexPublicDefense]?.test_index
               ) || "",
+        registration:
+          candidate?.public_defense[indexPublicDefense]?.registration,
       });
     }
   }, [currentData, data]);
@@ -321,7 +308,7 @@ const Candidates = () => {
     const matchingDefense = data[currentData]?.public_defense.filter(
       (defense: iPublic_defense) => {
         id =
-          defense.public_defense === form?.public_defense
+          defense.registration === form?.registration
             ? defense.public_defense
             : id;
       }

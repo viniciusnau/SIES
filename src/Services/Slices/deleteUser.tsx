@@ -55,7 +55,13 @@ export const fetchDeleteUser =
     try {
       await services.deleteUser(id);
       dispatch(deleteUserSuccess("sucesso"));
+      setTimeout(() => {
+        dispatch(deleteUserSuccess(""));
+      }, 3000);
     } catch (err) {
       dispatch(deleteUserFailure());
+      setTimeout(() => {
+        dispatch(deleteUser());
+      }, 3000);
     }
   };
