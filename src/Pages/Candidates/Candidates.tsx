@@ -322,15 +322,16 @@ const Candidates = () => {
     if (form?.public_defense) {
       const selectedDefense = data[currentData]?.public_defense.find(
         (defense: iPublic_defense) =>
-          defense?.public_defense === form?.public_defense
+          defense?.registration === form?.registration
       );
 
       if (selectedDefense) {
         setCurrentId(selectedDefense?.id);
       }
     }
-  }, [isOpenEditModal]);
-
+  }, [isOpenEditModal, currentData]);
+  console.log("currentId: ", currentId);
+  console.log("currentData: ", currentData);
   return (
     <div className={styles.container}>
       {error && snackbarType && (
@@ -595,6 +596,7 @@ const Candidates = () => {
           setCurrentData={setCurrentData}
           setCurrentPublicDefense={setCurrentPublicDefense}
           currentPublicDefense={currentPublicDefense}
+          setCurrentId={setCurrentId}
         />
       </div>
     </div>

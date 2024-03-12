@@ -29,6 +29,7 @@ interface AccordionTableProps {
   setCurrentData?: any;
   currentPublicDefense?: any;
   setCurrentPublicDefense?: any;
+  setCurrentId?: any;
 }
 
 export const AccordionTable: React.FC<AccordionTableProps> = ({
@@ -42,6 +43,7 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
   setCurrentData,
   currentPublicDefense,
   setCurrentPublicDefense,
+  setCurrentId,
 }) => {
   const handleEdit = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -50,6 +52,15 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
     e.stopPropagation();
     setOpenEditModal(true);
     setCurrentData(index);
+
+    const selectedDefense = data[index]?.public_defense.find(
+      (defense: any, defenseIndex: number) =>
+        defense.registration ===
+        data[index]?.public_defense[defenseIndex].registration
+    );
+    if (selectedDefense) {
+      setCurrentId(selectedDefense?.id);
+    }
   };
 
   const handlePublicDefense = (row: any, index: number) => {
