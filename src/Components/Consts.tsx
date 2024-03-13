@@ -118,6 +118,7 @@ export const hiring_status = [
   "contratado",
   "eliminado",
   "aprovado",
+  "reprovado",
   "em contratação",
 ];
 
@@ -126,6 +127,7 @@ export const ptToEnStatus = {
   contratado: "hired",
   eliminado: "rejected",
   aprovado: "approved",
+  reprovado: "failed",
   "em contratação": "hiring",
 };
 
@@ -134,6 +136,7 @@ export const EnToPtStatus = {
   hired: "contratado",
   rejected: "eliminado",
   approved: "aprovado",
+  failed: "reprovado",
   hiring: "em contratação",
 };
 
@@ -164,12 +167,14 @@ export const extraColumnsTable = [
 export const statusListTable = {
   hired: "Contratado",
   approved: "Aprovado",
+  failed: "Reprovado",
   rejected: "Eliminado",
   hiring: "Em contratação",
 };
 
 export const statusList = [
   { name: "Aprovado", property: "approved" },
+  { name: "Reprovado", property: "failed" },
   { name: "Contratado", property: "hired" },
   { name: "Eliminado", property: "rejected" },
   { name: "Em contratação", property: "hiring" },
