@@ -27,6 +27,7 @@ interface AccordionTableProps {
   error?: boolean;
   setOpenEditModal?: any;
   setCurrentData?: any;
+  currentData?: any;
   currentPublicDefense?: any;
   setCurrentPublicDefense?: any;
   setCurrentId?: any;
@@ -41,6 +42,7 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
   error,
   setOpenEditModal,
   setCurrentData,
+  currentData,
   currentPublicDefense,
   setCurrentPublicDefense,
   setCurrentId,
@@ -64,6 +66,23 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
   };
 
   const handlePublicDefense = (row: any, index: number) => {
+    const selectedDefense = data[currentData]?.public_defense.filter(
+      (defense: any) => {
+        return (
+          defense.registration ===
+          data[currentData]?.public_defense[index]?.registration
+        );
+      }
+    );
+    if (selectedDefense && selectedDefense.length > 0) {
+      setCurrentId(selectedDefense[0].id);
+    }
+    const rowIndex = data.findIndex(
+      (defense: any) => defense.name === row?.name
+    );
+    if (rowIndex !== -1) {
+      setCurrentData(rowIndex);
+    }
     setCurrentPublicDefense((prev: any) => ({
       ...prev,
       [row?.name?.replace(/ /g, "")]: index,

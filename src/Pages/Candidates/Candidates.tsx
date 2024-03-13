@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Candidates.module.css";
 import {
+  EnToPtStatus,
   candidatesColumns,
   categories,
   hiring_status,
@@ -258,7 +259,7 @@ const Candidates = () => {
     if (data && data[currentData]) {
       candidate = data[currentData];
       indexPublicDefense =
-        currentPublicDefense[candidate.name.replace(" ", "")] || 0;
+        currentPublicDefense[candidate.name.replace(/ /g, "")];
       setForm({
         name: candidate.name || "",
         public_defense:
@@ -270,8 +271,10 @@ const Candidates = () => {
         is_resident: candidate.is_resident || false,
         social_security_number: candidate.social_security_number || "",
         hiring_status:
-          candidate?.public_defense[indexPublicDefense]?.hiring_status ||
-          hiring_status[0],
+          EnToPtStatus[
+            candidate?.public_defense[indexPublicDefense]
+              ?.hiring_status as keyof typeof EnToPtStatus
+          ] || hiring_status[0],
         academic_index:
           candidate.academic_index &&
           String(candidate.academic_index).length >= 3
@@ -301,7 +304,7 @@ const Candidates = () => {
           candidate?.public_defense[indexPublicDefense]?.registration,
       });
     }
-  }, [currentData, data]);
+  }, [currentData, data, currentPublicDefense]);
 
   useEffect(() => {
     let id = "";
@@ -330,8 +333,7 @@ const Candidates = () => {
       }
     }
   }, [isOpenEditModal, currentData]);
-  console.log("currentId: ", currentId);
-  console.log("currentData: ", currentData);
+
   return (
     <div className={styles.container}>
       {error && snackbarType && (
@@ -594,6 +596,7 @@ const Candidates = () => {
           error={error}
           setOpenEditModal={setIsOpenEditModal}
           setCurrentData={setCurrentData}
+          currentData={currentData}
           setCurrentPublicDefense={setCurrentPublicDefense}
           currentPublicDefense={currentPublicDefense}
           setCurrentId={setCurrentId}
