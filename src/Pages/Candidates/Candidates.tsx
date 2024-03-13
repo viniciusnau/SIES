@@ -233,10 +233,10 @@ const Candidates = () => {
     if (selectedDefense) {
       setCurrentId(selectedDefense?.id);
     }
-    setCurrentPublicDefense((prev: any) => ({
-      ...prev,
-      [form.name?.replace(/ /g, "")]: value,
-    }));
+    // setCurrentPublicDefense((prev: any) => ({
+    //   ...prev,
+    //   [form.name?.replace(/ /g, "")]: value,
+    // }));
     setForm((prev) => ({
       ...prev,
       [name]: value,
@@ -258,8 +258,11 @@ const Candidates = () => {
   useEffect(() => {
     if (data && data[currentData]) {
       candidate = data[currentData];
-      indexPublicDefense =
-        currentPublicDefense[candidate.name.replace(/ /g, "")];
+      indexPublicDefense = currentPublicDefense[
+        candidate.name.replace(/ /g, "")
+      ]
+        ? currentPublicDefense[candidate.name.replace(/ /g, "")]
+        : 0;
       setForm({
         name: candidate.name || "",
         public_defense:
@@ -306,33 +309,33 @@ const Candidates = () => {
     }
   }, [currentData, data, currentPublicDefense]);
 
-  useEffect(() => {
-    let id = "";
-    const matchingDefense = data[currentData]?.public_defense.filter(
-      (defense: iPublic_defense) => {
-        id =
-          defense.registration === form?.registration
-            ? defense.public_defense
-            : id;
-      }
-    );
-    if (matchingDefense?.length > 0) {
-      setCurrentId(id);
-    }
-  }, [form.public_defense, data, currentData, setCurrentId]);
+  // useEffect(() => {
+  //   let id = "";
+  //   const matchingDefense = data[currentData]?.public_defense.filter(
+  //     (defense: iPublic_defense) => {
+  //       id =
+  //         defense.registration === form?.registration
+  //           ? defense.public_defense
+  //           : id;
+  //     }
+  //   );
+  //   if (matchingDefense?.length > 0) {
+  //     setCurrentId(id);
+  //   }
+  // }, [form.public_defense, data, currentData, setCurrentId]);
 
-  useEffect(() => {
-    if (form?.public_defense) {
-      const selectedDefense = data[currentData]?.public_defense.find(
-        (defense: iPublic_defense) =>
-          defense?.registration === form?.registration
-      );
+  // useEffect(() => {
+  //   if (form?.public_defense) {
+  //     const selectedDefense = data[currentData]?.public_defense.find(
+  //       (defense: iPublic_defense) =>
+  //         defense?.registration === form?.registration
+  //     );
 
-      if (selectedDefense) {
-        setCurrentId(selectedDefense?.id);
-      }
-    }
-  }, [isOpenEditModal, currentData]);
+  //     if (selectedDefense) {
+  //       setCurrentId(selectedDefense?.id);
+  //     }
+  //   }
+  // }, [isOpenEditModal, currentData]);
 
   return (
     <div className={styles.container}>
