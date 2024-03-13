@@ -233,10 +233,6 @@ const Candidates = () => {
     if (selectedDefense) {
       setCurrentId(selectedDefense?.id);
     }
-    // setCurrentPublicDefense((prev: any) => ({
-    //   ...prev,
-    //   [form.name?.replace(/ /g, "")]: value,
-    // }));
     setForm((prev) => ({
       ...prev,
       [name]: value,
@@ -258,11 +254,8 @@ const Candidates = () => {
   useEffect(() => {
     if (data && data[currentData]) {
       candidate = data[currentData];
-      indexPublicDefense = currentPublicDefense[
-        candidate.name.replace(/ /g, "")
-      ]
-        ? currentPublicDefense[candidate.name.replace(/ /g, "")]
-        : 0;
+      indexPublicDefense =
+        currentPublicDefense[candidate.name.replace(/ /g, "")];
       setForm({
         name: candidate.name || "",
         public_defense:
@@ -324,18 +317,18 @@ const Candidates = () => {
   //   }
   // }, [form.public_defense, data, currentData, setCurrentId]);
 
-  // useEffect(() => {
-  //   if (form?.public_defense) {
-  //     const selectedDefense = data[currentData]?.public_defense.find(
-  //       (defense: iPublic_defense) =>
-  //         defense?.registration === form?.registration
-  //     );
+  useEffect(() => {
+    if (form?.public_defense) {
+      const selectedDefense = data[currentData]?.public_defense.find(
+        (defense: iPublic_defense) =>
+          defense?.registration === form?.registration
+      );
 
-  //     if (selectedDefense) {
-  //       setCurrentId(selectedDefense?.id);
-  //     }
-  //   }
-  // }, [isOpenEditModal, currentData]);
+      if (selectedDefense) {
+        setCurrentId(selectedDefense?.id);
+      }
+    }
+  }, [isOpenEditModal, currentData]); // is this one
 
   return (
     <div className={styles.container}>
