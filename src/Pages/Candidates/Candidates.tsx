@@ -61,15 +61,15 @@ const Candidates = () => {
   const dispatch = useDispatch<any>();
   const [snackbarType, setSnackbarType] = useState<boolean>(false);
   const [isOpenCreateModal, setIsOpenCreateModal] = useState<boolean>(false);
-  const [isGraduation, setIsGraduation] = useState<boolean>(false);
-  const [currentData, setCurrentData] = useState<number>(0);
-  const [currentId, setCurrentId] = useState<number | string>(0);
-  const [currentPublicDefense, setCurrentPublicDefense] =
-    useState<iCurrentPublicDefense>({});
   const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false);
+  const [isGraduation, setIsGraduation] = useState<boolean>(false);
+  const [currentData, setCurrentData] = useState<number>(0); //candidateId
+  const [currentId, setCurrentId] = useState<number | string>(0); //
+  const [currentPublicDefense, setCurrentPublicDefense] =
+    useState<iCurrentPublicDefense>({}); //candidatePublicDefenseId
   const [searchCandidates, setSearchCandidates] = useState<iSearchCandidates>({
     name: "",
-  });
+  }); //searchForm
   const [form, setForm] = useState<iForm>({
     name: "",
     public_defense: public_defenses[0],
@@ -254,8 +254,11 @@ const Candidates = () => {
   useEffect(() => {
     if (data && data[currentData]) {
       candidate = data[currentData];
-      indexPublicDefense =
-        currentPublicDefense[candidate.name.replace(/ /g, "")];
+      indexPublicDefense = currentPublicDefense[
+        candidate.name.replace(/ /g, "")
+      ]
+        ? currentPublicDefense[candidate.name.replace(/ /g, "")]
+        : 0;
       setForm({
         name: candidate.name || "",
         public_defense:
