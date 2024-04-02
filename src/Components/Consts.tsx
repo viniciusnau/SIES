@@ -140,7 +140,7 @@ export const EnToPtStatus = {
   hiring: "em contratação",
 };
 
-export const categories = ["Direito"];
+export const categories = ["Direito", "Administração"];
 
 export const stages = [
   { name: "1", property: "1" },
