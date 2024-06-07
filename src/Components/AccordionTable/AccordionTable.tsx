@@ -171,12 +171,12 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
                         ))}
                       </AccordionSummary>
                       <AccordionDetails>
-                        <h3>Núcleos</h3>
+                        <h3 style={{ fontWeight: "500" }}>Núcleos</h3>
                         {row.public_defense?.map((item: any, index: number) => (
                           <p
                             onClick={() => handlePublicDefense(row, index)}
                             key={index}
-                            style={{ cursor: "pointer" }}
+                            style={{ cursor: "pointer", color: "#454b54" }}
                           >
                             {item.public_defense}
                           </p>
