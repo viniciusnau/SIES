@@ -248,10 +248,6 @@ const Candidates = () => {
   ]);
 
   useEffect(() => {
-    dispatch(fetchCandidates(searchCandidates));
-  }, []);
-
-  useEffect(() => {
     if (data && data[currentData]) {
       candidate = data[currentData];
       indexPublicDefense = currentPublicDefense[
