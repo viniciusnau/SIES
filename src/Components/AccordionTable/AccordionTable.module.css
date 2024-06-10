@@ -166,6 +166,35 @@
   background-color: rgba(0, 0, 0, 0.075);
 }
 
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+.spin svg {
+  opacity: 1;
+}
+
+.detailsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.option {
+  cursor: pointer;
+  color: #454b54;
+  width: auto;
+}
+
+.option.active {
+  background-color: var(--fifth-button-color);
+  color: var(--second-text-color);
+  font-size: .9rem;
+  padding: .35rem .75rem;
+  border-radius: .25rem;
+}
+
 @media (max-width: 750px) {
   .content {
     width: 80vw;
@@ -254,14 +283,6 @@
     width: 5rem;
     height: 2.75rem;
   }
-}
-
-.spin {
-  animation: spin 1s linear infinite;
-}
-
-.spin svg {
-  opacity: 1;
 }
 
 @keyframes spin {

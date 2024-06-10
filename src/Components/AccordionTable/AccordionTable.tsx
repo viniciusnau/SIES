@@ -171,16 +171,26 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
                         ))}
                       </AccordionSummary>
                       <AccordionDetails>
-                        <h3 style={{ fontWeight: "500" }}>Núcleos</h3>
-                        {row.public_defense?.map((item: any, index: number) => (
-                          <p
-                            onClick={() => handlePublicDefense(row, index)}
-                            key={index}
-                            style={{ cursor: "pointer", color: "#454b54" }}
-                          >
-                            {item.public_defense}
-                          </p>
-                        ))}
+                        <div className={styles.detailsContainer}>
+                          <h3 style={{ fontWeight: "500" }}>Núcleos</h3>
+                          {row.public_defense?.map(
+                            (item: any, index: number) => (
+                              <p
+                                onClick={() => handlePublicDefense(row, index)}
+                                key={index}
+                                className={`${styles.option} ${
+                                  currentPublicDefense[
+                                    row?.name?.replace(/ /g, "")
+                                  ] === index
+                                    ? styles.active
+                                    : ""
+                                }`}
+                              >
+                                {item?.public_defense}
+                              </p>
+                            )
+                          )}
+                        </div>
                       </AccordionDetails>
                     </Accordion>
                   ))}
