@@ -1,17 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./AccordionTable.module.css";
 import Loading from "../Loading/Loading";
 import { exhibitionDateFormat, neverNull } from "../Helper";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import Button from "../Forms/Button";
 import { MdModeEdit } from "react-icons/md";
-import { EnToPtStatus, hiring_status } from "../Consts";
-
-interface iCurrentPublicDefense {
-  [name: string]: number;
-}
+import { EnToPtStatus } from "../Consts";
 
 interface Column {
   title: string;
@@ -181,7 +176,11 @@ export const AccordionTable: React.FC<AccordionTableProps> = ({
                                 className={`${styles.option} ${
                                   currentPublicDefense[
                                     row?.name?.replace(/ /g, "")
-                                  ] === index
+                                  ] === index ||
+                                  (currentPublicDefense[
+                                    row?.name?.replace(/ /g, "")
+                                  ] === undefined &&
+                                    index === 0)
                                     ? styles.active
                                     : ""
                                 }`}
