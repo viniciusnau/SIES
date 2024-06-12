@@ -187,12 +187,48 @@
   width: auto;
 }
 
+.option {
+  text-decoration: none;
+  margin: .5rem 0;
+  position: relative;
+  transition: color 0.3s ease;
+  font-weight: bold;
+  cursor: var(--cursor-pointer);
+}
+
+.option::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--first-text-color);
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease;
+}
+
+.option:hover {
+  color: var(--first-text-color-hover);
+}
+
+.option:hover::before {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
 .option.active {
   background-color: var(--fifth-button-color);
   color: var(--second-text-color);
   font-size: .9rem;
   padding: .35rem .75rem;
   border-radius: .25rem;
+}
+
+.option.active::before {
+  visibility: hidden;
+  transform: scaleX(0);
 }
 
 @media (max-width: 750px) {

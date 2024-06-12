@@ -67,14 +67,6 @@ input[class*="DatePicker__input"] {
   font-size: var(--font-size);
 }
 
-.button:hover {
-  background-color: var(--first-button-color-hover);
-}
-
-.button:disabled {
-  background-color: var(--first-button-color-disabled);
-}
-
 .table {
   display: flex;
   justify-content: center;
@@ -135,13 +127,14 @@ input[class*="DatePicker__input"] {
     width: 10rem;
   }
 }
-@media (min-width: 751px) {
-}
+
+@media (min-width: 751px) {}
 
 @media (min-width: 1024px) {
   .button {
     margin: 1rem 0 0;
   }
+
   .input {
     margin-right: 1rem;
   }
