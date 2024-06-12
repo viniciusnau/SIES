@@ -125,7 +125,7 @@ const Login = () => {
               src={icon}
               className={styles.icon}
             />
-            <p className={styles.login}>Continuar com google</p>
+            <p className={styles.login}>Acessar com Google</p>
           </Button>
         </form>
         <div className={styles.formButton}>

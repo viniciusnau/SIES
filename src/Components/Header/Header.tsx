@@ -123,7 +123,7 @@ const Header = () => {
                   setToggleNav(!toggleNav);
                   navigate("sies/resident");
                 }}
-                className={`${styles.route} ${styles.logout}`}
+                className={styles.route}
               >
                 Residentes
               </span>
@@ -132,14 +132,14 @@ const Header = () => {
                   setToggleNav(!toggleNav);
                   navigate("sies/");
                 }}
-                className={`${styles.route} ${styles.logout}`}
+                className={styles.route}
               >
                 Estagiários
               </span>
               {isLoggedIn() && (
                 <>
                   <span
-                    className={`${styles.route} ${styles.logout}`}
+                    className={styles.route}
                     onClick={() => {
                       setToggleNav(!toggleNav);
                       navigate("/sies/register");
@@ -148,7 +148,7 @@ const Header = () => {
                     Registrar
                   </span>
                   <span
-                    className={`${styles.route} ${styles.logout}`}
+                    className={styles.route}
                     onClick={() => {
                       setToggleNav(!toggleNav);
                       navigate("/sies/candidates");
@@ -157,7 +157,7 @@ const Header = () => {
                     Candidatos
                   </span>
                   <span
-                    className={`${styles.route} ${styles.logout}`}
+                    className={styles.route}
                     onClick={() => logout(navigate)}
                   >
                     Sair

@@ -248,10 +248,6 @@ const Candidates = () => {
   ]);
 
   useEffect(() => {
-    dispatch(fetchCandidates(searchCandidates));
-  }, []);
-
-  useEffect(() => {
     if (data && data[currentData]) {
       candidate = data[currentData];
       indexPublicDefense = currentPublicDefense[
@@ -304,21 +300,6 @@ const Candidates = () => {
       });
     }
   }, [currentData, data, currentPublicDefense]);
-
-  // useEffect(() => {
-  //   let id = "";
-  //   const matchingDefense = data[currentData]?.public_defense.filter(
-  //     (defense: iPublic_defense) => {
-  //       id =
-  //         defense.registration === form?.registration
-  //           ? defense.public_defense
-  //           : id;
-  //     }
-  //   );
-  //   if (matchingDefense?.length > 0) {
-  //     setCurrentId(id);
-  //   }
-  // }, [form.public_defense, data, currentData, setCurrentId]);
 
   useEffect(() => {
     if (form?.public_defense) {
