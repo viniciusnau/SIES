@@ -100,8 +100,6 @@ const Register = () => {
   }, []);
 
   useEffect(() => {
-    if (isResidentChecked || isGraduatedChecked) {
-    }
     if (isResidentChecked) {
       setForm((prev) => ({
         ...prev,
@@ -217,9 +215,9 @@ const Register = () => {
         className={styles.button}
         onClick={handleSubmit}
         disabled={
-          !form.name &&
-          !form.social_security_number &&
-          !form.birth_date &&
+          !form.name ||
+          !form.social_security_number ||
+          !form.birth_date ||
           !form.academic_index
         }
       >

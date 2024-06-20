@@ -1,3 +1,22 @@
+/* .activeModal {
+  overflow-y: hidden;
+}
+
+.container,
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay {
+  background: rgba(49, 49, 49, 0.8);
+}
+
 .container {
   z-index: 2;
   position: fixed;
@@ -27,4 +46,50 @@
   font-size: 1.2rem;
   width: 10rem;
   height: 3rem;
+} */
+
+body.activeModal {
+  overflow-y: hidden;
+}
+
+.container,
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  /* right: 0;
+  bottom: 0; */
+}
+
+.overlay {
+  z-index: 1;
+  background: rgba(49, 49, 49, 0.8);
+}
+
+.container {
+  overflow-y: auto;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 25vw;
+  height: 80vh;
+  transform: translate(-50%, -50%);
+  border-radius: .25rem;
+  line-height: 1.4;
+  background: #ebebeb;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1.75rem 1rem 1.75rem;
+}
+
+.button {
+  margin: 1rem 0 0 0;
+  font-size: 1rem;
+  width: 8rem;
+  height: 2.5rem;
 }

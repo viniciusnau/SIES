@@ -345,20 +345,28 @@ const Candidates = () => {
           title="Cadastrar candidato"
           confirmLabel="Salvar"
           setOpenModal={setIsOpenCreateModal}
+          openModal={isOpenCreateModal}
           children={
             <>
-              <Input label="Nome" name="name" onChange={handleChange} />
+              <Input
+                label="Nome"
+                name="name"
+                onChange={handleChange}
+                className={styles.input}
+              />
               <Input
                 label="CPF"
                 name="social_security_number"
                 onChange={handleChange}
                 mask="999.999.999-99"
+                className={styles.input}
               />
               <Input
                 label="Data de nascimento"
                 name="birth_date"
                 onChange={handleChange}
                 mask="99/99/9999"
+                className={styles.input}
               />
               <div>
                 <p className={styles.label}>Curso:</p>
@@ -380,6 +388,7 @@ const Candidates = () => {
                 name="academic_index"
                 onChange={handleChange}
                 mask="99,99"
+                className={styles.input}
               />
               <div>
                 <p className={styles.label}>Núcleo:</p>
@@ -431,6 +440,7 @@ const Candidates = () => {
           title="Editar candidato"
           confirmLabel="Salvar"
           setOpenModal={setIsOpenEditModal}
+          openModal={isOpenEditModal}
           isDeleteButton={true}
           handleDelete={handleDelete}
           children={
@@ -440,6 +450,7 @@ const Candidates = () => {
                 name="name"
                 onChange={handleChange}
                 value={form.name}
+                className={styles.input}
               />
               <Input
                 label="CPF"
@@ -447,6 +458,7 @@ const Candidates = () => {
                 onChange={handleChange}
                 mask="999.999.999-99"
                 value={form.social_security_number}
+                className={styles.input}
               />
               <Input
                 label="Data de nascimento"
@@ -454,6 +466,7 @@ const Candidates = () => {
                 onChange={handleChange}
                 mask="99/99/9999"
                 value={form.birth_date}
+                className={styles.input}
               />
               <div>
                 <p className={styles.label}>Curso:</p>
@@ -476,6 +489,7 @@ const Candidates = () => {
                 onChange={handleChange}
                 mask="99,99"
                 value={String(form.academic_index)}
+                className={styles.input}
               />
               <Input
                 label="Nota da entrevista"
@@ -483,6 +497,7 @@ const Candidates = () => {
                 onChange={handleChange}
                 mask="99,99"
                 value={String(form.interview_index)}
+                className={styles.input}
               />
               <Input
                 label="Nota da prova"
@@ -490,6 +505,7 @@ const Candidates = () => {
                 onChange={handleChange}
                 mask="99,99"
                 value={String(form.test_index)}
+                className={styles.input}
               />
               <div>
                 <p className={styles.label}>Status:</p>
@@ -553,7 +569,8 @@ const Candidates = () => {
           label="Nome"
           name="name"
           onChange={handleChangeCandidates}
-          style={{ margin: "0 .5rem" }}
+          style={{ margin: "0 .5rem", width: "15rem" }}
+          className={styles.input}
         />
         <Button
           style={{ height: "2rem", margin: "0 .5rem" }}
