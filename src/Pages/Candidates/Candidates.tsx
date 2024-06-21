@@ -569,7 +569,7 @@ const Candidates = () => {
           label="Nome"
           name="name"
           onChange={handleChangeCandidates}
-          style={{ margin: "0 .5rem", width: "15rem" }}
+          style={{ width: "15rem" }}
           className={styles.input}
         />
         <Button

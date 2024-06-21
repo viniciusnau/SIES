@@ -18,11 +18,6 @@
   height: 3rem;
 }
 
-.input,
-.select {
-  margin: .75rem 0 !important;
-}
-
 .option {
   color: #626262 !important;
 }
@@ -33,15 +28,19 @@
 }
 
 .select {
-  height: 3rem;
-  width: 20.5rem;
+  background-color: var(--second-button-color);
+  padding: 0 0.5rem;
+  height: 2.5rem;
+  margin: 0 0 1.25rem 0;
+  border-radius: 0.25rem;
+  width: 20rem;
   font-size: 1rem;
   border: solid 1px #bcbcbc;
-  border-radius: .25rem;
-  box-shadow: var(--box-shadow);
-  background-color: var(--second-button-color);
-  color: #626262 !important;
-  padding: 0 0 0 .5rem;
+  box-shadow: 0 10px 10px -10px var(--shadow-color);
+}
+
+.select:hover {
+  border: solid 1px black;
 }
 
 .select:hover {

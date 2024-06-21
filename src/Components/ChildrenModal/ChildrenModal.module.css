@@ -1,52 +1,4 @@
-/* .activeModal {
-  overflow-y: hidden;
-}
-
-.container,
-.overlay {
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: fixed;
-}
-
-.overlay {
-  background: rgba(49, 49, 49, 0.8);
-}
-
-.container {
-  z-index: 2;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--fifth-color);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 10px 10px -10px var(--shadow-color);
-  max-width: 25rem;
-  width: 100%;
-  max-height: 80%;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.buttonContainer {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-}
-
-.button {
-  margin: 1rem 0 0 0;
-  font-size: 1.2rem;
-  width: 10rem;
-  height: 3rem;
-} */
+@import '../../colors.css';
 
 body.activeModal {
   overflow-y: hidden;
@@ -59,8 +11,6 @@ body.activeModal {
   height: 100vh;
   top: 0;
   left: 0;
-  /* right: 0;
-  bottom: 0; */
 }
 
 .overlay {
@@ -73,7 +23,7 @@ body.activeModal {
   z-index: 1;
   top: 50%;
   left: 50%;
-  width: 25vw;
+  width: 30vw;
   height: 80vh;
   transform: translate(-50%, -50%);
   border-radius: .25rem;
