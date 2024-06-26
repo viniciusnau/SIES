@@ -12,6 +12,7 @@ interface iChildrenModal {
   title: string;
   confirmLabel: string;
   setOpenModal: (value: boolean) => void;
+  openModal: boolean;
   isDeleteButton?: boolean;
 }
 
@@ -24,45 +25,55 @@ export const ChildrenModal: React.FC<iChildrenModal> = ({
   title,
   confirmLabel,
   setOpenModal,
+  openModal,
   isDeleteButton,
 }) => {
+  if (openModal) {
+    document.body.classList.add("activeModal");
+  } else {
+    document.body.classList.remove("activeModal");
+  }
+
   return (
-    <div className={styles.container}>
-      <h2>{title}</h2>
-      {children}
-      <div className={styles.buttonContainer}>
-        {isDeleteButton && (
-          <Button className={styles.button} onClick={handleDelete}>
-            Excluir
-          </Button>
-        )}
-        <Button
-          className={styles.button}
-          onClick={() => {
-            setOpenModal(false);
-          }}
-        >
-          Cancelar
-        </Button>
-        <Button
-          className={styles.button}
-          onClick={handleSubmit}
-          disabled={disabled}
-        >
-          {loading ? (
-            <div
-              style={{
-                position: "relative",
-                top: "-3rem",
-              }}
-            >
-              <Loading size="1.5rem" type="spin" />
-            </div>
-          ) : (
-            confirmLabel
+    <>
+      <div className={styles.overlay} onClick={() => setOpenModal(false)}></div>
+      <div className={styles.container}>
+        <h2>{title}</h2>
+        {children}
+        <div className={styles.buttonContainer}>
+          {isDeleteButton && (
+            <Button className={styles.button} onClick={handleDelete}>
+              Excluir
+            </Button>
           )}
-        </Button>
+          <Button
+            className={styles.button}
+            onClick={() => {
+              setOpenModal(false);
+            }}
+          >
+            Cancelar
+          </Button>
+          <Button
+            className={styles.button}
+            onClick={handleSubmit}
+            disabled={disabled}
+          >
+            {loading ? (
+              <div
+                style={{
+                  position: "relative",
+                  top: "-3rem",
+                }}
+              >
+                <Loading size="1.5rem" type="spin" />
+              </div>
+            ) : (
+              confirmLabel
+            )}
+          </Button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };

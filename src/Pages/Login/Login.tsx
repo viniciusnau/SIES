@@ -77,6 +77,7 @@ const Login = () => {
           <div className={styles.password}>
             <Input
               className={styles.input}
+              // fieldType="outlined"
               label="Usuário"
               name="username"
               onChange={handleChange}
@@ -88,19 +89,13 @@ const Login = () => {
           <div className={styles.password}>
             <Input
               className={styles.input}
+              // fieldType="password"
               type={showPassword ? "" : "password"}
               label="Senha"
               name="password"
               onChange={handleChange}
               value={form.password}
             />
-            <div className={styles.passwordIcon}>
-              {showPassword ? (
-                <HiOutlineEye size={24} onClick={handleShowPassword} />
-              ) : (
-                <HiOutlineEyeSlash size={24} onClick={handleShowPassword} />
-              )}
-            </div>
           </div>
           <a href="/automato/alterar-senha/" className={styles.forgotPassword}>
             Esqueceu a senha?

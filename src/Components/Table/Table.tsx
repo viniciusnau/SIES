@@ -22,6 +22,7 @@ interface TableProps {
   isEmpty?: boolean;
   loading?: boolean;
   error?: boolean;
+  pagination?: boolean;
 }
 
 const Table: React.FC<TableProps> = ({
@@ -34,41 +35,44 @@ const Table: React.FC<TableProps> = ({
   isEmpty,
   loading,
   error,
+  pagination = true,
 }) => {
   const handlePageChange = (page: number) => {
     setPage(page);
   };
 
   const customItemRender = (current: number, type: string) => {
-    if (type === "page") {
-      return (
-        current === page && (
-          <span
-            className={styles.currentPage}
-            style={{
-              color: "initial",
-            }}
-          >
-            {data?.length > 0 ? page : "0"}
-          </span>
-        )
-      );
-    }
+    if (pagination) {
+      if (type === "page") {
+        return (
+          current === page && (
+            <span
+              className={styles.currentPage}
+              style={{
+                color: "initial",
+              }}
+            >
+              {data?.length > 0 ? page : "0"}
+            </span>
+          )
+        );
+      }
 
-    if (type === "prev") {
-      return (
-        <Button className={styles.backButton} title="Voltar">
-          Voltar
-        </Button>
-      );
-    }
+      if (type === "prev") {
+        return (
+          <Button className={styles.paginationButton} title="Voltar">
+            Voltar
+          </Button>
+        );
+      }
 
-    if (type === "next") {
-      return (
-        <Button className={styles.backButton} title="Avançar">
-          Avançar
-        </Button>
-      );
+      if (type === "next") {
+        return (
+          <Button className={styles.paginationButton} title="Avançar">
+            Avançar
+          </Button>
+        );
+      }
     }
 
     return null;
@@ -142,16 +146,14 @@ const Table: React.FC<TableProps> = ({
           )}
         </div>
       </div>
-      <div className={styles.pagination}>
-        <Pagination
-          current={page}
-          onChange={handlePageChange}
-          total={total}
-          pageSize={10}
-          className={styles.customPagination}
-          itemRender={customItemRender}
-        />
-      </div>
+      <Pagination
+        current={page}
+        onChange={handlePageChange}
+        total={total}
+        pageSize={10}
+        className={styles.pagination}
+        itemRender={customItemRender}
+      />
     </div>
   );
 };
