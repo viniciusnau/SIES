@@ -207,6 +207,7 @@ const Rank: React.FC = () => {
         isEmpty={data?.results?.length === 0}
         loading={loading}
         error={error}
+        pagination={false}
       />
     </div>
   );
