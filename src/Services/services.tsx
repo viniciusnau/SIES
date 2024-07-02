@@ -188,6 +188,244 @@ const services = {
       })
       .catch((err: any) => console.log(err));
   },
+
+  getTestList: async (filter: any) => {
+    const queryParams = new URLSearchParams({
+      edition: filter.edition,
+      is_resident: filter.is_resident,
+      public_defense: filter.public_defense,
+      category: filter.category,
+      assignee: filter.assignee,
+      name: filter.name,
+      person: filter.person,
+    });
+
+    const url = `${PATH.base}/test/?${queryParams.toString()}`;
+
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+    const header = {
+      headers: {
+        Authorization: `${authorizationMethod} ${
+          apiToken || sessionStorage.getItem("credentials")
+        }`,
+      },
+    };
+
+    try {
+      const response = await axios.get(url, header);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  },
+
+  createTest: async (data: any) => {
+    const url = `${PATH.base}/test/`;
+
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+    const header = {
+      headers: {
+        Authorization: `${authorizationMethod} ${
+          apiToken || sessionStorage.getItem("credentials")
+        }`,
+      },
+    };
+
+    try {
+      const response = await axios.post(url, data, header);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  },
+
+  getTest: async (id: number) => {
+    const url = `${PATH.base}/test/${id}/`;
+
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+    const header = {
+      headers: {
+        Authorization: `${authorizationMethod} ${
+          apiToken || sessionStorage.getItem("credentials")
+        }`,
+      },
+    };
+
+    try {
+      const response = await axios.get(url, header);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  },
+
+  updateTest: async (id: number, data: any) => {
+    const url = `${PATH.base}/test/${id}/`;
+
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+    const header = {
+      headers: {
+        Authorization: `${authorizationMethod} ${
+          apiToken || sessionStorage.getItem("credentials")
+        }`,
+      },
+    };
+
+    try {
+      const response = await axios.patch(url, data, header);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  },
+
+  deleteTest: async (id: number) => {
+    const url = `${PATH.base}/test/${id}/`;
+
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+    const header = {
+      headers: {
+        Authorization: `${authorizationMethod} ${
+          apiToken || sessionStorage.getItem("credentials")
+        }`,
+      },
+    };
+
+    try {
+      const response = await axios.delete(url, header);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  },
+
+  getTestScoreList: async (filter: any) => {
+    const queryParams = new URLSearchParams({
+      test: filter.test,
+      person: filter.person,
+      min_score: filter.min_score,
+      max_score: filter.max_score,
+    });
+
+    const url = `${PATH.base}/test-score/?${queryParams.toString()}`;
+
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+    const header = {
+      headers: {
+        Authorization: `${authorizationMethod} ${
+          apiToken || sessionStorage.getItem("credentials")
+        }`,
+      },
+    };
+
+    try {
+      const response = await axios.get(url, header);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  },
+
+  createTestScore: async (data: any) => {
+    const url = `${PATH.base}/test-score/`;
+
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+    const header = {
+      headers: {
+        Authorization: `${authorizationMethod} ${
+          apiToken || sessionStorage.getItem("credentials")
+        }`,
+      },
+    };
+
+    try {
+      const response = await axios.post(url, data, header);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  },
+
+  getTestScore: async (id: number) => {
+    const url = `${PATH.base}/test-score/${id}/`;
+
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+    const header = {
+      headers: {
+        Authorization: `${authorizationMethod} ${
+          apiToken || sessionStorage.getItem("credentials")
+        }`,
+      },
+    };
+
+    try {
+      const response = await axios.get(url, header);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  },
+
+  updateTestScore: async (id: number, data: any) => {
+    const url = `${PATH.base}/test-score/${id}/`;
+
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+    const header = {
+      headers: {
+        Authorization: `${authorizationMethod} ${
+          apiToken || sessionStorage.getItem("credentials")
+        }`,
+      },
+    };
+
+    try {
+      const response = await axios.patch(url, data, header);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  },
+
+  deleteTestScore: async (id: number) => {
+    const url = `${PATH.base}/test-score/${id}/`;
+
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+    const header = {
+      headers: {
+        Authorization: `${authorizationMethod} ${
+          apiToken || sessionStorage.getItem("credentials")
+        }`,
+      },
+    };
+
+    try {
+      const response = await axios.delete(url, header);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  },
+
 };
 
 export default services;
