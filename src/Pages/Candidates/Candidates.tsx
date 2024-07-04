@@ -460,13 +460,20 @@ const Candidates = () => {
                 value={form.social_security_number}
                 className={styles.input}
               />
-              <Input
+              {/* <Input
                 label="Data de nascimento"
                 name="birth_date"
                 onChange={handleChange}
                 mask="99/99/9999"
                 value={form.birth_date}
                 className={styles.input}
+              /> */}
+              <Input
+                label="Birth Date"
+                name="birth_date"
+                value={form.birth_date}
+                onChange={handleChange}
+                mask="00/00/0000"
               />
               <div>
                 <p className={styles.label}>Curso:</p>

@@ -3,7 +3,6 @@ import styles from "./Login.module.css";
 import Input from "../../Components/Forms/Input";
 import Button from "../../Components/Forms/Button";
 import { handleKeyPress } from "../../Components/Helper";
-import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 import icon from "../../Assets/google-icon.png";
 import { fetchLogin } from "../../Services/Slices/getLogin";
 import { useDispatch, useSelector } from "react-redux";
@@ -97,7 +96,7 @@ const Login = () => {
               value={form.password}
             />
           </div>
-          <a href="/automato/alterar-senha/" className={styles.forgotPassword}>
+          <a href="/sies/alterar-senha/" className={styles.forgotPassword}>
             Esqueceu a senha?
           </a>
         </div>

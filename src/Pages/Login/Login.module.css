@@ -23,12 +23,10 @@
 }
 
 
-.input:hover,
 .date:hover {
   background-color: var(--second-button-color-hover);
 }
 
-.input:disabled,
 .date:disabled {
   background-color: var(--second-button-color-disabled);
 }

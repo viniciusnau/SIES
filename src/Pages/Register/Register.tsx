@@ -125,7 +125,7 @@ const Register = () => {
         <Snackbar type="errorRegister" setShowSnackbar={setSnackbarType} />
       )}
       <form
-        action="https://automato.defensoria.sc.def.br/api/google-redirect/"
+        action="https://sies.defensoria.sc.def.br/api/google-redirect/"
         method="get"
         className={styles.form}
       >
