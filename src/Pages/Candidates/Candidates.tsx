@@ -358,14 +358,14 @@ const Candidates = () => {
                 label="CPF"
                 name="social_security_number"
                 onChange={handleChange}
-                mask="999.999.999-99"
+                mask="00.00.00-00"
                 className={styles.input}
               />
               <Input
                 label="Data de nascimento"
                 name="birth_date"
                 onChange={handleChange}
-                mask="99/99/9999"
+                mask="00/00/0000"
                 className={styles.input}
               />
               <div>
@@ -387,7 +387,7 @@ const Candidates = () => {
                 label="IMAA"
                 name="academic_index"
                 onChange={handleChange}
-                mask="99,99"
+                mask="00,00"
                 className={styles.input}
               />
               <div>
@@ -456,18 +456,10 @@ const Candidates = () => {
                 label="CPF"
                 name="social_security_number"
                 onChange={handleChange}
-                mask="999.999.999-99"
+                mask="000.000.000-00"
                 value={form.social_security_number}
                 className={styles.input}
               />
-              {/* <Input
-                label="Data de nascimento"
-                name="birth_date"
-                onChange={handleChange}
-                mask="99/99/9999"
-                value={form.birth_date}
-                className={styles.input}
-              /> */}
               <Input
                 label="Birth Date"
                 name="birth_date"
@@ -494,7 +486,7 @@ const Candidates = () => {
                 label="IMAA"
                 name="academic_index"
                 onChange={handleChange}
-                mask="99,99"
+                mask="00,00"
                 value={String(form.academic_index)}
                 className={styles.input}
               />
@@ -502,7 +494,7 @@ const Candidates = () => {
                 label="Nota da entrevista"
                 name="interview_index"
                 onChange={handleChange}
-                mask="99,99"
+                mask="00,00"
                 value={String(form.interview_index)}
                 className={styles.input}
               />
@@ -510,7 +502,7 @@ const Candidates = () => {
                 label="Nota da prova"
                 name="test_index"
                 onChange={handleChange}
-                mask="99,99"
+                mask="00,00"
                 value={String(form.test_index)}
                 className={styles.input}
               />
