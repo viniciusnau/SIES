@@ -46,10 +46,6 @@ const Login = () => {
     });
   };
 
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
   useEffect(() => {
     if (data.length && isDispatched) {
       navigate("/sies/register");
@@ -76,7 +72,6 @@ const Login = () => {
           <div className={styles.password}>
             <Input
               className={styles.input}
-              // fieldType="outlined"
               label="Usuário"
               name="username"
               onChange={handleChange}
@@ -88,7 +83,6 @@ const Login = () => {
           <div className={styles.password}>
             <Input
               className={styles.input}
-              // fieldType="password"
               type={showPassword ? "" : "password"}
               label="Senha"
               name="password"

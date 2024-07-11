@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Button.module.css";
+import { Button as MUiButton } from "@mui/material";
 
 interface iButton {
   className?: any;
@@ -22,14 +23,15 @@ const Button: React.FC<iButton> = ({
   ...props
 }) => {
   return (
-    <button
+    <MUiButton
       className={`${styles.container} ${className}`}
+      variant="outlined"
       onClick={onClick}
       disabled={disabled}
       {...props}
     >
       {children}
-    </button>
+    </MUiButton>
   );
 };
 

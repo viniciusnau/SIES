@@ -57,7 +57,7 @@
   justify-content: center;
   border-radius: 5rem;
   background-color: var(--second-button-color) !important;
-  color: initial !important;
+  border: none !important;
   margin: 0 0 1.5rem 0;
 }
 
@@ -101,6 +101,7 @@
   height: 2.5rem;
   width: 7.5rem;
   font-size: var(--font-size);
+  margin: 1rem 0 0 0 !important;
 }
 
 .forgotPassword {
