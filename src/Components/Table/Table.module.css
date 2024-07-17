@@ -88,22 +88,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.customPagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 0;
+  margin-bottom: 7.5rem;
 }
 
-.customPagination li {
+.pagination li {
   display: flex;
   list-style-type: none;
   margin: 0;
 }
 
-.backButton,
+.paginationButton,
 .downloadButton {
   border: none;
   border-radius: 0.5rem;
@@ -131,18 +126,18 @@
   box-shadow: var(--box-shadow);
 }
 
-.backButton {
+.paginationButton {
   margin: 0 1rem;
 }
 
 .button:hover,
-.backButton:hover,
+.paginationButton:hover,
 .downloadButton:hover {
   background-color: var(--first-button-color-hover);
 }
 
 .button:disabled,
-.backButton:disabled,
+.paginationButton:disabled,
 .downloadButton:disabled {
   background-color: var(--first-button-color-disabled);
   cursor: var(--cursor-default);
@@ -164,7 +159,7 @@
 
   .columnTitle,
   .tableCell,
-  .backButton,
+  .paginationButton,
   .currentPage,
   .empty {
     font-size: var(--font-size)-0.3rem;
@@ -177,7 +172,7 @@
     padding: 0;
   }
 
-  .backButton {
+  .paginationButton {
     width: 4rem;
     height: 2rem;
     padding: 0;
@@ -196,7 +191,7 @@
 
   .columnTitle,
   .tableCell,
-  .backButton,
+  .paginationButton,
   .empty {
     font-size: var(--font-size);
   }
@@ -207,7 +202,7 @@
     height: 3rem;
   }
 
-  .backButton {
+  .paginationButton {
     width: 5rem;
     height: 2.75rem;
   }
@@ -225,7 +220,7 @@
 
   .columnTitle,
   .tableCell,
-  .backButton,
+  .paginationButton,
   .currentPage,
   .empty {
     font-size: var(--font-size);
@@ -237,7 +232,7 @@
     height: 3rem;
   }
 
-  .backButton {
+  .paginationButton {
     width: 5rem;
     height: 2.75rem;
   }
@@ -255,6 +250,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
