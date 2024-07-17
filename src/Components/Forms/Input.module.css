@@ -1,21 +1,36 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.label {
+  display: block;
+  font-size: 1.1rem;
+  margin: 1rem 0 .25rem 0;
 }
 
 .content {
   background-color: var(--second-button-color);
-  border: none;
-  border-radius: 0.5rem;
-  box-shadow: 0px 10px 10px -10px var(--shadow-color);
+  color: var(--third-text-color);
+  border: solid 1px #bcbcbc;
+  border-radius: .25rem;
+  box-shadow: var(--box-shadow);
   cursor: var(--cursor-pointer);
   padding: 0 0 0 0.5rem;
+  height: 3.5rem;
   font-size: 1rem;
 }
 
-.label {
-  display: block;
-  margin-bottom: 0.25rem;
-  font-size: 1.1rem;
+.content:hover {
+  border: solid 1px black;
 }
+
+.content:focus {
+  border: solid 1px black;
+}
+
+/* .content[type='checkbox'] {
+  background-color: transparent;
+  height: auto;
+  font-size: inherit;
+  padding: 0;
+}
+
+.content[type='checkbox']:hover {
+  border: none;
+} */

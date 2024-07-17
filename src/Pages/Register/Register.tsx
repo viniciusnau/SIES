@@ -100,8 +100,6 @@ const Register = () => {
   }, []);
 
   useEffect(() => {
-    if (isResidentChecked || isGraduatedChecked) {
-    }
     if (isResidentChecked) {
       setForm((prev) => ({
         ...prev,
@@ -117,7 +115,7 @@ const Register = () => {
       }));
     }
   }, [isGraduatedChecked || isResidentChecked]);
-
+  console.log("form: ", form);
   return (
     <div className={styles.container}>
       {data && snackbarType && (
@@ -127,7 +125,7 @@ const Register = () => {
         <Snackbar type="errorRegister" setShowSnackbar={setSnackbarType} />
       )}
       <form
-        action="https://automato.defensoria.sc.def.br/api/google-redirect/"
+        action="https://sies.defensoria.sc.def.br/api/google-redirect/"
         method="get"
         className={styles.form}
       >
@@ -143,14 +141,14 @@ const Register = () => {
           onChange={handleChange}
           name="social_security_number"
           label="CPF"
-          mask="999.999.999-99"
+          mask="000.000.000-00"
         />
         <Input
           className={styles.input}
           onChange={handleChange}
           name="birth_date"
           label="Data de nascimento"
-          mask="99/99/9999"
+          mask="00/00/0000"
         />
         <div>
           <p className={styles.label}>Curso:</p>
@@ -172,7 +170,7 @@ const Register = () => {
           onChange={handleChange}
           name="academic_index"
           label="Índice de Mérito Acadêmico Acumulado"
-          mask="99,99"
+          mask="00,00"
         />
         <div>
           <p className={styles.label}>Núcleo:</p>
@@ -217,9 +215,9 @@ const Register = () => {
         className={styles.button}
         onClick={handleSubmit}
         disabled={
-          !form.name &&
-          !form.social_security_number &&
-          !form.birth_date &&
+          !form.name ||
+          !form.social_security_number ||
+          !form.birth_date ||
           !form.academic_index
         }
       >
