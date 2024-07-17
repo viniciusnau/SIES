@@ -27,3 +27,8 @@ export interface gradeByPublicDefense {
 export interface iGetCandidates {
   name: string;
 }
+
+export interface iGetAdminList {
+  blurred_name: string;
+  registration: string;
+}

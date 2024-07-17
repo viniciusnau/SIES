@@ -180,6 +180,13 @@ export const statusList = [
   { name: "Em contratação", property: "hiring" },
 ];
 
+export const adminColumnsTable = [
+  { title: "Nome", property: "blurred_name" },
+  { title: "Matrícula", property: "registration" },
+  { title: "Editar", property: "edit" },
+  { title: "Excluir", property: "exclude" },
+];
+
 export const modalText = {
   deleteCandidate: {
     title: "Excluir candidato",

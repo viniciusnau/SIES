@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import ProtectedRoute from "./Auth/ProtectedRoute";
@@ -12,6 +11,7 @@ import NotFound from "./Pages/NotFound/NotFound";
 import Resident from "./Pages/Resident/Resident";
 import Footer from "./Components/Footer/Footer";
 import Candidates from "./Pages/Candidates/Candidates";
+import Admin from "./Pages/Admin/Admin";
 
 function App() {
   return (
@@ -44,6 +44,11 @@ function App() {
                 <ProtectedRoute Component={Update} path="/sies/update" />
               }
             />
+            {/* <Route
+              path="/sies/admin/"
+              element={<ProtectedRoute Component={Admin} path="/sies/admin" />}
+            /> */}
+            <Route path="/sies/admin/" element={<Admin />} />
             <Route path="/sies/callback/:apiToken" element={<Callback />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

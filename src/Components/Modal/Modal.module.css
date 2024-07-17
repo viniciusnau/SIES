@@ -1,9 +1,9 @@
-
-h2 {
+/* h2 {
   margin: .5rem 0;
 }
 
 .container {
+  z-index: 2;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -26,5 +26,50 @@ h2 {
 
 .button {
   margin: 0 .5rem;
+} */
+
+@import '../../colors.css';
+
+body.activeModal {
+  overflow-y: hidden;
 }
 
+.container,
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.overlay {
+  z-index: 1;
+  background: rgba(49, 49, 49, 0.8);
+}
+
+.container {
+  overflow-y: auto;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 30vw;
+  height: 80vh;
+  transform: translate(-50%, -50%);
+  border-radius: .25rem;
+  line-height: 1.4;
+  background: #ebebeb;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1.75rem 1rem 1.75rem;
+}
+
+.button {
+  margin: 1rem 0 0 0;
+  font-size: 1rem;
+  width: 8rem;
+  height: 2.5rem;
+}
