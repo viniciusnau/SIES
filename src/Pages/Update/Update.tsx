@@ -91,6 +91,7 @@ const Update = () => {
         <Modal
           content="deleteCandidate"
           confirm={fetchDeleteUser(form.id)}
+          openModal={isOpenModal}
           setOpenModal={setIsOpenModal}
           setShowSnackbar={setSnackbarType}
         />
