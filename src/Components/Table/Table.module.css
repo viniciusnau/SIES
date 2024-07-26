@@ -98,47 +98,22 @@
   margin: 0;
 }
 
-.paginationButton,
-.downloadButton {
+.paginationButton {
   border: none;
   border-radius: 0.5rem;
   background-color: var(--first-button-color);
   box-shadow: var(--box-shadow);
 }
 
-.button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5rem;
-  background-color: var(--first-button-color);
-  box-shadow: var(--box-shadow);
-}
-
-.downloadButton {
-  border-radius: 5rem;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 1rem 0.75rem 0;
-  box-shadow: var(--box-shadow);
-}
-
 .paginationButton {
-  margin: 0 1rem;
+  margin: 0 1rem !important;
 }
 
-.button:hover,
-.paginationButton:hover,
-.downloadButton:hover {
+.paginationButton:hover {
   background-color: var(--first-button-color-hover);
 }
 
-.button:disabled,
-.paginationButton:disabled,
-.downloadButton:disabled {
+.paginationButton:disabled {
   background-color: var(--first-button-color-disabled);
   cursor: var(--cursor-default);
 }
@@ -165,10 +140,9 @@
     font-size: var(--font-size)-0.3rem;
   }
 
-  .button,
-  .downloadButton {
+  .button {
     width: 2rem;
-    height: 2rem;
+    height: 1.75rem;
     padding: 0;
   }
 
@@ -196,10 +170,9 @@
     font-size: var(--font-size);
   }
 
-  .button,
-  .downloadButton {
+  .button {
     width: 3rem;
-    height: 3rem;
+    height: 2.75rem;
   }
 
   .paginationButton {
@@ -226,10 +199,9 @@
     font-size: var(--font-size);
   }
 
-  .button,
-  .downloadButton {
+  .button {
     width: 3rem;
-    height: 3rem;
+    height: 2.75rem;
   }
 
   .paginationButton {

@@ -56,11 +56,19 @@ const services = {
     const apiToken = sessionStorage.getItem("apiToken");
     const authorizationMethod = apiToken ? "Token" : "Basic";
 
-    if (body.test_index === "" || body.test_index === undefined || body.test_index === null) {
+    if (
+      body.test_index === "" ||
+      body.test_index === undefined ||
+      body.test_index === null
+    ) {
       delete body.test_index;
     }
 
-    if (body.interview_index === "" || body.interview_index === undefined || body.interview_index === null) {
+    if (
+      body.interview_index === "" ||
+      body.interview_index === undefined ||
+      body.interview_index === null
+    ) {
       delete body.interview_index;
     }
 
@@ -166,11 +174,19 @@ const services = {
     const apiToken = sessionStorage.getItem("apiToken");
     const authorizationMethod = apiToken ? "Token" : "Basic";
 
-    if (body.test_index === "" || body.test_index === undefined || body.test_index === null) {
+    if (
+      body.test_index === "" ||
+      body.test_index === undefined ||
+      body.test_index === null
+    ) {
       delete body.test_index;
     }
 
-    if (body.interview_index === "" || body.interview_index === undefined || body.interview_index === null) {
+    if (
+      body.interview_index === "" ||
+      body.interview_index === undefined ||
+      body.interview_index === null
+    ) {
       delete body.interview_index;
     }
 
@@ -183,6 +199,25 @@ const services = {
     };
     return axios
       .patch(`${PATH.base}/user/${id}/`, body, header)
+      .then((data: any) => {
+        return data;
+      })
+      .catch((err: any) => console.log(err));
+  },
+
+  getAdminList: async () => {
+    const apiToken = sessionStorage.getItem("apiToken");
+    const authorizationMethod = apiToken ? "Token" : "Basic";
+
+    const header = {
+      headers: {
+        Authorization: `${authorizationMethod} ${
+          apiToken || sessionStorage.getItem("credentials")
+        }`,
+      },
+    };
+    return axios
+      .get(`${PATH.base}/admin/`, header)
       .then((data: any) => {
         return data;
       })

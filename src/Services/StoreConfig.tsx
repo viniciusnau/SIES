@@ -8,6 +8,10 @@ import loginSlice from "./Slices/getLogin";
 import deleteUserSlice from "./Slices/deleteUser";
 import getCandidates from "./Slices/getCandidates";
 import updateCandidate from "./Slices/updateCandidate";
+import getAdminList from "./Slices/getAdminList";
+import updateUserAdmin from "./Slices/updateUserAdmin";
+import deleteUserAdmin from "./Slices/deleteUserAdmin";
+import postUserAdmin from "./Slices/postUserAdmin";
 
 const reducer = combineReducers({
   rankSlice,
@@ -19,6 +23,10 @@ const reducer = combineReducers({
   deleteUserSlice,
   getCandidates,
   updateCandidate,
+  getAdminList,
+  updateUserAdmin,
+  deleteUserAdmin,
+  postUserAdmin,
 });
 
 export const store = configureStore({ reducer });

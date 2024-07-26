@@ -11,7 +11,7 @@ interface iChildrenModal {
   handleDelete?: () => void;
   title: string;
   confirmLabel: string;
-  setOpenModal: (value: boolean) => void;
+  setOpenModal: any;
   openModal: boolean;
   isDeleteButton?: boolean;
 }

@@ -1,8 +1,7 @@
 import React from "react";
 import styles from "./Table.module.css";
 import Pagination from "rc-pagination";
-
-import { MdDownload } from "react-icons/md";
+import { MdDelete, MdDownload, MdEdit } from "react-icons/md";
 import Button from "../Forms/Button";
 import Loading from "../Loading/Loading";
 import { neverNull } from "../Helper";
@@ -22,6 +21,8 @@ interface TableProps {
   isEmpty?: boolean;
   loading?: boolean;
   error?: boolean;
+  handleDelete?: (id: string) => void;
+  handleEdit?: (id: string) => void;
   pagination?: boolean;
 }
 
@@ -35,6 +36,8 @@ const Table: React.FC<TableProps> = ({
   isEmpty,
   loading,
   error,
+  handleDelete,
+  handleEdit,
   pagination = true,
 }) => {
   const handlePageChange = (page: number) => {
@@ -120,18 +123,32 @@ const Table: React.FC<TableProps> = ({
                       {columns.map((column, columnIndex) => (
                         <div key={columnIndex} className={styles.row}>
                           {column.property === "presigned_url" ? (
+                            <div className={styles.buttonGroup}>
+                              <Button
+                                onClick={() => null}
+                                className={styles.button}
+                              >
+                                <MdDownload size={24} />
+                              </Button>
+                            </div>
+                          ) : column.property === "exclude" && handleDelete ? (
                             <Button
-                              onClick={() => null}
+                              onClick={() => handleDelete(row.id)}
                               className={styles.button}
                             >
-                              <MdDownload size={24} />
+                              <MdDelete size={24} />
+                            </Button>
+                          ) : column.property === "edit" && handleEdit ? (
+                            <Button
+                              onClick={() => handleEdit(row.id)}
+                              className={styles.button}
+                            >
+                              <MdEdit size={24} />
                             </Button>
                           ) : (
                             <div
                               className={styles.tableCell}
-                              style={{
-                                color: "initial",
-                              }}
+                              style={{ color: "initial" }}
                             >
                               {neverNull(row[column.property])}
                             </div>
